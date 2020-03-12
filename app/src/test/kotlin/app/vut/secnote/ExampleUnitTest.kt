@@ -1,4 +1,4 @@
-package app.futured.androidprojecttemplate
+package app.vut.secnote
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
