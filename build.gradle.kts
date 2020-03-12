@@ -1,6 +1,6 @@
-import app.futured.androidprojecttemplate.Clean
-import app.futured.androidprojecttemplate.DependencyUpdates
-import app.futured.androidprojecttemplate.LintCheck
+import app.vut.secnote.Clean
+import app.vut.secnote.DependencyUpdates
+import app.vut.secnote.LintCheck
 import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
@@ -25,9 +25,9 @@ plugins {
 }
 
 tasks {
-    register<Clean>("clean")
-    register<LintCheck>("lintCheck")
-    register<DependencyUpdates>("dependencyUpdates")
+    register<app.vut.secnote.Clean>("clean")
+    register<app.vut.secnote.LintCheck>("lintCheck")
+    register<app.vut.secnote.DependencyUpdates>("dependencyUpdates")
 }
 
 allprojects {

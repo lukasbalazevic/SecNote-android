@@ -1,7 +1,7 @@
 object ProjectSettings {
 
-    const val projectName = "Android project template"
-    const val applicationId = "app.futured.androidprojecttemplate"
+    const val projectName = "SecNote"
+    const val applicationId = "app.vut.secnote"
     const val compileSdkVersion = 29
     const val targetSdk = 29
     const val minSdk = 21
