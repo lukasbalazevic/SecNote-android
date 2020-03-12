@@ -8,15 +8,15 @@
 
         <variable
             name="view"
-            type="app.futured.androidprojecttemplate.ui.navigation.NavigationView"/>
+            type="app.vut.secnote.ui.navigation.NavigationView"/>
 
         <variable
             name="viewModel"
-            type="app.futured.androidprojecttemplate.ui.navigation.NavigationViewModel"/>
+            type="app.vut.secnote.ui.navigation.NavigationViewModel"/>
 
         <variable
             name="viewState"
-            type="app.futured.androidprojecttemplate.ui.navigation.NavigationViewState"/>
+            type="app.vut.secnote.ui.navigation.NavigationViewState"/>
 
     </data>
 
