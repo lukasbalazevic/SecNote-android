@@ -3,11 +3,65 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/fragment_login">
 
     <fragment
-        android:id="@+id/mainFragment"
-        android:name="app.vut.secnote.ui.main.MainFragment"
-        android:label="fragment_main"
-        tools:layout="@layout/fragment_main" />
+        android:id="@+id/fragment_categories"
+        android:name="app.vut.secnote.ui.main.categories.CategoriesFragment"
+        android:label="CategoriesFragment"
+        tools:layout="@layout/fragment_categories"/>
+
+    <fragment
+        android:id="@+id/fragment_create_category"
+        android:name="app.vut.secnote.ui.main.categories.create.CreateCategoryFragment"
+        android:label="CreateCategoryFragment"
+        tools:layout="@layout/fragment_create_category"/>
+
+    <fragment
+        android:id="@+id/fragment_encryption"
+        android:name="app.vut.secnote.ui.main.encryption.EncryptionFragment"
+        android:label="EncryptionFragment"
+        tools:layout="@layout/fragment_encryption"/>
+
+    <fragment
+        android:id="@+id/fragment_create_key"
+        android:name="app.vut.secnote.ui.main.encryption.create.CreateKeyFragment"
+        android:label="CreateKeyFragment"
+        tools:layout="@layout/fragment_create_key"/>
+
+    <fragment
+        android:id="@+id/fragment_invite"
+        android:name="app.vut.secnote.ui.main.invite.InviteFragment"
+        android:label="InviteFragment"
+        tools:layout="@layout/fragment_invite"/>
+
+    <fragment
+        android:id="@+id/fragment_login"
+        android:name="app.vut.secnote.ui.main.login.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login"/>
+
+    <fragment
+        android:id="@+id/fragment_note"
+        android:name="app.vut.secnote.ui.main.note.NoteFragment"
+        android:label="NoteFragment"
+        tools:layout="@layout/fragment_note"/>
+
+    <fragment
+        android:id="@+id/fragment_notes"
+        android:name="app.vut.secnote.ui.main.notes.NotesFragment"
+        android:label="NotesFragment"
+        tools:layout="@layout/fragment_notes"/>
+
+    <fragment
+        android:id="@+id/fragment_pin"
+        android:name="app.vut.secnote.ui.main.pin.PinFragment"
+        android:label="PinFragment"
+        tools:layout="@layout/fragment_pin"/>
+
+    <fragment
+        android:id="@+id/fragment_profile"
+        android:name="app.vut.secnote.ui.main.profile.ProfileFragment"
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_profile"/>
 </navigation>
