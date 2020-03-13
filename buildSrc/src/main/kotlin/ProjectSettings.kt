@@ -4,7 +4,7 @@ object ProjectSettings {
     const val applicationId = "app.vut.secnote"
     const val compileSdkVersion = 29
     const val targetSdk = 29
-    const val minSdk = 21
+    const val minSdk = 23
     const val versionName = "1.0.0"
     val versionCode = System.getenv("BITRISE_BUILD_NUMBER")?.toInt() ?: 1
 

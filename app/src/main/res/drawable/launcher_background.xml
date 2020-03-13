@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- The android:opacity=”opaque” line — this is critical in preventing a flash of black as your theme transitions. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- The background color, preferably the same as your normal theme -->
+    <item android:drawable="@color/orange" />
+
+    <item
+        android:width="235dp"
+        android:height="47dp"
+        android:drawable="@drawable/ic_secnote"
+        android:gravity="top|center"
+        android:top="96dp" />
+
+    <!-- Your product logo - 144dp color version of your app icon -->
+    <item
+        android:drawable="@drawable/ic_undraw_personal_notebook"
+        android:gravity="center" />
+
+</layer-list>

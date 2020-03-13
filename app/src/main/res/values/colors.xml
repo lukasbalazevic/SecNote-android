@@ -1,3 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="orange">#D64F41</color>
+    <color name="orange_dark">#C0392B</color>
+    <color name="cream">#ECF0F1</color>
+    <color name="night_sky">#2C3E50</color>
+    <color name="grey">#AAAAAA</color>
+    <color name="white">#FFFFFF</color>
 </resources>
