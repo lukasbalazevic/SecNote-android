@@ -1,14 +1,46 @@
 <resources>
-
-
-
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/orange</item>
+        <item name="colorPrimaryDark">@color/orange_dark</item>
         <item name="android:windowBackground">@color/orange</item>
+        <item name="textInputStyle">@style/Widget.TextInputLayout</item>
+        <item name="materialButtonStyle">@style/Button.NightSky</item>
     </style>
 
     <style name="AppTheme.Launcher">
         <item name="android:windowBackground">@drawable/launcher_background</item>
+    </style>
+
+    <style name="Widget.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxCornerRadiusTopStart">@dimen/d2</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/d2</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/d2</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/d2</item>
+        <item name="boxStrokeColor">@color/color_boxstroke_textfield</item>
+        <item name="helperTextTextColor">@color/cream</item>
+        <item name="hintTextColor">@color/night_sky</item>
+        <item name="android:textColorHint">@color/ligth_grey</item>
+        <item name="materialThemeOverlay">@style/Overlay.TextInputEditText</item>
+    </style>
+
+    <style name="Overlay.TextInputEditText" parent="ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox.Dense">
+        <item name="editTextStyle">@style/Widget.TextInputEditText</item>
+    </style>
+
+    <style name="Widget.TextInputEditText" parent="Widget.MaterialComponents.TextInputEditText.OutlinedBox.Dense">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="Button.NightSky" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerRadius">@dimen/d2</item>
+        <item name="backgroundTint">@color/night_sky</item>
+        <item name="android:minHeight">@dimen/d14</item>
+        <item name="android:textAppearance">@style/TextBold.White.16</item>
     </style>
 
 </resources>

@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">SecNote</string>
+    <string name="general_email">email</string>
+    <string name="general_password">password</string>
+    <string name="general_signIn">Sign In</string>
+    <string name="general_signUp">Sign Up</string>
+    <string name="general_signOut">Sign Out</string>
 </resources>

@@ -24,8 +24,8 @@ class NavigationActivity :
 
     override val layoutResId = R.layout.activity_navigation
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onStart() {
+        super.onStart()
         setupNavigationFragment(StartDestination.LOGIN)
     }
 
