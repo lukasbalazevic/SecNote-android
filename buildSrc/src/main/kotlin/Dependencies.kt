@@ -5,6 +5,10 @@ object Dependencies {
         const val detekt = "io.gitlab.arturbosch.detekt"
         const val ktlint = "org.jlleitschuh.gradle.ktlint"
         const val templates = "com.thefuntasty.mvvm.android-templates"
+
+        const val grpc = "grpc"
+        const val java = "java"
+        const val coroutines = "coroutines"
     }
 
     object Kotlin {
@@ -43,6 +47,19 @@ object Dependencies {
         const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
         const val retrofitConverter = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit}"
         const val retrofitAdapter = "com.squareup.retrofit2:adapter-rxjava2:${Versions.retrofit}"
+    }
+
+    object Grpc {
+        const val protobuf = "com.google.protobuf:protoc:${Versions.protobuf}"
+        const val genGrpc = "io.grpc:protoc-gen-grpc-java:${Versions.protocGen}"
+        const val krotoPlusProtocGen = "com.github.marcoferrer.krotoplus:protoc-gen-grpc-coroutines:${Versions.krotoPlus}"
+
+        const val javaxAnnotation = "javax.annotation:javax.annotation-api:${Versions.javaxAnnotation}"
+        const val grpcStub = "io.grpc:grpc-stub:${Versions.grpc}"
+        const val grpcProtobuf = "io.grpc:grpc-protobuf-lite:${Versions.grpc}"
+        const val grpcOkHttp = "io.grpc:grpc-okhttp:${Versions.grpc}"
+        const val grpcCore = "io.grpc:grpc-core:${Versions.grpc}"
+        const val krotoPlus = "com.github.marcoferrer.krotoplus:kroto-plus-coroutines:${Versions.krotoPlus}"
     }
 
     object Taste {

@@ -33,6 +33,13 @@ object Versions {
     const val okhttp = "4.2.2"
     const val retrofit = "2.6.1"
 
+    // grpc
+    const val protobuf = "3.11.0"
+    const val protocGen = "1.28.0"
+    const val krotoPlus = "0.6.1"
+    const val javaxAnnotation = "1.2"
+    const val grpc = "1.28.0"
+
     // other
     const val threetenbp = "1.4.0"
     const val timber = "4.7.1"

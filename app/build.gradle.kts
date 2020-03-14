@@ -131,31 +131,33 @@ android {
 }
 
 protobuf {
-    protoc { artifact = "com.google.protobuf:protoc:3.11.0" }
+    protoc { artifact = Dependencies.Grpc.protobuf }
 
     plugins {
-        id("grpc") {
-            artifact = "io.grpc:protoc-gen-grpc-java:1.28.0"
+        id(Dependencies.Plugins.grpc) {
+            artifact = Dependencies.Grpc.genGrpc
+        }
+        id(Dependencies.Plugins.coroutines) {
+            artifact = Dependencies.Grpc.krotoPlusProtocGen
         }
     }
 
     generateProtoTasks {
         all().forEach { task ->
             task.builtins {
-                id("java") {
+                id(Dependencies.Plugins.java) {
                     option("lite")
                 }
             }
             task.plugins {
-                id("grpc") {
+                id(Dependencies.Plugins.coroutines)
+                id(Dependencies.Plugins.grpc) {
                     option("lite")
                 }
             }
         }
     }
 }
-
-
 
 dependencies {
     // Kotlin
@@ -204,10 +206,11 @@ dependencies {
     testImplementation(Dependencies.Test.mockk)
 
 
-    implementation("javax.annotation:javax.annotation-api:1.2")
-    implementation("io.grpc:grpc-stub:1.28.0")
-    implementation("io.grpc:grpc-protobuf-lite:1.28.0")
-    implementation("io.grpc:grpc-okhttp:1.28.0")
-    implementation("io.grpc:grpc-core:1.28.0")
+    implementation(Dependencies.Grpc.javaxAnnotation)
+    implementation(Dependencies.Grpc.grpcStub)
+    implementation(Dependencies.Grpc.grpcProtobuf)
+    implementation(Dependencies.Grpc.grpcOkHttp)
+    implementation(Dependencies.Grpc.grpcCore)
 
+    implementation(Dependencies.Grpc.krotoPlus)
 }
