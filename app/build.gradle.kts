@@ -1,3 +1,9 @@
+import com.google.protobuf.gradle.builtins
+import com.google.protobuf.gradle.generateProtoTasks
+import com.google.protobuf.gradle.id
+import com.google.protobuf.gradle.plugins
+import com.google.protobuf.gradle.protobuf
+import com.google.protobuf.gradle.protoc
 import org.jetbrains.kotlin.config.KotlinCompilerVersion
 import org.jetbrains.kotlin.gradle.internal.AndroidExtensionsExtension
 
@@ -7,6 +13,7 @@ plugins {
     kotlin("kapt")
     kotlin("android.extensions")
     id("androidx.navigation.safeargs.kotlin")
+    id("com.google.protobuf") version "0.8.8"
 }
 
 android {
@@ -123,6 +130,33 @@ android {
     }
 }
 
+protobuf {
+    protoc { artifact = "com.google.protobuf:protoc:3.11.0" }
+
+    plugins {
+        id("grpc") {
+            artifact = "io.grpc:protoc-gen-grpc-java:1.28.0"
+        }
+    }
+
+    generateProtoTasks {
+        all().forEach { task ->
+            task.builtins {
+                id("java") {
+                    option("lite")
+                }
+            }
+            task.plugins {
+                id("grpc") {
+                    option("lite")
+                }
+            }
+        }
+    }
+}
+
+
+
 dependencies {
     // Kotlin
     implementation(kotlin(Dependencies.Kotlin.stdlib, KotlinCompilerVersion.VERSION))
@@ -168,4 +202,12 @@ dependencies {
     testImplementation(Dependencies.Test.runner)
     testImplementation(Dependencies.Test.junit)
     testImplementation(Dependencies.Test.mockk)
+
+
+    implementation("javax.annotation:javax.annotation-api:1.2")
+    implementation("io.grpc:grpc-stub:1.28.0")
+    implementation("io.grpc:grpc-protobuf-lite:1.28.0")
+    implementation("io.grpc:grpc-okhttp:1.28.0")
+    implementation("io.grpc:grpc-core:1.28.0")
+
 }

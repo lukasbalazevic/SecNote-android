@@ -5,5 +5,10 @@ import javax.inject.Inject
 
 class LoginViewModel @Inject constructor(
     override val viewState: LoginViewState
-) : BaseCrViewModel<LoginViewState>()
+) : BaseCrViewModel<LoginViewState>() {
+
+    fun callGrpc() {
+
+    }
+}
 
