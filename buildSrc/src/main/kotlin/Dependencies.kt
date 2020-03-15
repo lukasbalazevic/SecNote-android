@@ -25,6 +25,7 @@ object Dependencies {
         const val lifecycleLiveData = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
         const val vectordrawable = "androidx.vectordrawable:vectordrawable:${Versions.vectorDrawable}"
         const val preference = "androidx.preference:preference-ktx:${Versions.preference}"
+        const val security = "androidx.security:security-crypto:${Versions.security}"
     }
 
     object DependencyInjection {
@@ -38,15 +39,6 @@ object Dependencies {
         const val safeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigationComponents}"
         const val fragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigationComponents}"
         const val ui = "androidx.navigation:navigation-ui-ktx:${Versions.navigationComponents}"
-    }
-
-    object Networking {
-        const val moshi = "com.squareup.moshi:moshi:${Versions.moshi}"
-        const val okHttp = "com.squareup.okhttp3:okhttp:${Versions.okhttp}"
-        const val logging = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp}"
-        const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
-        const val retrofitConverter = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit}"
-        const val retrofitAdapter = "com.squareup.retrofit2:adapter-rxjava2:${Versions.retrofit}"
     }
 
     object Grpc {

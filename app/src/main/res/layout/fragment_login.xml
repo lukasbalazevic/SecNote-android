@@ -51,7 +51,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"/>
+                android:inputType="textEmailAddress"
+                android:text="@{viewState.email}"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -70,7 +71,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"/>
+                android:inputType="textPassword"
+                android:text="@{viewState.password}"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -81,6 +83,7 @@
             android:layout_marginStart="@dimen/d8"
             android:layout_marginTop="@dimen/d8"
             android:layout_marginEnd="@dimen/d8"
+            android:onClick="@{() -> viewModel.signIn()}"
             android:text="@string/general_signIn"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -93,6 +96,7 @@
             android:layout_marginStart="@dimen/d8"
             android:layout_marginTop="@dimen/d2"
             android:layout_marginEnd="@dimen/d8"
+            android:onClick="@{() -> viewModel.signUp()}"
             android:text="@string/general_signUp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

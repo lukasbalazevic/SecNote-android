@@ -14,6 +14,7 @@ plugins {
     kotlin("android.extensions")
     id("androidx.navigation.safeargs.kotlin")
     id("com.google.protobuf") version "0.8.8"
+    id("idea")
 }
 
 android {
@@ -172,6 +173,7 @@ dependencies {
     implementation(Dependencies.Support.lifecycleLiveData)
     implementation(Dependencies.Support.constraintLayout)
     implementation(Dependencies.Support.preference)
+    implementation(Dependencies.Support.security)
 
     // MVVM
     implementation(Dependencies.Taste.mvvmDagger)
@@ -179,15 +181,6 @@ dependencies {
 
     // NavigationComponents
     implementation(Dependencies.NavigationComponents.fragment)
-
-    // Networking
-    implementation(Dependencies.Networking.okHttp)
-    implementation(Dependencies.Networking.logging)
-    implementation(Dependencies.Networking.moshi)
-    implementation(Dependencies.Networking.retrofit)
-    implementation(Dependencies.Networking.retrofitConverter)
-    implementation(Dependencies.Networking.retrofitAdapter)
-    implementation(Dependencies.NavigationComponents.ui)
 
     // Dependency injection
     implementation(Dependencies.DependencyInjection.dagger)
