@@ -136,8 +136,8 @@ protobuf {
 
     plugins {
 
-        id("javalite") {
-            artifact = "com.google.protobuf:protoc-gen-javalite:3.0.0"
+        id(Dependencies.Plugins.java) {
+            artifact = Dependencies.Grpc.genJava
         }
 
         id(Dependencies.Plugins.grpc) {
@@ -152,7 +152,7 @@ protobuf {
         all().forEach { task ->
 
             task.plugins {
-                id("javalite")
+                id(Dependencies.Plugins.java)
                 id(Dependencies.Plugins.grpc) {
                     option("lite")
                 }
@@ -200,10 +200,9 @@ dependencies {
     testImplementation(Dependencies.Test.junit)
     testImplementation(Dependencies.Test.mockk)
 
-
+    // GRPC
     implementation(Dependencies.Grpc.javaxAnnotation)
     implementation(Dependencies.Grpc.grpcStub)
-    //implementation(Dependencies.Grpc.grpcProtobuf)
     implementation(Dependencies.Grpc.grpcOkHttp)
     implementation(Dependencies.Grpc.grpcCore)
     implementation(Dependencies.Grpc.grpcProtoLite) {
