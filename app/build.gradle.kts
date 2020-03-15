@@ -150,7 +150,6 @@ protobuf {
 
     generateProtoTasks {
         all().forEach { task ->
-
             task.plugins {
                 id(Dependencies.Plugins.java)
                 id(Dependencies.Plugins.grpc) {
