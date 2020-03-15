@@ -1,4 +1,4 @@
-import com.google.protobuf.gradle.builtins
+
 import com.google.protobuf.gradle.generateProtoTasks
 import com.google.protobuf.gradle.id
 import com.google.protobuf.gradle.plugins
@@ -135,6 +135,11 @@ protobuf {
     protoc { artifact = Dependencies.Grpc.protobuf }
 
     plugins {
+
+        id("javalite") {
+            artifact = "com.google.protobuf:protoc-gen-javalite:3.0.0"
+        }
+
         id(Dependencies.Plugins.grpc) {
             artifact = Dependencies.Grpc.genGrpc
         }
@@ -145,16 +150,13 @@ protobuf {
 
     generateProtoTasks {
         all().forEach { task ->
-            task.builtins {
-                id(Dependencies.Plugins.java) {
-                    option("lite")
-                }
-            }
+
             task.plugins {
-                id(Dependencies.Plugins.coroutines)
+                id("javalite")
                 id(Dependencies.Plugins.grpc) {
                     option("lite")
                 }
+                id(Dependencies.Plugins.coroutines)
             }
         }
     }
@@ -201,9 +203,12 @@ dependencies {
 
     implementation(Dependencies.Grpc.javaxAnnotation)
     implementation(Dependencies.Grpc.grpcStub)
-    implementation(Dependencies.Grpc.grpcProtobuf)
+    //implementation(Dependencies.Grpc.grpcProtobuf)
     implementation(Dependencies.Grpc.grpcOkHttp)
     implementation(Dependencies.Grpc.grpcCore)
+    implementation(Dependencies.Grpc.grpcProtoLite) {
+        exclude("com.google.protobuf", "protobuf-javalite")
+    }
 
     implementation(Dependencies.Grpc.krotoPlus)
 }

@@ -30,11 +30,11 @@ class SignUpInteractor @Inject constructor(
             cryptoHelper.generateKey()
         }
         val hashedPassword = cryptoHelper.hashMessage("$password${Constants.Security.SALT}".toByteArray())
-        return authServiceManager.signUp(email, hashedPassword, key)
+        val creds = authServiceManager.signUp(email, hashedPassword, key)
 
-    /*    tokenStore.saveAccessToken(creds.jwt.accessToken)
+        tokenStore.saveAccessToken(creds.jwt.accessToken)
         tokenStore.saveRefreshToken(creds.jwt.refreshToken)
 
-        return creds*/
+        return creds
     }
 }

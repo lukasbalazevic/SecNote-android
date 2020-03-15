@@ -31,9 +31,8 @@ object Versions {
 
     // grpc
     const val protobuf = "3.11.4"
-    const val protocGen = "1.28.0"
     const val krotoPlus = "0.6.1"
-    const val javaxAnnotation = "1.2"
+    const val javaxAnnotation = "1.3.2"
     const val grpc = "1.28.0"
 
     // other

@@ -43,14 +43,16 @@ object Dependencies {
 
     object Grpc {
         const val protobuf = "com.google.protobuf:protoc:${Versions.protobuf}"
-        const val genGrpc = "io.grpc:protoc-gen-grpc-java:${Versions.protocGen}"
+        const val genGrpc = "io.grpc:protoc-gen-grpc-java:${Versions.grpc}"
         const val krotoPlusProtocGen = "com.github.marcoferrer.krotoplus:protoc-gen-grpc-coroutines:${Versions.krotoPlus}"
 
         const val javaxAnnotation = "javax.annotation:javax.annotation-api:${Versions.javaxAnnotation}"
         const val grpcStub = "io.grpc:grpc-stub:${Versions.grpc}"
-        const val grpcProtobuf = "io.grpc:grpc-protobuf-lite:${Versions.grpc}"
+        const val grpcProtobuf = "com.google.protobuf:protobuf-lite:3.0.1"
         const val grpcOkHttp = "io.grpc:grpc-okhttp:${Versions.grpc}"
         const val grpcCore = "io.grpc:grpc-core:${Versions.grpc}"
+        const val grpcProtoLite = "io.grpc:grpc-protobuf-lite:${Versions.grpc}"
+
         const val krotoPlus = "com.github.marcoferrer.krotoplus:kroto-plus-coroutines:${Versions.krotoPlus}"
     }
 
