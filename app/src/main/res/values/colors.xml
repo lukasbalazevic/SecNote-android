@@ -5,5 +5,8 @@
     <color name="cream">#ECF0F1</color>
     <color name="night_sky">#2C3E50</color>
     <color name="grey">#AAAAAA</color>
+    <color name="ligth_grey">#4DFFFFFF</color>
     <color name="white">#FFFFFF</color>
+    <color name="blackish">#2f2d2d</color>
 </resources>
+

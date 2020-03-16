@@ -5,6 +5,10 @@ object Dependencies {
         const val detekt = "io.gitlab.arturbosch.detekt"
         const val ktlint = "org.jlleitschuh.gradle.ktlint"
         const val templates = "com.thefuntasty.mvvm.android-templates"
+
+        const val grpc = "grpc"
+        const val java = "javalite"
+        const val coroutines = "coroutines"
     }
 
     object Kotlin {
@@ -21,6 +25,7 @@ object Dependencies {
         const val lifecycleLiveData = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
         const val vectordrawable = "androidx.vectordrawable:vectordrawable:${Versions.vectorDrawable}"
         const val preference = "androidx.preference:preference-ktx:${Versions.preference}"
+        const val security = "androidx.security:security-crypto:${Versions.security}"
     }
 
     object DependencyInjection {
@@ -36,13 +41,19 @@ object Dependencies {
         const val ui = "androidx.navigation:navigation-ui-ktx:${Versions.navigationComponents}"
     }
 
-    object Networking {
-        const val moshi = "com.squareup.moshi:moshi:${Versions.moshi}"
-        const val okHttp = "com.squareup.okhttp3:okhttp:${Versions.okhttp}"
-        const val logging = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp}"
-        const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
-        const val retrofitConverter = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit}"
-        const val retrofitAdapter = "com.squareup.retrofit2:adapter-rxjava2:${Versions.retrofit}"
+    object Grpc {
+        const val protobuf = "com.google.protobuf:protoc:${Versions.protobuf}"
+        const val genJava = "com.google.protobuf:protoc-gen-javalite:${Versions.java}"
+        const val genGrpc = "io.grpc:protoc-gen-grpc-java:${Versions.grpc}"
+        const val krotoPlusProtocGen = "com.github.marcoferrer.krotoplus:protoc-gen-grpc-coroutines:${Versions.krotoPlus}"
+
+        const val javaxAnnotation = "javax.annotation:javax.annotation-api:${Versions.javaxAnnotation}"
+        const val grpcStub = "io.grpc:grpc-stub:${Versions.grpc}"
+        const val grpcOkHttp = "io.grpc:grpc-okhttp:${Versions.grpc}"
+        const val grpcCore = "io.grpc:grpc-core:${Versions.grpc}"
+        const val grpcProtoLite = "io.grpc:grpc-protobuf-lite:${Versions.grpc}"
+
+        const val krotoPlus = "com.github.marcoferrer.krotoplus:kroto-plus-coroutines:${Versions.krotoPlus}"
     }
 
     object Taste {

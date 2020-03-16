@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+option java_package = "app.vut.secnote.authservice";
+option java_multiple_files = true;
+option java_outer_classname = "AuthServiceProto";
+
+package authservice;
+
+service AuthService {
+    rpc SignIn(CredentialsRequest) returns (CredentialsResponse) {}
+    rpc SignUp(CredentialsRequest) returns (CredentialsResponse) {}
+    rpc RenewToken(RenewRequest) returns (CredentialsResponse) {}
+    rpc SignOut(Request) returns (Response) {}
+    rpc Verify(Request) returns (VerifyResponse) {}
+    rpc FindUser(FindUserRequest) returns (FindUserResponse) {}
+}
+
+message CredentialsRequest {
+    string email = 1;
+    string password = 2;
+    string key = 3;
+}
+
+message CredentialsResponse {
+    JWT jwt = 1;
+}
+
+message RenewRequest {
+    string refreshToken = 1;
+}
+
+message VerifyResponse {
+    bool valid = 1;
+    string userId = 2;
+}
+
+message Request {
+
+}
+
+message Response {
+    int32 code = 1;
+}
+
+message JWT {
+    string accessToken = 1;
+    string refreshToken = 2;
+}
+
+message FindUserRequest {
+    string email = 1;
+}
+
+message FindUserResponse {
+    string userId = 1;
+}

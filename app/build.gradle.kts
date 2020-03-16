@@ -1,3 +1,9 @@
+
+import com.google.protobuf.gradle.generateProtoTasks
+import com.google.protobuf.gradle.id
+import com.google.protobuf.gradle.plugins
+import com.google.protobuf.gradle.protobuf
+import com.google.protobuf.gradle.protoc
 import org.jetbrains.kotlin.config.KotlinCompilerVersion
 import org.jetbrains.kotlin.gradle.internal.AndroidExtensionsExtension
 
@@ -7,6 +13,8 @@ plugins {
     kotlin("kapt")
     kotlin("android.extensions")
     id("androidx.navigation.safeargs.kotlin")
+    id("com.google.protobuf") version "0.8.8"
+    id("idea")
 }
 
 android {
@@ -123,6 +131,36 @@ android {
     }
 }
 
+protobuf {
+    protoc { artifact = Dependencies.Grpc.protobuf }
+
+    plugins {
+
+        id(Dependencies.Plugins.java) {
+            artifact = Dependencies.Grpc.genJava
+        }
+
+        id(Dependencies.Plugins.grpc) {
+            artifact = Dependencies.Grpc.genGrpc
+        }
+        id(Dependencies.Plugins.coroutines) {
+            artifact = Dependencies.Grpc.krotoPlusProtocGen
+        }
+    }
+
+    generateProtoTasks {
+        all().forEach { task ->
+            task.plugins {
+                id(Dependencies.Plugins.java)
+                id(Dependencies.Plugins.grpc) {
+                    option("lite")
+                }
+                id(Dependencies.Plugins.coroutines)
+            }
+        }
+    }
+}
+
 dependencies {
     // Kotlin
     implementation(kotlin(Dependencies.Kotlin.stdlib, KotlinCompilerVersion.VERSION))
@@ -136,6 +174,7 @@ dependencies {
     implementation(Dependencies.Support.lifecycleLiveData)
     implementation(Dependencies.Support.constraintLayout)
     implementation(Dependencies.Support.preference)
+    implementation(Dependencies.Support.security)
 
     // MVVM
     implementation(Dependencies.Taste.mvvmDagger)
@@ -143,15 +182,6 @@ dependencies {
 
     // NavigationComponents
     implementation(Dependencies.NavigationComponents.fragment)
-
-    // Networking
-    implementation(Dependencies.Networking.okHttp)
-    implementation(Dependencies.Networking.logging)
-    implementation(Dependencies.Networking.moshi)
-    implementation(Dependencies.Networking.retrofit)
-    implementation(Dependencies.Networking.retrofitConverter)
-    implementation(Dependencies.Networking.retrofitAdapter)
-    implementation(Dependencies.NavigationComponents.ui)
 
     // Dependency injection
     implementation(Dependencies.DependencyInjection.dagger)
@@ -168,4 +198,15 @@ dependencies {
     testImplementation(Dependencies.Test.runner)
     testImplementation(Dependencies.Test.junit)
     testImplementation(Dependencies.Test.mockk)
+
+    // GRPC
+    implementation(Dependencies.Grpc.javaxAnnotation)
+    implementation(Dependencies.Grpc.grpcStub)
+    implementation(Dependencies.Grpc.grpcOkHttp)
+    implementation(Dependencies.Grpc.grpcCore)
+    implementation(Dependencies.Grpc.grpcProtoLite) {
+        exclude("com.google.protobuf", "protobuf-javalite")
+    }
+
+    implementation(Dependencies.Grpc.krotoPlus)
 }

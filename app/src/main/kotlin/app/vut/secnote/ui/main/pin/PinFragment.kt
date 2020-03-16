@@ -7,7 +7,6 @@ import javax.inject.Inject
 
 class PinFragment : BaseBindingFragment<PinViewModel, PinViewState, FragmentPinBinding>(), PinView {
 
-
     @Inject override lateinit var viewModelFactory: PinViewModelFactory
 
     override val layoutResId = R.layout.fragment_pin

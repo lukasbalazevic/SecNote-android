@@ -7,7 +7,6 @@ import javax.inject.Inject
 
 class InviteFragment : BaseBindingFragment<InviteViewModel, InviteViewState, FragmentInviteBinding>(), InviteView {
 
-
     @Inject override lateinit var viewModelFactory: InviteViewModelFactory
 
     override val layoutResId = R.layout.fragment_invite

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     tools:ignore="InvalidNavigation,UnusedNavigation">
@@ -38,7 +39,11 @@
         android:id="@+id/fragment_login"
         android:name="app.vut.secnote.ui.main.login.LoginFragment"
         android:label="LoginFragment"
-        tools:layout="@layout/fragment_login"/>
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/navigate_to_notes_fragment"
+            app:destination="@id/fragment_notes"/>
+    </fragment>
 
     <fragment
         android:id="@+id/fragment_note"

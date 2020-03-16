@@ -24,5 +24,4 @@ class SplashActivity : BaseBindingActivity<SplashViewModel, SplashViewState, Act
         super.onResume()
         startActivity(NavigationActivity.getStartIntent(this))
     }
-
 }
