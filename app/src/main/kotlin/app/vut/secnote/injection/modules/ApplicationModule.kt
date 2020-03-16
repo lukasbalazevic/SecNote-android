@@ -33,7 +33,8 @@ class ApplicationModule {
 
     @Singleton
     @Provides
-    fun keyPairGenerator(): KeyPairGenerator = KeyPairGenerator.getInstance(KeyProperties.KEY_ALGORITHM_RSA, Constants.Security.KEYSTORE)
+    fun keyPairGenerator(): KeyPairGenerator
+        = KeyPairGenerator.getInstance(KeyProperties.KEY_ALGORITHM_RSA, Constants.Security.KEYSTORE)
 
     @Singleton
     @Provides
@@ -49,5 +50,5 @@ class ApplicationModule {
             context,
             EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
             EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-        );
+        )
 }

@@ -18,5 +18,6 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideAuthStub(channel: Channel): AuthServiceCoroutineGrpc.AuthServiceCoroutineStub = AuthServiceCoroutineGrpc.newStub(channel)
+    fun provideAuthStub(channel: Channel): AuthServiceCoroutineGrpc.AuthServiceCoroutineStub
+        = AuthServiceCoroutineGrpc.newStub(channel)
 }

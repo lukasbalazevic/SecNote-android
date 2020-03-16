@@ -2,8 +2,6 @@ package app.vut.secnote.ui.navigation
 
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.navigation.fragment.NavHostFragment
 import app.vut.secnote.R
 import app.vut.secnote.data.ui.StartDestination

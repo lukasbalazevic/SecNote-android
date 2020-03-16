@@ -1,7 +1,6 @@
 package app.vut.secnote.data.remote
 
 import app.vut.secnote.authservice.AuthServiceCoroutineGrpc
-import app.vut.secnote.domain.security.CryptoHelper
 import com.github.marcoferrer.krotoplus.coroutines.withCoroutineContext
 import javax.inject.Inject
 

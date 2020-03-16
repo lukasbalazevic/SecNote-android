@@ -6,4 +6,3 @@ import javax.inject.Inject
 class InviteViewModel @Inject constructor(
     override val viewState: InviteViewState
 ) : BaseCrViewModel<InviteViewState>()
-

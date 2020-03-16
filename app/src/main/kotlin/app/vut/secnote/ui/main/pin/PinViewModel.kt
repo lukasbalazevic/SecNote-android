@@ -6,4 +6,3 @@ import javax.inject.Inject
 class PinViewModel @Inject constructor(
     override val viewState: PinViewState
 ) : BaseCrViewModel<PinViewState>()
-
