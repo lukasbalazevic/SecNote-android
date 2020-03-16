@@ -3,6 +3,7 @@
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/orange</item>
         <item name="colorPrimaryDark">@color/orange_dark</item>
+        <item name="colorSecondary">@color/night_sky</item>
         <item name="android:windowBackground">@color/orange</item>
         <item name="textInputStyle">@style/Widget.TextInputLayout</item>
         <item name="materialButtonStyle">@style/Button.NightSky</item>
@@ -18,6 +19,7 @@
         <item name="boxCornerRadiusBottomStart">@dimen/d2</item>
         <item name="boxCornerRadiusBottomEnd">@dimen/d2</item>
         <item name="boxStrokeColor">@color/color_boxstroke_textfield</item>
+        <item name="errorTextColor">@color/blackish</item>
         <item name="helperTextTextColor">@color/cream</item>
         <item name="hintTextColor">@color/night_sky</item>
         <item name="android:textColorHint">@color/ligth_grey</item>

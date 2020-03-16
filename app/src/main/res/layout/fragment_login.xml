@@ -44,6 +44,7 @@
             android:layout_marginTop="@dimen/d8"
             android:layout_marginEnd="@dimen/d8"
             android:hint="@string/general_email"
+            app:errorText="@{viewState.emailError}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/login_title">
@@ -64,6 +65,7 @@
             android:layout_marginTop="@dimen/d2"
             android:layout_marginEnd="@dimen/d8"
             android:hint="@string/general_password"
+            app:errorText="@{viewState.passwordError}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/login_email">

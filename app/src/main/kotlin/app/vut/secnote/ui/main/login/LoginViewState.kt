@@ -7,4 +7,7 @@ import javax.inject.Inject
 class LoginViewState @Inject constructor() : ViewState {
     val email = DefaultValueLiveData("")
     val password = DefaultValueLiveData("")
+
+    val emailError = DefaultValueLiveData("")
+    val passwordError = DefaultValueLiveData("")
 }
