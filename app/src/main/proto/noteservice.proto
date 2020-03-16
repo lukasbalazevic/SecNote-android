@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+option java_package = "app.vut.secnote.noteservice";
+option java_multiple_files = true;
+option java_outer_classname = "NoteServiceProto";
+
+package noteservice;
+
+service NoteService {
+    rpc getNotes(NoteRequest) returns (NoteResponse) {}
+    rpc createNote(NoteOperationRequest) returns (Note) {}
+    rpc updateNote(NoteOperationRequest) returns (Note) {}
+    rpc deleteNote(DeleteRequest) returns (Response) {}
+}
+
+// Requests
+
+message NoteRequest {
+    repeated string ids = 1;
+}
+
+message NoteOperationRequest {
+    Note note = 1;
+}
+
+message DeleteRequest {
+    string id = 1;
+}
+
+// Response
+
+message NoteResponse {
+    repeated Note notes = 1;
+}
+
+message Response {
+}
+
+// Data structure
+
+message Note {
+    string id = 1;
+    string title = 2;
+    string body = 3;
+    repeated string categories = 4;
+    bool encrypted = 5;
+    string alias = 6;
+}
+

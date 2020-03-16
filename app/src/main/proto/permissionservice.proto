@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+option java_package = "app.vut.secnote.permissionservice";
+option java_multiple_files = true;
+option java_outer_classname = "PermissionServiceProto";
+
+package permissionservice;
+
+import "noteservice.proto";
+
+service PermissionService {
+    rpc getNotes(Request) returns (noteservice.NoteResponse) {}
+    rpc addOrUpdateNote(noteservice.NoteOperationRequest) returns (noteservice.NoteResponse) {}
+    rpc deleteNote(noteservice.DeleteRequest) returns (noteservice.NoteResponse) {}
+    rpc shareNote(ShareRequest) returns (Request) {}
+    rpc subscribeNotes(Request) returns (stream noteservice.NoteResponse) {}
+}
+
+message Request {
+}
+
+message ShareRequest {
+    string noteId = 1;
+    string email = 2;
+    Permissions permissions = 3;
+}
+
+message Permissions {
+    bool read = 1;
+    bool write = 2;
+    bool delete = 3;
+    bool share = 4;
+    bool owner = 5;
+}
