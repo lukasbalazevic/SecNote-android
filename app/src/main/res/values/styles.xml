@@ -28,6 +28,12 @@
         <item name="materialThemeOverlay">@style/Overlay.TextInputEditText</item>
     </style>
 
+    <style name="CollapsingToolbar" parent="Widget.Design.CollapsingToolbar">
+        <item name="expandedTitleTextAppearance">@style/TextBold.White.48</item>
+        <item name="collapsedTitleTextAppearance">@style/TextBold.White.24</item>
+        <item name="contentScrim">@color/orange_dark</item>
+    </style>
+
     <style name="Overlay.TextInputEditText" parent="ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox.Dense">
         <item name="editTextStyle">@style/Widget.TextInputEditText</item>
     </style>
