@@ -24,7 +24,38 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+            <LinearLayout
+                app:visibility="@{viewState.isListEmpty}"
+                android:layout_gravity="center"
+                android:id="@+id/notes_empty_state"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:src="@drawable/ic_undraw_add_notes"
+                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:ignore="ContentDescription"/>
+
+                <TextView
+                    android:layout_margin="@dimen/d8"
+                    android:textAppearance="@style/TextRegular.White.16"
+                    android:text="@string/general_add_first_note"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
         <androidx.recyclerview.widget.RecyclerView
+            app:visibility="@{!viewState.isListEmpty}"
+            android:id="@+id/notes_list"
+            android:layout_marginStart="@dimen/d4"
+            android:layout_marginEnd="@dimen/d4"
+
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
