@@ -55,7 +55,11 @@
         android:id="@+id/fragment_notes"
         android:name="app.vut.secnote.ui.main.notes.NotesFragment"
         android:label="NotesFragment"
-        tools:layout="@layout/fragment_notes"/>
+        tools:layout="@layout/fragment_notes">
+        <action
+            android:id="@+id/navigate_to_note"
+            app:destination="@id/fragment_note"/>
+    </fragment>
 
     <fragment
         android:id="@+id/fragment_pin"

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import app.vut.secnote.R
 import app.vut.secnote.databinding.FragmentNotesBinding
+import app.vut.secnote.tools.extensions.navigateTo
 import app.vut.secnote.ui.base.BaseBindingFragment
 import com.thefuntasty.mvvm.livedata.observeNonNull
 import javax.inject.Inject
@@ -19,6 +20,12 @@ class NotesFragment : BaseBindingFragment<NotesViewModel, NotesViewState, Fragme
         binding.notesList.adapter = adapter
         viewModel.viewState.list.observeNonNull(this) {
             adapter.submitList(it)
+        }
+
+        observeEvent(NavigateToCreateOrUpdateNoteEvent::class) {
+            navigateTo(
+                NotesFragmentDirections.navigateToNote()
+            )
         }
     }
 }
