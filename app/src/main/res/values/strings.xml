@@ -7,4 +7,6 @@
     <string name="general_signOut">Sign Out</string>
     <string name="general_email_error">Enter email to continue.</string>
     <string name="general_password_error">Enter password to continue.</string>
+    <string name="general_profile">Profile</string>
+    <string name="general_encryption">Encryption</string>
 </resources>
