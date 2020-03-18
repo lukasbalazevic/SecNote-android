@@ -16,7 +16,7 @@ class NotesViewModel @Inject constructor(
     fun getNotes() {
         getNotesInteractor.execute(
             onSuccess = {
-                //viewState.list.value = it.notesList
+                viewState.list.value = it.notesList
             },
             onError = {
                 Timber.d(it)

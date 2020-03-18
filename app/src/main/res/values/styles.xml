@@ -15,6 +15,12 @@
         <item name="android:windowBackground">@drawable/launcher_background</item>
     </style>
 
+    <style name="NoteBackground">
+        <item name="cornerRadius">@dimen/d2</item>
+        <item name="cornerFamily">rounded</item>
+        <item name="background">@color/white</item>
+    </style>
+
     <style name="Widget.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
         <item name="boxCornerRadiusTopStart">@dimen/d2</item>
         <item name="boxCornerRadiusTopEnd">@dimen/d2</item>

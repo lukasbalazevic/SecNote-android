@@ -1,14 +1,19 @@
 <resources>
     <string name="app_name">SecNote</string>
-    <string name="general_email">email</string>
-    <string name="general_password">password</string>
+    <string name="general_email">Email</string>
+    <string name="general_password">Password</string>
     <string name="general_signIn">Sign In</string>
     <string name="general_signUp">Sign Up</string>
     <string name="general_signOut">Sign Out</string>
     <string name="general_email_error">Enter email to continue.</string>
     <string name="general_password_error">Enter password to continue.</string>
     <string name="general_profile">Profile</string>
+    <string name="general_lock">Lock</string>
+    <string name="general_delete">Delete</string>
+    <string name="general_share">Share</string>
     <string name="general_encryption">Encryption</string>
     <string name="general_all_notes">All notes</string>
     <string name="general_add_first_note">Add your first note</string>
+    <string name="general_title">Title</string>
+    <string name="general_body">Body</string>
 </resources>
