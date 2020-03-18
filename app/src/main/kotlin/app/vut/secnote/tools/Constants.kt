@@ -15,8 +15,7 @@ interface Constants {
         const val ENCRYPTED_SHARED_PREFS = "secret_shared_prefs"
     }
 
-    object Api {
-        const val BASE_PROD_URL = "https://reqres.in/"
-        const val TIMEOUT_IN_SECONDS = 30L
+    object Category {
+        const val DEFAULT_ITEM = "DEFAULT_ITEM"
     }
 }

@@ -17,4 +17,5 @@
     <string name="general_title">Title</string>
     <string name="general_body">Body</string>
     <string name="general_note">Note</string>
+    <string name="general_add_category">Add Category</string>
 </resources>

@@ -70,4 +70,7 @@
         <item name="tint">@color/white</item>
     </style>
 
+    <style name="Category" parent="@style/Widget.MaterialComponents.Chip.Choice">
+
+    </style>
 </resources>

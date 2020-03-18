@@ -47,10 +47,10 @@
                 android:layout_marginStart="@dimen/d4"
                 android:layout_marginTop="@dimen/d4"
                 android:layout_marginEnd="@dimen/d4"
-                android:layout_marginBottom="@dimen/d10"
+                android:layout_marginBottom="@dimen/d2"
                 android:background="@drawable/background_note"
                 android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/note_categories"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/note_toolbar">
@@ -87,6 +87,20 @@
                     tools:ignore="LabelFor"/>
             </LinearLayout>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/note_categories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/d10"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/d4"
+                android:paddingEnd="@dimen/d4"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                tools:listitem="@layout/list_item_category_selection"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

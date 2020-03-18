@@ -49,7 +49,11 @@
         android:id="@+id/fragment_note"
         android:name="app.vut.secnote.ui.main.note.NoteFragment"
         android:label="NoteFragment"
-        tools:layout="@layout/fragment_note"/>
+        tools:layout="@layout/fragment_note">
+        <action
+            android:id="@+id/navigate_to_create_category"
+            app:destination="@id/fragment_create_category"/>
+    </fragment>
 
     <fragment
         android:id="@+id/fragment_notes"
