@@ -38,7 +38,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:navigationIcon="@drawable/ic_back"
                 app:navigation_icon_click="@{() -> viewModel.navigateBack()}"
-                app:title="My note"
+                app:title="@string/general_note"
                 app:titleTextColor="@color/white"/>
 
             <LinearLayout

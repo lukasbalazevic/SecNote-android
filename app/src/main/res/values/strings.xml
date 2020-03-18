@@ -16,4 +16,5 @@
     <string name="general_add_first_note">Add your first note</string>
     <string name="general_title">Title</string>
     <string name="general_body">Body</string>
+    <string name="general_note">Note</string>
 </resources>
