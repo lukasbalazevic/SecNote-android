@@ -15,8 +15,9 @@
     </data>
 
     <com.google.android.material.chip.Chip
-        style="@style/Widget.MaterialComponents.Chip.Choice"
+        style="@style/CategorySelection"
         android:layout_width="wrap_content"
+        android:text="@{item}"
         tools:text="Ideas"
         android:layout_height="wrap_content"/>
 

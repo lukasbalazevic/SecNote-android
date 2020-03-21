@@ -9,9 +9,9 @@
     </data>
 
     <com.google.android.material.chip.Chip
-        android:onClick="@{() -> view.addCategory()}"
-        android:text="@string/general_add_category"
-        style="@style/Widget.MaterialComponents.Chip.Action"
+        style="@style/CategoryAction"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> view.addCategory()}"
+        android:text="@string/general_add_category"/>
 </layout>

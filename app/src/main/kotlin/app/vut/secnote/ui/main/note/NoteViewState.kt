@@ -5,7 +5,7 @@ import com.thefuntasty.mvvm.livedata.DefaultValueLiveData
 import javax.inject.Inject
 
 class NoteViewState @Inject constructor() : ViewState {
-    val categories = DefaultValueLiveData<List<String>>(emptyList())
+    val categories = DefaultValueLiveData<List<String>>(listOf())
     val title = DefaultValueLiveData("")
     val body = DefaultValueLiveData("")
 }
