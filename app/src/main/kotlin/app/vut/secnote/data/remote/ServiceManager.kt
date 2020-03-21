@@ -3,15 +3,20 @@ package app.vut.secnote.data.remote
 import app.vut.secnote.data.store.TokenStore
 import app.vut.secnote.domain.security.CryptoHelper
 import io.grpc.Metadata
+import io.grpc.Status
 import io.grpc.StatusRuntimeException
 import io.grpc.stub.AbstractStub
 import io.grpc.stub.MetadataUtils
 import timber.log.Timber
 import java.net.UnknownHostException
 
-abstract class ServiceManager(val cryptoHelper: CryptoHelper, private val tokenStore: TokenStore) {
+abstract class ServiceManager(
+    private val cryptoHelper: CryptoHelper,
+    private val tokenStore: TokenStore,
+    private val authServiceManager: AuthServiceManager
+) {
 
-    suspend fun <T : AbstractStub<T>> T.executeWithMetadata(request: String) : T = executeApiCall {
+    suspend fun <T : AbstractStub<T>> T.executeWithMetadata(request: String): T = executeApiCall {
 
         val signature = cryptoHelper.signAndEncodeDataBase64(request.toByteArray())
         val encodedMessage = cryptoHelper.encodeBase64(request.toByteArray())
@@ -28,10 +33,10 @@ abstract class ServiceManager(val cryptoHelper: CryptoHelper, private val tokenS
     }
 
     suspend fun <T> executeApiCall(apiCall: suspend () -> T): T {
-        try {
-            return apiCall()
+        return try {
+            apiCall()
         } catch (e: StatusRuntimeException) {
-            throw e
+            checkStatusRuntimeException(e, apiCall)
         } catch (e: KotlinNullPointerException) {
             throw e
         } catch (e: UnknownHostException) {
@@ -41,5 +46,34 @@ abstract class ServiceManager(val cryptoHelper: CryptoHelper, private val tokenS
             Timber.e(e)
             throw e
         }
+    }
+
+    private suspend fun <T> checkStatusRuntimeException(e: StatusRuntimeException, apiCall: suspend () -> T): T =
+        when (e.status.code) {
+            Status.Code.OK,
+            Status.Code.CANCELLED,
+            Status.Code.UNKNOWN,
+            Status.Code.INVALID_ARGUMENT,
+            Status.Code.DEADLINE_EXCEEDED,
+            Status.Code.NOT_FOUND,
+            Status.Code.ALREADY_EXISTS,
+            Status.Code.PERMISSION_DENIED,
+            Status.Code.RESOURCE_EXHAUSTED,
+            Status.Code.FAILED_PRECONDITION,
+            Status.Code.ABORTED,
+            Status.Code.OUT_OF_RANGE,
+            Status.Code.UNIMPLEMENTED,
+            Status.Code.INTERNAL,
+            Status.Code.UNAVAILABLE,
+            Status.Code.DATA_LOSS -> throw e
+            Status.Code.UNAUTHENTICATED -> handleUnauthenticatedError(e, apiCall)
+        }
+
+    private suspend fun <T> handleUnauthenticatedError(e: StatusRuntimeException, apiCall: suspend () -> T): T {
+        val successful = authServiceManager.renewToken()
+        if (successful) {
+            return apiCall()
+        }
+        throw e
     }
 }

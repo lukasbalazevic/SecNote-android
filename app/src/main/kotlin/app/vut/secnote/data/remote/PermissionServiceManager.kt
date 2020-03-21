@@ -11,8 +11,9 @@ import javax.inject.Inject
 class PermissionServiceManager @Inject constructor(
     private val client: PermissionServiceCoroutineGrpc.PermissionServiceCoroutineStub,
     cryptoHelper: CryptoHelper,
-    tokenStore: TokenStore
-) : ServiceManager(cryptoHelper, tokenStore) {
+    tokenStore: TokenStore,
+    authServiceManager: AuthServiceManager
+) : ServiceManager(cryptoHelper, tokenStore, authServiceManager) {
 
     suspend fun getNotes() = executeApiCall {
         client

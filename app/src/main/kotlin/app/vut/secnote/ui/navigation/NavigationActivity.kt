@@ -2,8 +2,6 @@ package app.vut.secnote.ui.navigation
 
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.navigation.fragment.NavHostFragment
 import app.vut.secnote.R
 import app.vut.secnote.data.ui.StartDestination
@@ -26,7 +24,9 @@ class NavigationActivity :
 
     override fun onStart() {
         super.onStart()
-        setupNavigationFragment(StartDestination.LOGIN)
+        observeEvent(NavigationStartDestinationEvent::class) {
+            setupNavigationFragment(it.destination)
+        }
     }
 
     private fun setupNavigationFragment(destination: StartDestination) {

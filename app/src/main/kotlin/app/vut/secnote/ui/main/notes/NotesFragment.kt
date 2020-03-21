@@ -17,6 +17,7 @@ class NotesFragment : BaseBindingFragment<NotesViewModel, NotesViewState, Fragme
     override val layoutResId = R.layout.fragment_notes
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setBottomBarMenuClicks()
         binding.notesList.adapter = adapter
         viewModel.viewState.list.observeNonNull(this) {
             adapter.submitList(it)
@@ -26,6 +27,20 @@ class NotesFragment : BaseBindingFragment<NotesViewModel, NotesViewState, Fragme
             navigateTo(
                 NotesFragmentDirections.navigateToNote()
             )
+        }
+    }
+
+    private fun setBottomBarMenuClicks() {
+        binding.bar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.notes_profile -> navigateTo(
+                    NotesFragmentDirections.navigateToProfileFragment()
+                )
+                R.id.notes_encryption -> navigateTo(
+                    NotesFragmentDirections.navigateToCreateKeyFragment()
+                )
+            }
+            true
         }
     }
 }
