@@ -16,5 +16,11 @@ data class Note(
     val categories: String
 ) {
     @Ignore
-    val categoryList = categories.split(Constants.Database.CATEGORY_SEPARATOR)
+    val categoryList = if (categories.isBlank()) emptyList() else categories.split(Constants.Database.CATEGORY_SEPARATOR)
+
+    @Ignore
+    val bodyPreview = if (body.length > Constants.Note.NOTE_BODY_PREVIEW_LENGTH)
+        "${body.subSequence(0, Constants.Note.NOTE_BODY_PREVIEW_LENGTH)}..."
+    else
+        body
 }

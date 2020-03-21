@@ -20,4 +20,8 @@ interface Constants {
         const val NAME = "secnote.db"
         const val CATEGORY_SEPARATOR = ";;"
     }
+
+    object Note {
+        const val NOTE_BODY_PREVIEW_LENGTH = 60
+    }
 }

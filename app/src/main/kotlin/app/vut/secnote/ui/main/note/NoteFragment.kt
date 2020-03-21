@@ -8,7 +8,6 @@ import app.vut.secnote.tools.extensions.forceHideKeyboard
 import app.vut.secnote.tools.extensions.navigateBack
 import app.vut.secnote.tools.extensions.navigateTo
 import app.vut.secnote.ui.base.BaseBindingFragment
-import app.vut.secnote.ui.main.notes.NotesFragmentDirections
 import com.thefuntasty.mvvm.livedata.observe
 import javax.inject.Inject
 
@@ -19,11 +18,12 @@ class NoteFragment : BaseBindingFragment<NoteViewModel, NoteViewState, FragmentN
     override val layoutResId = R.layout.fragment_note
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         binding.noteCategories.adapter = adapter
+
         viewModel.viewState.categories.observe(this) {
             adapter.submitList(it)
         }
+
         observeEvent(NavigateBackEvent::class) {
             forceHideKeyboard()
             navigateBack()

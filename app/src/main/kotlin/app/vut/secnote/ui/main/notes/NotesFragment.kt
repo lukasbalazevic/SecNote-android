@@ -3,6 +3,7 @@ package app.vut.secnote.ui.main.notes
 import android.os.Bundle
 import android.view.View
 import app.vut.secnote.R
+import app.vut.secnote.data.model.room.Note
 import app.vut.secnote.databinding.FragmentNotesBinding
 import app.vut.secnote.tools.extensions.navigateTo
 import app.vut.secnote.ui.base.BaseBindingFragment
@@ -25,7 +26,7 @@ class NotesFragment : BaseBindingFragment<NotesViewModel, NotesViewState, Fragme
 
         observeEvent(NavigateToCreateOrUpdateNoteEvent::class) {
             navigateTo(
-                NotesFragmentDirections.navigateToNote()
+                NotesFragmentDirections.navigateToNote(it.note)
             )
         }
     }
@@ -42,5 +43,11 @@ class NotesFragment : BaseBindingFragment<NotesViewModel, NotesViewState, Fragme
             }
             true
         }
+    }
+
+    override fun onNoteClick(item: Note) {
+        navigateTo(
+            NotesFragmentDirections.navigateToNote(item.id)
+        )
     }
 }
