@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.main.pin.PinFragment">
 
@@ -22,6 +23,54 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/pin_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/d8"
+            android:text="@string/app_name"
+            android:textAppearance="@style/TextBold.White.64"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/d8"
+            android:src="@drawable/ic_undraw_fingerprint"
+            app:layout_constraintBottom_toTopOf="@id/pin_info"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pin_title"/>
+
+        <TextView
+            android:id="@+id/pin_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/d8"
+            android:layout_marginEnd="@dimen/d8"
+            android:layout_marginBottom="@dimen/d12"
+            android:gravity="center"
+            android:text="@{viewState.infoText}"
+            android:textAppearance="@style/TextRegular.White.16"
+            app:layout_constraintBottom_toTopOf="@id/pin_set"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:text="To use application set up the PIN"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/pin_set"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/d8"
+            android:onClick="@{() -> viewModel.pinAction()}"
+            android:text="@{viewState.buttonText}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:text="Set PIN"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

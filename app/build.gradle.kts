@@ -189,7 +189,7 @@ dependencies {
     // Other
     implementation(Dependencies.Other.timber)
     implementation(Dependencies.Other.threetenbp)
-
+    implementation("androidx.biometric:biometric:1.0.1")
     // Testing
     testImplementation(Dependencies.Test.core)
     testImplementation(Dependencies.Test.runner)

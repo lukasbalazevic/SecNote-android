@@ -1,13 +1,16 @@
 package app.vut.secnote.injection.modules
 
+import android.app.KeyguardManager
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Resources
 import android.security.keystore.KeyProperties
+import androidx.biometric.BiometricPrompt
 import androidx.room.Room
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
 import app.vut.secnote.App
+import app.vut.secnote.R
 import app.vut.secnote.data.database.ApplicationDatabase
 import app.vut.secnote.injection.ApplicationContext
 import app.vut.secnote.injection.SharedPrefKey
@@ -60,4 +63,15 @@ class ApplicationModule {
             .fallbackToDestructiveMigration()
             .build()
     }
+
+    @Provides
+    fun keyguardManager(@ApplicationContext context: Context): KeyguardManager =
+        context.getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
+
+    @Provides
+    fun biometricPromptInfo(resources: Resources) = BiometricPrompt.PromptInfo.Builder()
+        .setTitle(resources.getString(R.string.general_lock_screen_title))
+        .setSubtitle(resources.getString(R.string.general_lock_screen_subtitle))
+        .setDeviceCredentialAllowed(true)
+        .build()
 }

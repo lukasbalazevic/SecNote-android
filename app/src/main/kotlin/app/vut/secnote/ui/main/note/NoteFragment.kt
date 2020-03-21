@@ -44,7 +44,13 @@ class NoteFragment : BaseBindingFragment<NoteViewModel, NoteViewState, FragmentN
         }
     }
 
-    fun setBottomBarMenuClicks() {
+    override fun addCategory() {
+        navigateTo(
+            NoteFragmentDirections.navigateToCreateCategory()
+        )
+    }
+
+    private fun setBottomBarMenuClicks() {
         binding.noteAppbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.note_lock -> {
@@ -55,11 +61,5 @@ class NoteFragment : BaseBindingFragment<NoteViewModel, NoteViewState, FragmentN
             }
             true
         }
-    }
-
-    override fun addCategory() {
-        navigateTo(
-            NoteFragmentDirections.navigateToCreateCategory()
-        )
     }
 }

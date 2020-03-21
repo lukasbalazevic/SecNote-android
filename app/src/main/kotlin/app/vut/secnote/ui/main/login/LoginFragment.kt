@@ -15,9 +15,9 @@ class LoginFragment : BaseBindingFragment<LoginViewModel, LoginViewState, Fragme
     override val layoutResId = R.layout.fragment_login
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        observeEvent(NavigateToNotesEvent::class) {
+        observeEvent(NavigateToPinEvent::class) {
             navigateTo(
-                LoginFragmentDirections.navigateToNotesFragment()
+                LoginFragmentDirections.navigateToPinFragment(it.state)
             )
         }
     }
