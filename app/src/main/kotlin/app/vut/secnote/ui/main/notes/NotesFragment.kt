@@ -7,6 +7,7 @@ import app.vut.secnote.data.model.room.Note
 import app.vut.secnote.databinding.FragmentNotesBinding
 import app.vut.secnote.tools.extensions.navigateTo
 import app.vut.secnote.ui.base.BaseBindingFragment
+import app.vut.secnote.ui.main.note.NoteSavedEvent
 import com.thefuntasty.mvvm.livedata.observeNonNull
 import javax.inject.Inject
 

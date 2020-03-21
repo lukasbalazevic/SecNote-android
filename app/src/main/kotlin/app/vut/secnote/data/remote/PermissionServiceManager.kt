@@ -22,6 +22,15 @@ class PermissionServiceManager @Inject constructor(
             .getNotes {}
     }
 
+    suspend fun deleteNote(id: String) = executeApiCall {
+        client
+            .executeWithMetadata("")
+            .withCoroutineContext()
+            .deleteNote {
+            this.id = id
+        }
+    }
+
     suspend fun createOrUpdateNote(
         prototype: Note? = null,
         id: String? = null,

@@ -8,6 +8,7 @@ import app.vut.secnote.tools.extensions.forceHideKeyboard
 import app.vut.secnote.tools.extensions.navigateBack
 import app.vut.secnote.tools.extensions.navigateTo
 import app.vut.secnote.ui.base.BaseBindingFragment
+import com.google.android.material.snackbar.Snackbar
 import com.thefuntasty.mvvm.livedata.observe
 import javax.inject.Inject
 
@@ -18,6 +19,7 @@ class NoteFragment : BaseBindingFragment<NoteViewModel, NoteViewState, FragmentN
     override val layoutResId = R.layout.fragment_note
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setBottomBarMenuClicks()
         binding.noteCategories.adapter = adapter
 
         viewModel.viewState.categories.observe(this) {
@@ -27,6 +29,31 @@ class NoteFragment : BaseBindingFragment<NoteViewModel, NoteViewState, FragmentN
         observeEvent(NavigateBackEvent::class) {
             forceHideKeyboard()
             navigateBack()
+        }
+
+        observeEvent(NoteSavedEvent::class) {
+            Snackbar.make(binding.root, resources.getString(R.string.general_note_saved), Snackbar.LENGTH_SHORT)
+                .setAnchorView(binding.notesSaveFab)
+                .show()
+        }
+
+        observeEvent(ErrorOccurredEvent::class) {
+            Snackbar.make(binding.root, "${it.title} ${it.message}", Snackbar.LENGTH_SHORT)
+                .setAnchorView(binding.notesSaveFab)
+                .show()
+        }
+    }
+
+    fun setBottomBarMenuClicks() {
+        binding.noteAppbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.note_lock -> {
+                }
+                R.id.note_delete -> viewModel.deleteNote()
+                R.id.note_share -> {
+                }
+            }
+            true
         }
     }
 
