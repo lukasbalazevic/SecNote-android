@@ -77,6 +77,10 @@
         <action
             android:id="@+id/navigate_to_create_key_fragment"
             app:destination="@id/fragment_create_key"/>
+
+        <action
+            android:id="@+id/navigate_to_pin"
+            app:destination="@id/fragment_pin"/>
     </fragment>
 
     <fragment

@@ -4,6 +4,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.OnLifecycleEvent
 import app.vut.secnote.domain.notes.GetNotesInteractor
 import app.vut.secnote.domain.notes.SyncNotesInteractor
+import app.vut.secnote.tools.extensions.checkForUserNoteAuthenticatedException
 import com.thefuntasty.mvvm.crinteractors.BaseCrViewModel
 import timber.log.Timber
 import javax.inject.Inject
@@ -29,7 +30,14 @@ class NotesViewModel @Inject constructor(
                 Timber.d("Sync complete")
             },
             onError = {
-                Timber.d(it)
+               it.checkForUserNoteAuthenticatedException(
+                   authorize = {
+                       sendEvent(AuthorizeDeviceEvent)
+                   },
+                   showError = {
+                       // TODO show error
+                   }
+               )
             }
         )
     }

@@ -13,6 +13,7 @@ interface Constants {
         const val HASH_ALG = "SHA-512"
         const val SALT = "@Secnote?2020?Thesis!@"
         const val ENCRYPTED_SHARED_PREFS = "secret_shared_prefs"
+        const val DEVICE_AUTHORIZATION_WINDOW = 60 * 20
     }
 
     object Database {

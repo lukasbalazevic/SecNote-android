@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import app.vut.secnote.R
 import app.vut.secnote.data.model.room.Note
+import app.vut.secnote.data.model.ui.PinState
 import app.vut.secnote.databinding.FragmentNotesBinding
 import app.vut.secnote.tools.extensions.navigateTo
 import app.vut.secnote.ui.base.BaseBindingFragment
@@ -28,6 +29,12 @@ class NotesFragment : BaseBindingFragment<NotesViewModel, NotesViewState, Fragme
         observeEvent(NavigateToCreateOrUpdateNoteEvent::class) {
             navigateTo(
                 NotesFragmentDirections.navigateToNote(it.note)
+            )
+        }
+
+        observeEvent(AuthorizeDeviceEvent::class) {
+            navigateTo(
+                NotesFragmentDirections.navigateToPin(PinState.REAUTHORISE)
             )
         }
     }

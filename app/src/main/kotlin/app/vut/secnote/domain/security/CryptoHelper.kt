@@ -26,7 +26,7 @@ class CryptoHelper @Inject constructor(
             .setDigests(KeyProperties.DIGEST_SHA512)
             .setKeySize(Constants.Security.DEVICE_USER_KEY_SIG_SIZE)
             .setUserAuthenticationRequired(true)
-            .setUserAuthenticationValidityDurationSeconds(60 * 5)
+            .setUserAuthenticationValidityDurationSeconds(Constants.Security.DEVICE_AUTHORIZATION_WINDOW)
             .setSignaturePaddings(KeyProperties.SIGNATURE_PADDING_RSA_PKCS1)
             .build()
 
