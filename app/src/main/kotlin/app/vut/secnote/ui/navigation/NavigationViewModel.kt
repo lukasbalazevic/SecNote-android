@@ -1,6 +1,6 @@
 package app.vut.secnote.ui.navigation
 
-import app.vut.secnote.data.ui.StartDestination
+import app.vut.secnote.data.model.ui.StartDestination
 import app.vut.secnote.domain.login.IsUserSignInInteractor
 import com.thefuntasty.mvvm.crinteractors.BaseCrViewModel
 import javax.inject.Inject

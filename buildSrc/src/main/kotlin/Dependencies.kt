@@ -72,4 +72,10 @@ object Dependencies {
         const val junit = "androidx.test.ext:junit:${Versions.junit}"
         const val mockk = "io.mockk:mockk:${Versions.mockk}"
     }
+
+    object Room {
+        const val roomRuntime = "androidx.room:room-runtime:${Versions.room}"
+        const val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
+        const val roomKtx = "androidx.room:room-ktx:${Versions.room}"
+    }
 }

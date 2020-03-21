@@ -1,7 +1,7 @@
 package app.vut.secnote.ui.main.notes
 
 import androidx.lifecycle.map
-import app.vut.secnote.noteservice.Note
+import app.vut.secnote.data.model.room.Note
 import com.thefuntasty.mvvm.ViewState
 import com.thefuntasty.mvvm.livedata.DefaultValueLiveData
 import javax.inject.Inject

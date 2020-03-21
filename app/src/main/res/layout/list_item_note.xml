@@ -11,7 +11,7 @@
 
         <variable
             name="item"
-            type="app.vut.secnote.noteservice.Note"/>
+            type="app.vut.secnote.data.model.room.Note"/>
     </data>
 
     <androidx.cardview.widget.CardView

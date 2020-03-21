@@ -14,7 +14,6 @@ plugins {
     kotlin("android.extensions")
     id("androidx.navigation.safeargs.kotlin")
     id("com.google.protobuf") version "0.8.8"
-    id("idea")
 }
 
 android {
@@ -135,11 +134,9 @@ protobuf {
     protoc { artifact = Dependencies.Grpc.protobuf }
 
     plugins {
-
         id(Dependencies.Plugins.java) {
             artifact = Dependencies.Grpc.genJava
         }
-
         id(Dependencies.Plugins.grpc) {
             artifact = Dependencies.Grpc.genGrpc
         }
@@ -209,4 +206,9 @@ dependencies {
     }
 
     implementation(Dependencies.Grpc.krotoPlus)
+
+    // Room
+    implementation(Dependencies.Room.roomRuntime)
+    kapt(Dependencies.Room.roomCompiler)
+    implementation(Dependencies.Room.roomKtx)
 }

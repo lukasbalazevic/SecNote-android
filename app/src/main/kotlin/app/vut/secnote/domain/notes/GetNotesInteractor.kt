@@ -1,13 +1,13 @@
 package app.vut.secnote.domain.notes
 
-import app.vut.secnote.data.remote.PermissionServiceManager
-import app.vut.secnote.noteservice.NoteResponse
-import com.thefuntasty.mvvm.crinteractors.BaseCoroutineInteractor
+import app.vut.secnote.data.model.room.Note
+import app.vut.secnote.data.store.NoteStore
+import com.thefuntasty.mvvm.crinteractors.BaseFlowInteractor
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class GetNotesInteractor @Inject constructor(
-    private val permissionServiceManager: PermissionServiceManager
-) : BaseCoroutineInteractor<NoteResponse>() {
-    override suspend fun build(): NoteResponse =
-        permissionServiceManager.getNotes()
+    private val noteStore: NoteStore
+) : BaseFlowInteractor<List<Note>>() {
+    override suspend fun build(): Flow<List<Note>> = noteStore.getNotes()
 }

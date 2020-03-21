@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import app.vut.secnote.data.model.room.Note
 import app.vut.secnote.databinding.ListItemNoteBinding
-import app.vut.secnote.noteservice.Note
 import app.vut.secnote.tools.extensions.layoutInflater
 import javax.inject.Inject
 

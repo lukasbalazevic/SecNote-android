@@ -15,7 +15,9 @@ interface Constants {
         const val ENCRYPTED_SHARED_PREFS = "secret_shared_prefs"
     }
 
-    object Category {
-        const val DEFAULT_ITEM = "DEFAULT_ITEM"
+    object Database {
+        const val VERSION = 1
+        const val NAME = "secnote.db"
+        const val CATEGORY_SEPARATOR = ";;"
     }
 }

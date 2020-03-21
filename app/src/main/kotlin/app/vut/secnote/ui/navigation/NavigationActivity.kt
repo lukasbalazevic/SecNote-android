@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.navigation.fragment.NavHostFragment
 import app.vut.secnote.R
-import app.vut.secnote.data.ui.StartDestination
+import app.vut.secnote.data.model.ui.StartDestination
 import app.vut.secnote.databinding.ActivityNavigationBinding
 import app.vut.secnote.ui.base.BaseBindingActivity
 import javax.inject.Inject

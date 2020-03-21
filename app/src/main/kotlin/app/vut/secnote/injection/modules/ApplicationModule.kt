@@ -4,9 +4,11 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Resources
 import android.security.keystore.KeyProperties
+import androidx.room.Room
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
 import app.vut.secnote.App
+import app.vut.secnote.data.database.ApplicationDatabase
 import app.vut.secnote.injection.ApplicationContext
 import app.vut.secnote.injection.SharedPrefKey
 import app.vut.secnote.tools.Constants
@@ -49,5 +51,13 @@ class ApplicationModule {
             context,
             EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
             EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-        );
+        )
+
+    @Singleton
+    @Provides
+    fun applicationDatabase(@ApplicationContext context: Context): ApplicationDatabase {
+        return Room.databaseBuilder(context, ApplicationDatabase::class.java, Constants.Database.NAME)
+            .fallbackToDestructiveMigration()
+            .build()
+    }
 }
