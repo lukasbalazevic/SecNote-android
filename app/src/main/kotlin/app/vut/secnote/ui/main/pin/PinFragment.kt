@@ -9,6 +9,7 @@ import app.vut.secnote.R
 import app.vut.secnote.databinding.FragmentPinBinding
 import app.vut.secnote.tools.extensions.navigateBack
 import app.vut.secnote.tools.extensions.navigateTo
+import app.vut.secnote.tools.extensions.runOnUIThread
 import app.vut.secnote.tools.security.BiometricCallbackInterface
 import app.vut.secnote.ui.base.BaseBindingFragment
 import javax.inject.Inject
@@ -44,7 +45,7 @@ class PinFragment : BaseBindingFragment<PinViewModel, PinViewState, FragmentPinB
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        when(requestCode) {
+        when (requestCode) {
             REQUEST_CODE_PIN_SETTINGS -> viewModel.checkIfDeviceIsSecure()
         }
     }
@@ -53,7 +54,9 @@ class PinFragment : BaseBindingFragment<PinViewModel, PinViewState, FragmentPinB
         // TODO show error
     }
 
-    override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) = viewModel.checkState()
+    override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) = runOnUIThread {
+        viewModel.checkState()
+    }
 
     override fun onAuthenticationFailed() {
         // TODO show error

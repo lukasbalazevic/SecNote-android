@@ -30,3 +30,7 @@ fun Fragment.forceHideKeyboard() {
     val ims = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
     ims?.hideSoftInputFromWindow(this.view?.windowToken, InputMethodManager.RESULT_UNCHANGED_SHOWN)
 }
+
+fun Fragment.runOnUIThread(action: () -> Unit) {
+    activity?.runOnUiThread(action)
+}

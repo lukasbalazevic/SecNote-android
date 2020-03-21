@@ -26,6 +26,7 @@ class NavigationActivity :
 
     override fun onStart() {
         super.onStart()
+        runOnUiThread {  }
         observeEvent(NavigationStartDestinationEvent::class) {
             setupNavigationFragment(it.destination)
         }
