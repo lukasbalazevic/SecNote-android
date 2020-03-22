@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/note_lock"
+        android:icon="@drawable/ic_lock"
+        android:title="@string/general_lock"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/note_delete"
+        android:icon="@drawable/ic_delete"
+        android:title="@string/general_delete"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/note_share"
+        android:icon="@drawable/ic_share"
+        android:title="@string/general_share"
+        app:showAsAction="ifRoom"/>
+</menu>

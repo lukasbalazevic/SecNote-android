@@ -41,27 +41,64 @@
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login">
         <action
-            android:id="@+id/navigate_to_notes_fragment"
-            app:destination="@id/fragment_notes"/>
+            android:id="@+id/navigate_to_pin_fragment"
+            app:destination="@id/fragment_pin"/>
     </fragment>
 
     <fragment
         android:id="@+id/fragment_note"
         android:name="app.vut.secnote.ui.main.note.NoteFragment"
         android:label="NoteFragment"
-        tools:layout="@layout/fragment_note"/>
+        tools:layout="@layout/fragment_note">
+
+        <argument
+            android:name="note_id"
+            app:argType="string"
+            app:nullable="true"/>
+
+        <action
+            android:id="@+id/navigate_to_create_category"
+            app:destination="@id/fragment_create_category"/>
+    </fragment>
 
     <fragment
         android:id="@+id/fragment_notes"
         android:name="app.vut.secnote.ui.main.notes.NotesFragment"
         android:label="NotesFragment"
-        tools:layout="@layout/fragment_notes"/>
+        tools:layout="@layout/fragment_notes">
+        <action
+            android:id="@+id/navigate_to_note"
+            app:destination="@id/fragment_note"/>
+
+        <action
+            android:id="@+id/navigate_to_profile_fragment"
+            app:destination="@id/fragment_profile"/>
+
+        <action
+            android:id="@+id/navigate_to_create_key_fragment"
+            app:destination="@id/fragment_create_key"/>
+
+        <action
+            android:id="@+id/navigate_to_pin"
+            app:destination="@id/fragment_pin"/>
+    </fragment>
 
     <fragment
         android:id="@+id/fragment_pin"
         android:name="app.vut.secnote.ui.main.pin.PinFragment"
         android:label="PinFragment"
-        tools:layout="@layout/fragment_pin"/>
+        tools:layout="@layout/fragment_pin">
+        <argument
+            android:name="pin_state"
+            app:argType="app.vut.secnote.data.model.ui.PinState"
+            app:nullable="false"/>
+
+        <action
+            android:id="@+id/navigate_to_notes_fragment"
+            app:destination="@id/fragment_notes"
+            app:popUpTo="@id/fragment_pin"
+            app:popUpToInclusive="true"/>
+    </fragment>
 
     <fragment
         android:id="@+id/fragment_profile"

@@ -1,10 +1,30 @@
 <resources>
     <string name="app_name">SecNote</string>
-    <string name="general_email">email</string>
-    <string name="general_password">password</string>
+    <string name="general_email">Email</string>
+    <string name="general_password">Password</string>
     <string name="general_signIn">Sign In</string>
     <string name="general_signUp">Sign Up</string>
     <string name="general_signOut">Sign Out</string>
     <string name="general_email_error">Enter email to continue.</string>
     <string name="general_password_error">Enter password to continue.</string>
+    <string name="general_profile">Profile</string>
+    <string name="general_lock">Lock</string>
+    <string name="general_delete">Delete</string>
+    <string name="general_share">Share</string>
+    <string name="general_encryption">Encryption</string>
+    <string name="general_all_notes">All notes</string>
+    <string name="general_add_first_note">Add your first note</string>
+    <string name="general_title">Title</string>
+    <string name="general_body">Body</string>
+    <string name="general_note">Note</string>
+    <string name="general_add_category">Add Category</string>
+    <string name="general_note_saved">Note has been successfully saved</string>
+    <string name="general_error_occurred">Error occurred</string>
+    <string name="general_try_again_later">Please try again later.</string>
+    <string name="general_lock_screen_title">Please authorize device to continue.</string>
+    <string name="general_lock_screen_subtitle">By authentication you unlocking cryptographic material which is used for safety of your data</string>
+    <string name="general_set_pin">Set PIN</string>
+    <string name="general_set_pin_info">To use application set up phone PIN</string>
+    <string name="general_authorize_device">Authorize</string>
+    <string name="general_authorize_expired">Authorization expired please reauthorize device</string>
 </resources>

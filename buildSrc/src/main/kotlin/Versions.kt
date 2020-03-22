@@ -48,4 +48,7 @@ object Versions {
     const val testRunner = "1.2.0"
     const val junit = "1.1.1"
     const val mockk = "1.9"
+
+    // room
+    const val room = "2.2.5"
 }

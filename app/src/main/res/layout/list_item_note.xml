@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="view"
+            type="app.vut.secnote.ui.main.notes.NotesView"/>
+
+        <variable
+            name="item"
+            type="app.vut.secnote.data.model.room.Note"/>
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_margin="@dimen/d4"
+        android:foreground="?android:selectableItemBackground"
+        android:onClick="@{() -> view.onNoteClick(item)}"
+        app:cardCornerRadius="@dimen/d4">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:paddingStart="@dimen/d4"
+                android:paddingEnd="@dimen/d4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:padding="@dimen/d2"
+                android:text="@{item.title}"
+                android:textAppearance="@style/TextRegular.Black.14"
+                tools:text="Ideas for startup"/>
+            <View
+                android:layout_marginStart="@dimen/d4"
+                android:layout_marginEnd="@dimen/d4"
+                android:background="@color/black36"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"/>
+
+
+            <TextView
+                android:paddingStart="@dimen/d4"
+                android:paddingEnd="@dimen/d4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:padding="@dimen/d2"
+                android:text="@{item.bodyPreview}"
+                android:textAppearance="@style/TextRegular.Black.14"/>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

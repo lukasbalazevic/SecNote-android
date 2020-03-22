@@ -7,6 +7,22 @@
         <item name="android:background">@null</item>
     </style>
 
+    <style name="TextRegular.Black">
+        <item name="android:textColor">@color/night_sky</item>
+    </style>
+
+    <style name="TextRegular.Black.14">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextRegular.White">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="TextRegular.White.16">
+        <item name="android:textSize">16sp</item>
+    </style>
+
     <style name="TextBold" parent="@android:style/TextAppearance">
         <item name="android:fontFamily">@font/scada_bold</item>
         <item name="fontFamily">@font/scada_bold</item>
@@ -19,6 +35,18 @@
 
     <style name="TextBold.White.16">
         <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextBold.White.24">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="TextBold.White.32">
+        <item name="android:textSize">32sp</item>
+    </style>
+
+    <style name="TextBold.White.48">
+        <item name="android:textSize">48sp</item>
     </style>
 
     <style name="TextBold.White.64">

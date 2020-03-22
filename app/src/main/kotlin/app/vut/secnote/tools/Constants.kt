@@ -13,10 +13,16 @@ interface Constants {
         const val HASH_ALG = "SHA-512"
         const val SALT = "@Secnote?2020?Thesis!@"
         const val ENCRYPTED_SHARED_PREFS = "secret_shared_prefs"
+        const val DEVICE_AUTHORIZATION_WINDOW = 60 * 20
     }
 
-    object Api {
-        const val BASE_PROD_URL = "https://reqres.in/"
-        const val TIMEOUT_IN_SECONDS = 30L
+    object Database {
+        const val VERSION = 1
+        const val NAME = "secnote.db"
+        const val CATEGORY_SEPARATOR = ";;"
+    }
+
+    object Note {
+        const val NOTE_BODY_PREVIEW_LENGTH = 60
     }
 }

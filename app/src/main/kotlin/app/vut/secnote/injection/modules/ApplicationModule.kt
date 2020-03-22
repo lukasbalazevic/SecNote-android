@@ -1,12 +1,17 @@
 package app.vut.secnote.injection.modules
 
+import android.app.KeyguardManager
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Resources
 import android.security.keystore.KeyProperties
+import androidx.biometric.BiometricPrompt
+import androidx.room.Room
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
 import app.vut.secnote.App
+import app.vut.secnote.R
+import app.vut.secnote.data.database.ApplicationDatabase
 import app.vut.secnote.injection.ApplicationContext
 import app.vut.secnote.injection.SharedPrefKey
 import app.vut.secnote.tools.Constants
@@ -33,8 +38,7 @@ class ApplicationModule {
 
     @Singleton
     @Provides
-    fun keyPairGenerator(): KeyPairGenerator
-        = KeyPairGenerator.getInstance(KeyProperties.KEY_ALGORITHM_RSA, Constants.Security.KEYSTORE)
+    fun keyPairGenerator(): KeyPairGenerator = KeyPairGenerator.getInstance(KeyProperties.KEY_ALGORITHM_RSA, Constants.Security.KEYSTORE)
 
     @Singleton
     @Provides
@@ -51,4 +55,23 @@ class ApplicationModule {
             EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
             EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
         )
+
+    @Singleton
+    @Provides
+    fun applicationDatabase(@ApplicationContext context: Context): ApplicationDatabase {
+        return Room.databaseBuilder(context, ApplicationDatabase::class.java, Constants.Database.NAME)
+            .fallbackToDestructiveMigration()
+            .build()
+    }
+
+    @Provides
+    fun keyguardManager(@ApplicationContext context: Context): KeyguardManager =
+        context.getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
+
+    @Provides
+    fun biometricPromptInfo(resources: Resources) = BiometricPrompt.PromptInfo.Builder()
+        .setTitle(resources.getString(R.string.general_lock_screen_title))
+        .setSubtitle(resources.getString(R.string.general_lock_screen_subtitle))
+        .setDeviceCredentialAllowed(true)
+        .build()
 }

@@ -7,10 +7,18 @@
         <item name="android:windowBackground">@color/orange</item>
         <item name="textInputStyle">@style/Widget.TextInputLayout</item>
         <item name="materialButtonStyle">@style/Button.NightSky</item>
+        <item name="floatingActionButtonStyle">@style/FloatingActionButtonNightSky</item>
+        <item name="bottomAppBarStyle">@style/BottomAppBar</item>
     </style>
 
     <style name="AppTheme.Launcher">
         <item name="android:windowBackground">@drawable/launcher_background</item>
+    </style>
+
+    <style name="NoteBackground">
+        <item name="cornerRadius">@dimen/d2</item>
+        <item name="cornerFamily">rounded</item>
+        <item name="background">@color/white</item>
     </style>
 
     <style name="Widget.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
@@ -24,6 +32,12 @@
         <item name="hintTextColor">@color/night_sky</item>
         <item name="android:textColorHint">@color/ligth_grey</item>
         <item name="materialThemeOverlay">@style/Overlay.TextInputEditText</item>
+    </style>
+
+    <style name="CollapsingToolbar" parent="Widget.Design.CollapsingToolbar">
+        <item name="expandedTitleTextAppearance">@style/TextBold.White.48</item>
+        <item name="collapsedTitleTextAppearance">@style/TextBold.White.24</item>
+        <item name="contentScrim">@color/orange_dark</item>
     </style>
 
     <style name="Overlay.TextInputEditText" parent="ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox.Dense">
@@ -43,6 +57,29 @@
         <item name="backgroundTint">@color/night_sky</item>
         <item name="android:minHeight">@dimen/d14</item>
         <item name="android:textAppearance">@style/TextBold.White.16</item>
+    </style>
+
+    <style name="BottomAppBar" parent="Widget.MaterialComponents.BottomAppBar">
+        <item name="fabAlignmentMode">end</item>
+        <item name="backgroundTint">@color/orange_dark</item>
+        <item name="hideOnScroll">true</item>
+    </style>
+
+    <style name="FloatingActionButtonNightSky" parent="Widget.Design.FloatingActionButton">
+        <item name="backgroundTint">@color/night_sky</item>
+        <item name="tint">@color/white</item>
+    </style>
+
+    <style name="CategorySelection" parent="@style/Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/orange_dark</item>
+        <item name="android:textAppearance">@style/TextRegular.White.16</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="CategoryAction" parent="@style/Widget.MaterialComponents.Chip.Action">
+        <item name="chipBackgroundColor">@color/night_sky</item>
+        <item name="android:textAppearance">@style/TextRegular.White.16</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
 </resources>

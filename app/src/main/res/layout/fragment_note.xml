@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.main.note.NoteFragment">
 
@@ -19,10 +20,105 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/d14">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/note_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:navigationIcon="@drawable/ic_back"
+                app:navigation_icon_click="@{() -> viewModel.navigateBack()}"
+                app:title="@string/general_note"
+                app:titleTextColor="@color/white"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/d4"
+                android:layout_marginTop="@dimen/d4"
+                android:layout_marginEnd="@dimen/d4"
+                android:layout_marginBottom="@dimen/d2"
+                android:background="@drawable/background_note"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@id/note_categories"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/note_toolbar">
+
+                <EditText
+                    android:id="@+id/note_title2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:gravity="start"
+                    android:hint="@string/general_title"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:padding="@dimen/d4"
+                    android:scrollbars="vertical"
+                    android:singleLine="true"
+                    android:text="@={viewState.title}"
+                    android:textAlignment="gravity"
+                    tools:ignore="LabelFor"/>
+
+                <EditText
+                    android:id="@+id/note_body"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:gravity="start"
+                    android:hint="@string/general_body"
+                    android:importantForAutofill="no"
+                    android:inputType="textMultiLine"
+                    android:padding="@dimen/d4"
+                    android:scrollbars="vertical"
+                    android:text="@={viewState.body}"
+                    android:textAlignment="gravity"
+                    tools:ignore="LabelFor"/>
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/note_categories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/d10"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/d4"
+                android:paddingEnd="@dimen/d4"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                tools:listitem="@layout/list_item_category_selection"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/note_appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:menu="@menu/menu_note"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/notes_save_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> viewModel.saveNote()}"
+            android:src="@drawable/ic_save"
+            app:layout_anchor="@id/note_appbar"/>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>

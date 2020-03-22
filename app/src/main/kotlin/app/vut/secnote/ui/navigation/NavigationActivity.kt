@@ -2,9 +2,11 @@ package app.vut.secnote.ui.navigation
 
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment
 import app.vut.secnote.R
-import app.vut.secnote.data.ui.StartDestination
+import app.vut.secnote.data.model.ui.PinState
+import app.vut.secnote.data.model.ui.StartDestination
 import app.vut.secnote.databinding.ActivityNavigationBinding
 import app.vut.secnote.ui.base.BaseBindingActivity
 import javax.inject.Inject
@@ -24,7 +26,9 @@ class NavigationActivity :
 
     override fun onStart() {
         super.onStart()
-        setupNavigationFragment(StartDestination.LOGIN)
+        observeEvent(NavigationStartDestinationEvent::class) {
+            setupNavigationFragment(it.destination)
+        }
     }
 
     private fun setupNavigationFragment(destination: StartDestination) {
@@ -32,11 +36,20 @@ class NavigationActivity :
             val graph = navInflater.inflate(R.navigation.nav_graph).apply {
                 startDestination = when (destination) {
                     StartDestination.LOGIN -> R.id.fragment_login
-                    StartDestination.PIN -> R.id.fragment_pin
-                    StartDestination.NOTES -> R.id.fragment_notes
+                    StartDestination.PIN_SET,
+                    StartDestination.PIN_AUTH -> R.id.fragment_pin
                 }
             }
-            setGraph(graph, intent.extras)
+
+            val extras = when (destination) {
+                StartDestination.LOGIN -> intent.extras
+                StartDestination.PIN_SET -> Bundle().apply { putSerializable("pin_state", PinState.PIN_SET) }
+                StartDestination.PIN_AUTH -> Bundle().apply { putSerializable("pin_state", PinState.AUTHORISE) }
+            }
+
+            setGraph(graph, extras)
         } ?: error("Unexpected state")
     }
 }
+
+
