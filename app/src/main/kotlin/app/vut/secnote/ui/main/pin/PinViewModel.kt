@@ -33,12 +33,7 @@ class PinViewModel @Inject constructor(
     }
 
     fun checkIfDeviceIsSecure() {
-        if (keyguardManager.isDeviceSecure) {
-            viewState.state.value = PinState.AUTHORISE
-            sendEvent(AuthenticateDeviceEvent)
-        } else {
-            // TODO show error
-        }
+        sendEvent(NavigateBackEvent)
     }
 }
 

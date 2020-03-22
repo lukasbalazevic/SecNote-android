@@ -30,6 +30,10 @@ class AuthServiceManager @Inject constructor(
         }
     }
 
+    suspend fun signOut() = executeApiCall {
+        client.withCoroutineContext().signOut {}
+    }
+
     suspend fun renewToken() = executeApiCall {
         val credResponse = executeApiCall {
             client.withCoroutineContext().renewToken {

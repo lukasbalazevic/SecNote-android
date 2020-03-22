@@ -19,16 +19,18 @@ class LoginViewModel @Inject constructor(
 ) : BaseCrViewModel<LoginViewState>() {
 
     fun signIn() = validateInput {
+
+        if (!keyguardManager.isDeviceSecure) {
+            sendEvent(NavigateToPinEvent(PinState.PIN_SET))
+            return@validateInput
+        }
+
         signInInteractor.init(
             viewState.email.value,
             viewState.password.value
         ).execute(
             onSuccess = {
-                if (keyguardManager.isDeviceSecure) {
-                    sendEvent(NavigateToPinEvent(PinState.AUTHORISE))
-                } else {
-                    sendEvent(NavigateToPinEvent(PinState.PIN_SET))
-                }
+                sendEvent(NavigateToPinEvent(PinState.AUTHORISE))
             },
             onError = {
                 Timber.d(it)
@@ -41,16 +43,18 @@ class LoginViewModel @Inject constructor(
     }
 
     fun signUp() = validateInput {
+
+        if (!keyguardManager.isDeviceSecure) {
+            sendEvent(NavigateToPinEvent(PinState.PIN_SET))
+            return@validateInput
+        }
+
         signUpInteractor.init(
             viewState.email.value,
             viewState.password.value
         ).execute(
             onSuccess = {
-                if (keyguardManager.isDeviceSecure) {
-                    sendEvent(NavigateToPinEvent(PinState.AUTHORISE))
-                } else {
-                    sendEvent(NavigateToPinEvent(PinState.PIN_SET))
-                }
+                sendEvent(NavigateToPinEvent(PinState.AUTHORISE))
             },
             onError = {
                 Timber.d(it)

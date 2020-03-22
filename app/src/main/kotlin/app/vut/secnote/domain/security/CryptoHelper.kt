@@ -8,6 +8,7 @@ import java.security.KeyPairGenerator
 import java.security.KeyStore
 import java.security.MessageDigest
 import java.security.Signature
+import java.security.UnrecoverableKeyException
 import javax.inject.Inject
 
 class CryptoHelper @Inject constructor(
@@ -38,8 +39,15 @@ class CryptoHelper @Inject constructor(
         return encodeBase64(pem.toByteArray())
     }
 
-    fun checkIfDeviceKeyExists() =
+    fun checkIfDeviceKeyExists() = try {
         keystore.getEntry(Constants.Security.DEVICE_USER_KEY, null) != null
+    } catch (e: UnrecoverableKeyException) {
+        deleteDeviceKey()
+        false
+    }
+
+
+    fun deleteDeviceKey() = keystore.deleteEntry(Constants.Security.DEVICE_USER_KEY)
 
     fun getDeviceKey(): String {
         val entry = keystore.getEntry(Constants.Security.DEVICE_USER_KEY, null) as KeyStore.PrivateKeyEntry
