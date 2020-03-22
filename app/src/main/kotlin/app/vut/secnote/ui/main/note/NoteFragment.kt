@@ -46,7 +46,7 @@ class NoteFragment : BaseBindingFragment<NoteViewModel, NoteViewState, FragmentN
 
     override fun addCategory() {
         navigateTo(
-            NoteFragmentDirections.navigateToCreateCategory()
+            NoteFragmentDirections.navigateToCreateCategoryFragment()
         )
     }
 

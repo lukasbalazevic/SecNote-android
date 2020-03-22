@@ -22,6 +22,10 @@ interface Constants {
         const val CATEGORY_SEPARATOR = ";;"
     }
 
+    object User {
+        const val EMAIL = "EMAIL"
+    }
+
     object Note {
         const val NOTE_BODY_PREVIEW_LENGTH = 60
     }

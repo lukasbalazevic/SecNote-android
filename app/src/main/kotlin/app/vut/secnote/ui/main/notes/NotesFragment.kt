@@ -28,13 +28,13 @@ class NotesFragment : BaseBindingFragment<NotesViewModel, NotesViewState, Fragme
 
         observeEvent(NavigateToCreateOrUpdateNoteEvent::class) {
             navigateTo(
-                NotesFragmentDirections.navigateToNote(it.note)
+                NotesFragmentDirections.navigateToNoteFragment(it.note)
             )
         }
 
         observeEvent(AuthorizeDeviceEvent::class) {
             navigateTo(
-                NotesFragmentDirections.navigateToPin(PinState.REAUTHORISE)
+                NotesFragmentDirections.navigateToPinFragment(PinState.REAUTHORISE)
             )
         }
     }
@@ -55,7 +55,7 @@ class NotesFragment : BaseBindingFragment<NotesViewModel, NotesViewState, Fragme
 
     override fun onNoteClick(item: Note) {
         navigateTo(
-            NotesFragmentDirections.navigateToNote(item.id)
+            NotesFragmentDirections.navigateToNoteFragment(item.id)
         )
     }
 }
