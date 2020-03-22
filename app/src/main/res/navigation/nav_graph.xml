@@ -57,7 +57,7 @@
             app:nullable="true"/>
 
         <action
-            android:id="@+id/navigate_to_create_category"
+            android:id="@+id/navigate_to_create_category_fragment"
             app:destination="@id/fragment_create_category"/>
     </fragment>
 
@@ -67,7 +67,7 @@
         android:label="NotesFragment"
         tools:layout="@layout/fragment_notes">
         <action
-            android:id="@+id/navigate_to_note"
+            android:id="@+id/navigate_to_note_fragment"
             app:destination="@id/fragment_note"/>
 
         <action
@@ -79,7 +79,7 @@
             app:destination="@id/fragment_create_key"/>
 
         <action
-            android:id="@+id/navigate_to_pin"
+            android:id="@+id/navigate_to_pin_fragment"
             app:destination="@id/fragment_pin"/>
     </fragment>
 
@@ -104,5 +104,11 @@
         android:id="@+id/fragment_profile"
         android:name="app.vut.secnote.ui.main.profile.ProfileFragment"
         android:label="ProfileFragment"
-        tools:layout="@layout/fragment_profile"/>
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/navigate_to_login_fragment"
+            app:destination="@id/fragment_login"
+            app:popUpTo="@id/fragment_notes"
+            app:popUpToInclusive="true"/>
+    </fragment>
 </navigation>
