@@ -98,8 +98,8 @@
             app:destination="@id/fragment_profile"/>
 
         <action
-            android:id="@+id/navigate_to_create_key_fragment"
-            app:destination="@id/fragment_create_key"/>
+            android:id="@+id/navigate_to_encryption_fragment"
+            app:destination="@id/fragment_encryption"/>
 
         <action
             android:id="@+id/navigate_to_pin_fragment"

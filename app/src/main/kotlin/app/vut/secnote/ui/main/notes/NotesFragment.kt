@@ -8,7 +8,6 @@ import app.vut.secnote.data.model.ui.PinState
 import app.vut.secnote.databinding.FragmentNotesBinding
 import app.vut.secnote.tools.extensions.navigateTo
 import app.vut.secnote.ui.base.BaseBindingFragment
-import app.vut.secnote.ui.main.note.NoteSavedEvent
 import com.thefuntasty.mvvm.livedata.observeNonNull
 import javax.inject.Inject
 
@@ -46,7 +45,7 @@ class NotesFragment : BaseBindingFragment<NotesViewModel, NotesViewState, Fragme
                     NotesFragmentDirections.navigateToProfileFragment()
                 )
                 R.id.notes_encryption -> navigateTo(
-                    NotesFragmentDirections.navigateToCreateKeyFragment()
+                    NotesFragmentDirections.navigateToEncryptionFragment("")
                 )
             }
             true

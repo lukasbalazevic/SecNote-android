@@ -5,6 +5,7 @@ import app.vut.secnote.domain.security.CryptoHelper
 import app.vut.secnote.noteservice.Note
 import app.vut.secnote.permissionservice.PermissionServiceCoroutineGrpc
 import com.github.marcoferrer.krotoplus.coroutines.withCoroutineContext
+import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -27,8 +28,8 @@ class PermissionServiceManager @Inject constructor(
             .executeWithMetadata("")
             .withCoroutineContext()
             .deleteNote {
-            this.id = id
-        }
+                this.id = id
+            }
     }
 
     suspend fun createOrUpdateNote(
@@ -42,7 +43,6 @@ class PermissionServiceManager @Inject constructor(
         client
             .executeWithMetadata("")
             .withCoroutineContext()
-
             .addOrUpdateNote {
                 note = (if (prototype != null) Note.newBuilder(prototype) else Note.newBuilder()).apply {
                     id?.also { setId(it) }
@@ -52,7 +52,9 @@ class PermissionServiceManager @Inject constructor(
                     encrypted?.also { setEncrypted(it) }
                     alias?.also { setAlias(it) }
                 }.build()
-
+            }.let {
+                Timber.d(it.toString())
+                it
             }
     }
 }
