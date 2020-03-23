@@ -11,6 +11,8 @@ interface Constants {
         const val DEVICE_USER_KEY_SIG_ALG = "SHA512withRSA"
         const val DEVICE_USER_KEY_SIG_SIZE = 2048
         const val HASH_ALG = "SHA-512"
+        const val AES_ALG = "AES/GCM/NoPadding"
+        const val AES = "AES"
         const val SALT = "@Secnote?2020?Thesis!@"
         const val ENCRYPTED_SHARED_PREFS = "secret_shared_prefs"
         const val DEVICE_AUTHORIZATION_WINDOW = 60 * 20
@@ -29,5 +31,6 @@ interface Constants {
     object Note {
         const val NOTE_BODY_PREVIEW_LENGTH = 60
         const val CATEGORIES_CHANGE = "CATEGORIES_CHANGE"
+        const val KEY_SELECTED = "KEY_SELECTED"
     }
 }

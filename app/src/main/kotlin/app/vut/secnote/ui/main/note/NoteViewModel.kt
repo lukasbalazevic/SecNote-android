@@ -25,6 +25,7 @@ class NoteViewModel @Inject constructor(
                     viewState.id.value = it.id
                     viewState.title.value = it.title
                     viewState.body.value = it.body
+                    viewState.alias.value = it.alias
                     viewState.categories.value = it.categoryList
                 }
             )
@@ -60,8 +61,8 @@ class NoteViewModel @Inject constructor(
             title = viewState.title.value,
             body = viewState.body.value,
             categories = viewState.categories.value,
-            encrypted = false,
-            alias = ""
+            encrypted = viewState.alias.value.isNotBlank(),
+            alias = viewState.alias.value
         ).execute(
             onSuccess = {
                 sendEvent(NoteSavedEvent)

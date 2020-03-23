@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.main.encryption.create.CreateKeyFragment">
 
@@ -22,6 +23,86 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/encryption_create_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_back"
+            app:navigation_icon_click="@{() -> viewModel.navigateBack()}"
+            app:title="@string/general_encryption"
+            app:titleTextColor="@color/white"/>
+
+        <RadioGroup
+            android:id="@+id/encryption_create_aes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/d8"
+            android:checkedButton="@+id/first"
+            android:onCheckedChanged="@{viewModel.onCheckedChange}"
+            android:orientation="vertical"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/encryption_create_toolbar">
+
+            <RadioButton
+                android:id="@+id/encryption_create_aes128"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/general_aes128"/>
+
+            <RadioButton
+                android:id="@+id/encryption_create_aes192"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/general_aes192"/>
+
+            <RadioButton
+                android:checked="true"
+                android:id="@+id/encryption_create_aes256"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/general_aes256"/>
+        </RadioGroup>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/ic_privacy_protection"
+            app:layout_constraintBottom_toTopOf="@id/encryption_create_alias"
+            app:layout_constraintLeft_toRightOf="@id/encryption_create_aes"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/encryption_create_toolbar"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/encryption_create_alias"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/d8"
+            android:hint="@string/general_alias"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/encryption_create_aes">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@={viewState.alias}"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/d8"
+            android:onClick="@{() -> viewModel.createKey()}"
+            android:text="@string/general_add_key"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,13 +1,15 @@
 package app.vut.secnote.domain.notes
 
 import app.vut.secnote.data.remote.PermissionServiceManager
+import app.vut.secnote.domain.security.CryptoHelper
 import app.vut.secnote.noteservice.Note
 import app.vut.secnote.noteservice.NoteResponse
 import com.thefuntasty.mvvm.crinteractors.BaseCoroutineInteractor
 import javax.inject.Inject
 
 class CreateOrUpdateNoteInteractor @Inject constructor(
-    private val permissionServiceManager: PermissionServiceManager
+    private val permissionServiceManager: PermissionServiceManager,
+    private val cryptoHelper: CryptoHelper
 ) : BaseCoroutineInteractor<NoteResponse>() {
 
     private var prototype: Note? = null
@@ -36,6 +38,12 @@ class CreateOrUpdateNoteInteractor @Inject constructor(
         this.alias = alias
     }
 
-    override suspend fun build(): NoteResponse =
-        permissionServiceManager.createOrUpdateNote(prototype, id, title, body, categories, encrypted, alias)
+    override suspend fun build(): NoteResponse {
+        if (encrypted == true) {
+            body = cryptoHelper.encryptData(alias ?: error("Alias can`t be null on active encryption"), body ?: "")
+        }
+
+        return permissionServiceManager.createOrUpdateNote(prototype, id, title, body, categories, encrypted, alias)
+    }
+
 }

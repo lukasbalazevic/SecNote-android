@@ -2,13 +2,18 @@ package app.vut.secnote.domain.security
 
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties
+import androidx.security.crypto.MasterKeys
 import app.vut.secnote.tools.Constants
+import app.vut.secnote.tools.extensions.second
 import com.google.common.io.BaseEncoding
 import java.security.KeyPairGenerator
 import java.security.KeyStore
 import java.security.MessageDigest
 import java.security.Signature
 import java.security.UnrecoverableKeyException
+import javax.crypto.Cipher
+import javax.crypto.KeyGenerator
+import javax.crypto.spec.GCMParameterSpec
 import javax.inject.Inject
 
 class CryptoHelper @Inject constructor(
@@ -19,6 +24,7 @@ class CryptoHelper @Inject constructor(
     companion object {
         const val PEM_KEY_RREFIX = "-----BEGIN RSA PUBLIC KEY-----"
         const val PEM_KEY_POSFIX = "-----END RSA PUBLIC KEY-----"
+        const val ENCRYPTION_DELIMITER = ";-;"
     }
 
     fun generateKey(): String {
@@ -47,7 +53,7 @@ class CryptoHelper @Inject constructor(
     }
 
 
-    fun deleteDeviceKey() = keystore.deleteEntry(Constants.Security.DEVICE_USER_KEY)
+    private fun deleteDeviceKey() = keystore.deleteEntry(Constants.Security.DEVICE_USER_KEY)
 
     fun getDeviceKey(): String {
         val entry = keystore.getEntry(Constants.Security.DEVICE_USER_KEY, null) as KeyStore.PrivateKeyEntry
@@ -55,6 +61,57 @@ class CryptoHelper @Inject constructor(
         val pem = "$PEM_KEY_RREFIX\n$encoded\n$PEM_KEY_POSFIX"
 
         return encodeBase64(pem.toByteArray())
+    }
+
+    fun getKeystoreAliases() = keystore.aliases().toList()
+        .filter {
+            it != Constants.Security.DEVICE_USER_KEY &&
+                it != MasterKeys.AES256_GCM_SPEC.keystoreAlias
+        }
+
+    fun generateEncryptionKey(alias: String, keySize: Int) {
+        val keyGenerator = KeyGenerator
+            .getInstance(Constants.Security.AES, Constants.Security.KEYSTORE)
+        val keyGenParameterSpec =
+            KeyGenParameterSpec.Builder(alias, KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT)
+                .apply {
+                    setBlockModes(KeyProperties.BLOCK_MODE_GCM)
+                    setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_NONE)
+                    setRandomizedEncryptionRequired(true)
+                }
+                .setKeySize(keySize)
+                .build()
+        keyGenerator.init(keyGenParameterSpec)
+        keyGenerator.generateKey()
+    }
+
+    fun encryptData(alias: String, data: String): String {
+        val key = keystore.getKey(alias, null)
+        return Cipher.getInstance(Constants.Security.AES_ALG).run {
+            init(
+                Cipher.ENCRYPT_MODE,
+                key
+            )
+            val encrypted = doFinal(data.toByteArray())
+            val vector = iv
+            "${encodeBase64(encrypted)}${ENCRYPTION_DELIMITER}${encodeBase64(vector)}"
+        }
+    }
+
+    fun decryptData(alias: String, data: String): String {
+        val split = data.split(ENCRYPTION_DELIMITER)
+        val encryptedData = decodeBase64(split.first())
+        val vector = decodeBase64(split.second())
+        val key = keystore.getKey(alias, null)
+        val spec = GCMParameterSpec(128, vector)
+        return Cipher.getInstance(Constants.Security.AES_ALG).run {
+            init(
+                Cipher.DECRYPT_MODE,
+                key,
+                spec
+            )
+            String(doFinal(encryptedData))
+        }
     }
 
     fun hashMessage(message: ByteArray): String =
@@ -74,4 +131,5 @@ class CryptoHelper @Inject constructor(
     }
 
     fun encodeBase64(data: ByteArray) = BaseEncoding.base64().encode(data)
+    fun decodeBase64(data: String) = BaseEncoding.base64().decode(data)
 }

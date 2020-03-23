@@ -12,9 +12,9 @@
         tools:layout="@layout/fragment_categories">
 
         <argument
+            android:name="note_categories"
             app:argType="app.vut.secnote.data.model.ui.NoteCategories"
-            app:nullable="true"
-            android:name="note_categories"/>
+            app:nullable="true"/>
 
         <action
             android:id="@+id/navigate_to_create_category_fragment"
@@ -31,7 +31,16 @@
         android:id="@+id/fragment_encryption"
         android:name="app.vut.secnote.ui.main.encryption.EncryptionFragment"
         android:label="EncryptionFragment"
-        tools:layout="@layout/fragment_encryption"/>
+        tools:layout="@layout/fragment_encryption">
+
+        <argument
+            android:name="alias"
+            app:argType="string"/>
+
+        <action
+            android:id="@+id/navigate_to_create_key_fragment"
+            app:destination="@id/fragment_create_key"/>
+    </fragment>
 
     <fragment
         android:id="@+id/fragment_create_key"
@@ -69,6 +78,10 @@
         <action
             android:id="@+id/navigate_to_categories_fragment"
             app:destination="@id/fragment_categories"/>
+
+        <action
+            android:id="@+id/navigate_to_encryption_fragment"
+            app:destination="@id/fragment_encryption"/>
     </fragment>
 
     <fragment

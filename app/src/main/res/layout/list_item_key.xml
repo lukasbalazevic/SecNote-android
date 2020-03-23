@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="view"
+            type="app.vut.secnote.ui.main.encryption.EncryptionView"/>
+
+        <variable
+            name="alias"
+            type="String"/>
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/d4"
+        android:backgroundTint="@color/color_key_background"
+        android:foreground="?android:selectableItemBackground"
+        android:onClick="@{() -> view.onKeySelected(alias)}"
+        app:cardCornerRadius="@dimen/d4">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:padding="@dimen/d2"
+            android:paddingStart="@dimen/d4"
+            android:paddingEnd="@dimen/d4"
+            android:text="@{alias}"
+            android:textAppearance="@style/TextRegular.Black.16"
+            android:textColor="@color/color_key_text"
+            tools:text="Ideas for startup"/>
+    </androidx.cardview.widget.CardView>
+
+</layout>

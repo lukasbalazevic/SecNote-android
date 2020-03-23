@@ -29,4 +29,9 @@
     <string name="general_set_pin_info">To use application set up phone PIN</string>
     <string name="general_authorize_device">Authorize</string>
     <string name="general_authorize_expired">Authorization expired please reauthorize device</string>
+    <string name="general_aes128">AES128</string>
+    <string name="general_aes192">AES192</string>
+    <string name="general_aes256">AES256</string>
+    <string name="general_alias">Alias</string>
+    <string name="general_add_key">Add key</string>
 </resources>

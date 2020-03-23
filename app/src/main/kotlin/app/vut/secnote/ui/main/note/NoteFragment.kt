@@ -33,6 +33,10 @@ class NoteFragment : BaseBindingFragment<NoteViewModel, NoteViewState, FragmentN
             viewModel.viewState.categories.value = it.categories
         }
 
+        getResultOnce<String>(this, Constants.Note.KEY_SELECTED) {
+            viewModel.viewState.alias.value = it
+        }
+
         observeEvent(NavigateBackEvent::class) {
             forceHideKeyboard()
             navigateBack()
@@ -63,6 +67,9 @@ class NoteFragment : BaseBindingFragment<NoteViewModel, NoteViewState, FragmentN
         binding.noteAppbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.note_lock -> {
+                    navigateTo(
+                        NoteFragmentDirections.navigateToEncryptionFragment(viewModel.viewState.alias.value)
+                    )
                 }
                 R.id.note_delete -> viewModel.deleteNote()
                 R.id.note_share -> {

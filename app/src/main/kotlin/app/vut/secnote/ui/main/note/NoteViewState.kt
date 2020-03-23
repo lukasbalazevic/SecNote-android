@@ -11,4 +11,5 @@ class NoteViewState @Inject constructor() : ViewState {
     val categories = DefaultValueLiveData<List<String>>(listOf())
     val title = DefaultValueLiveData("")
     val body = DefaultValueLiveData("")
+    val alias = DefaultValueLiveData("")
 }
