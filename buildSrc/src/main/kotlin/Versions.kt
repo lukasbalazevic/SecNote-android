@@ -24,7 +24,7 @@ object Versions {
     const val security = "1.0.0-alpha02"
 
     // navigation components
-    const val navigationComponents = "2.1.0-alpha04"
+    const val navigationComponents = "2.3.0-alpha02"
 
     // dependency injection
     const val dagger = "2.24"

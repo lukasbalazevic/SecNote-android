@@ -9,7 +9,17 @@
         android:id="@+id/fragment_categories"
         android:name="app.vut.secnote.ui.main.categories.CategoriesFragment"
         android:label="CategoriesFragment"
-        tools:layout="@layout/fragment_categories"/>
+        tools:layout="@layout/fragment_categories">
+
+        <argument
+            app:argType="app.vut.secnote.data.model.ui.NoteCategories"
+            app:nullable="true"
+            android:name="note_categories"/>
+
+        <action
+            android:id="@+id/navigate_to_create_category_fragment"
+            app:destination="@id/fragment_create_category"/>
+    </fragment>
 
     <fragment
         android:id="@+id/fragment_create_category"
@@ -57,8 +67,8 @@
             app:nullable="true"/>
 
         <action
-            android:id="@+id/navigate_to_create_category_fragment"
-            app:destination="@id/fragment_create_category"/>
+            android:id="@+id/navigate_to_categories_fragment"
+            app:destination="@id/fragment_categories"/>
     </fragment>
 
     <fragment

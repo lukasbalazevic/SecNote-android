@@ -17,7 +17,7 @@ interface Constants {
     }
 
     object Database {
-        const val VERSION = 1
+        const val VERSION = 2
         const val NAME = "secnote.db"
         const val CATEGORY_SEPARATOR = ";;"
     }
@@ -28,5 +28,6 @@ interface Constants {
 
     object Note {
         const val NOTE_BODY_PREVIEW_LENGTH = 60
+        const val CATEGORIES_CHANGE = "CATEGORIES_CHANGE"
     }
 }

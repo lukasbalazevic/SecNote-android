@@ -79,7 +79,6 @@ class CategoriesAdapter @Inject constructor(
 
         fun bind(item: String) {
             binding.item = item
-            binding.view = view
             binding.executePendingBindings()
         }
     }

@@ -4,9 +4,11 @@ import android.content.Context
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import com.thefuntasty.mvvm.livedata.observeNonNull
 import timber.log.Timber
 
 fun Fragment.navigateBack() = findNavController().navigateUp()
@@ -33,4 +35,15 @@ fun Fragment.forceHideKeyboard() {
 
 fun Fragment.runOnUIThread(action: () -> Unit) {
     activity?.runOnUiThread(action)
+}
+
+fun <T> Fragment.setResult(key: String, value: T) {
+    findNavController().previousBackStackEntry?.savedStateHandle?.set(key, value)
+}
+
+fun <T> Fragment.getResultOnce(owner: LifecycleOwner, key: String, onChanged: (T) -> Unit) {
+    findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<T>(key)?.observeNonNull(owner) {
+        onChanged.invoke(it)
+        findNavController().currentBackStackEntry?.savedStateHandle?.remove<T>(key)
+    }
 }

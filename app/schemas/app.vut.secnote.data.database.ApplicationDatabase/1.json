@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "d556a29b0395bf7d486d94ba4c9b9168",
+    "identityHash": "9824641098ee03b70b53ddb0dba9c357",
     "entities": [
       {
         "tableName": "Note",
@@ -53,12 +53,32 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "Category",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, PRIMARY KEY(`name`))",
+        "fields": [
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "name"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd556a29b0395bf7d486d94ba4c9b9168')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9824641098ee03b70b53ddb0dba9c357')"
     ]
   }
 }

@@ -3,8 +3,11 @@ package app.vut.secnote.ui.main.note
 import android.os.Bundle
 import android.view.View
 import app.vut.secnote.R
+import app.vut.secnote.data.model.ui.NoteCategories
 import app.vut.secnote.databinding.FragmentNoteBinding
+import app.vut.secnote.tools.Constants
 import app.vut.secnote.tools.extensions.forceHideKeyboard
+import app.vut.secnote.tools.extensions.getResultOnce
 import app.vut.secnote.tools.extensions.navigateBack
 import app.vut.secnote.tools.extensions.navigateTo
 import app.vut.secnote.ui.base.BaseBindingFragment
@@ -24,6 +27,10 @@ class NoteFragment : BaseBindingFragment<NoteViewModel, NoteViewState, FragmentN
 
         viewModel.viewState.categories.observe(this) {
             adapter.submitList(it)
+        }
+
+        getResultOnce<NoteCategories>(this, Constants.Note.CATEGORIES_CHANGE) {
+            viewModel.viewState.categories.value = it.categories
         }
 
         observeEvent(NavigateBackEvent::class) {
@@ -46,7 +53,9 @@ class NoteFragment : BaseBindingFragment<NoteViewModel, NoteViewState, FragmentN
 
     override fun addCategory() {
         navigateTo(
-            NoteFragmentDirections.navigateToCreateCategoryFragment()
+            NoteFragmentDirections.navigateToCategoriesFragment(
+                NoteCategories(viewModel.viewState.categories.value)
+            )
         )
     }
 
