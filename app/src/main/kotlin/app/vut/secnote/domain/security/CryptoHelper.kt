@@ -79,6 +79,8 @@ class CryptoHelper @Inject constructor(
                     setBlockModes(KeyProperties.BLOCK_MODE_GCM)
                     setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_NONE)
                     setRandomizedEncryptionRequired(true)
+                    setUserAuthenticationRequired(true)
+                    setUserAuthenticationValidityDurationSeconds(Constants.Security.DEVICE_AUTHORIZATION_WINDOW)
                 }
                 .setKeySize(keySize)
                 .build()
