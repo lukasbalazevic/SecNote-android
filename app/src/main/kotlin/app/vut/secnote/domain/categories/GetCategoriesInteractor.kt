@@ -8,5 +8,5 @@ import javax.inject.Inject
 class GetCategoriesInteractor @Inject constructor(
     private val categoryStore: CategoryStore
 ) : BaseFlowInteractor<List<String>>() {
-    override suspend fun build(): Flow<List<String>> = categoryStore.getCategories()
+    override fun build(): Flow<List<String>> = categoryStore.getCategories()
 }

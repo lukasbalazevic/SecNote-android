@@ -1,4 +1,3 @@
-
 import com.google.protobuf.gradle.generateProtoTasks
 import com.google.protobuf.gradle.id
 import com.google.protobuf.gradle.plugins
@@ -54,8 +53,13 @@ android {
     }
 
     compileOptions {
-        setSourceCompatibility(JavaVersion.VERSION_1_8)
-        setTargetCompatibility(JavaVersion.VERSION_1_8)
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        this as org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
+        jvmTarget = "1.8"
     }
 
     sourceSets {

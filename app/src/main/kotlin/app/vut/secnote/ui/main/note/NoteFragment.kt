@@ -11,15 +11,21 @@ import app.vut.secnote.tools.extensions.getResultOnce
 import app.vut.secnote.tools.extensions.navigateBack
 import app.vut.secnote.tools.extensions.navigateTo
 import app.vut.secnote.ui.base.BaseBindingFragment
+import app.vut.secnote.ui.base.BaseDialogFragment
 import com.google.android.material.snackbar.Snackbar
 import com.thefuntasty.mvvm.livedata.observe
 import javax.inject.Inject
 
-class NoteFragment : BaseBindingFragment<NoteViewModel, NoteViewState, FragmentNoteBinding>(), NoteView {
+class NoteFragment : BaseBindingFragment<NoteViewModel, NoteViewState, FragmentNoteBinding>(),
+    NoteView, BaseDialogFragment.DialogListener {
 
     @Inject override lateinit var viewModelFactory: NoteViewModelFactory
     @Inject lateinit var adapter: CategoriesAdapter
     override val layoutResId = R.layout.fragment_note
+
+    companion object {
+        const val KEY_NOT_FOUND_DIALOG_TAG = "KEY_NOT_FOUND_DIALOG_TAG"
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setBottomBarMenuClicks()
@@ -53,6 +59,17 @@ class NoteFragment : BaseBindingFragment<NoteViewModel, NoteViewState, FragmentN
                 .setAnchorView(binding.notesSaveFab)
                 .show()
         }
+
+        observeEvent(NoDecryptionKeyEvent::class) {
+            navigateTo(
+                NoteFragmentDirections.navigateToDialog(
+                    dialogTag = KEY_NOT_FOUND_DIALOG_TAG,
+                    dialogTitle = resources.getString(R.string.general_note_key_not_found_title),
+                    dialogBody = resources.getString(R.string.general_note_key_not_found_body),
+                    dialogPositive = resources.getString(R.string.general_ok)
+                )
+            )
+        }
     }
 
     override fun addCategory() {
@@ -76,6 +93,12 @@ class NoteFragment : BaseBindingFragment<NoteViewModel, NoteViewState, FragmentN
                 }
             }
             true
+        }
+    }
+
+    override fun onCancel(tag: String?) {
+        when(tag) {
+            KEY_NOT_FOUND_DIALOG_TAG -> viewModel.deleteNote()
         }
     }
 }

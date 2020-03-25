@@ -6,6 +6,7 @@ import androidx.security.crypto.MasterKeys
 import app.vut.secnote.tools.Constants
 import app.vut.secnote.tools.extensions.second
 import com.google.common.io.BaseEncoding
+import java.lang.IllegalStateException
 import java.security.KeyPairGenerator
 import java.security.KeyStore
 import java.security.MessageDigest
@@ -102,7 +103,7 @@ class CryptoHelper @Inject constructor(
         val split = data.split(ENCRYPTION_DELIMITER)
         val encryptedData = decodeBase64(split.first())
         val vector = decodeBase64(split.second())
-        val key = keystore.getKey(alias, null)
+        val key = keystore.getKey(alias, null) ?: throw IllegalStateException("Missing key")
         val spec = GCMParameterSpec(128, vector)
         return Cipher.getInstance(Constants.Security.AES_ALG).run {
             init(

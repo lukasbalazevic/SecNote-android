@@ -27,6 +27,14 @@ class NoteViewModel @Inject constructor(
                     viewState.body.value = it.body
                     viewState.alias.value = it.alias
                     viewState.categories.value = it.categoryList
+                },
+                onError = {
+                    when (it) {
+                        is IllegalStateException -> {
+                            sendEvent(NoDecryptionKeyEvent)
+                        }
+                        else -> Timber.e(it)
+                    }
                 }
             )
         }

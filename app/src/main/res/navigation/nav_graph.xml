@@ -134,4 +134,57 @@
             app:popUpTo="@id/fragment_notes"
             app:popUpToInclusive="true"/>
     </fragment>
+
+    <dialog
+        android:id="@+id/dialog"
+        android:name="app.vut.secnote.ui.base.BaseDialogFragment"
+        android:label="Dialog">
+
+        <argument
+            android:name="dialog_tag"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true"/>
+
+        <argument
+            android:name="dialog_title"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true"/>
+
+        <argument
+            android:name="dialog_body"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true"/>
+
+        <argument
+            android:name="dialog_positive"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true"/>
+
+        <argument
+            android:name="dialog_negative"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true"/>
+
+        <argument
+            android:name="dialog_single_choice_array_res"
+            android:defaultValue="0"
+            app:argType="integer"
+            app:nullable="false"/>
+
+        <argument
+            android:name="dialog_single_choice_preset_position"
+            android:defaultValue="0"
+            app:argType="integer"
+            app:nullable="false"/>
+    </dialog>
+
+    <action
+        android:id="@+id/navigate_to_dialog"
+        app:destination="@id/dialog"/>
+
 </navigation>

@@ -34,4 +34,7 @@
     <string name="general_aes256">AES256</string>
     <string name="general_alias">Alias</string>
     <string name="general_add_key">Add key</string>
+    <string name="general_note_key_not_found_title">Key for decryption not found</string>
+    <string name="general_note_key_not_found_body">If you changed your phone screen lock mechanism all your keys are invalidated therefore note can`t be decrypted. Note will be deleted. </string>
+    <string name="general_ok">OK</string>
 </resources>

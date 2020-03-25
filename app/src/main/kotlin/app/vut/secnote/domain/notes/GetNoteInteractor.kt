@@ -5,7 +5,10 @@ import app.vut.secnote.data.store.NoteStore
 import app.vut.secnote.domain.security.CryptoHelper
 import com.thefuntasty.mvvm.crinteractors.BaseFlowInteractor
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.flatMapConcat
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOf
+import java.lang.Exception
 import javax.inject.Inject
 
 class GetNoteInteractor @Inject constructor(
@@ -19,12 +22,26 @@ class GetNoteInteractor @Inject constructor(
         this.id = id
     }
 
-    override suspend fun build(): Flow<Note> = noteStore.getNote(id).map {
+    override fun build(): Flow<Note> = noteStore.getNote(id).flatMapConcat {
         if (it.encrypted) {
-            val decryptedBody = cryptoHelper.decryptData(it.alias, it.body)
-            it.copy(body = decryptedBody)
+            try {
+                val decryptedBody = cryptoHelper.decryptData(it.alias, it.body)
+                flowOf(it.copy(body = decryptedBody))
+            } catch (e: IllegalStateException) {
+                flow {
+                    emit(it)
+                    throw e
+                }
+            } catch (e: Exception) {
+                // Case when server send back note that is encrypted but is not.
+                // Should not happen on new version
+                flow {
+                    emit(it)
+                    throw e
+                }
+            }
         } else {
-            it
+            flowOf(it)
         }
     }
 }

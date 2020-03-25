@@ -33,4 +33,15 @@ interface Constants {
         const val CATEGORIES_CHANGE = "CATEGORIES_CHANGE"
         const val KEY_SELECTED = "KEY_SELECTED"
     }
+
+    object Bundle {
+        const val DIALOG_TAG = "dialog_tag"
+        const val DIALOG_TITLE = "dialog_title"
+        const val DIALOG_BODY = "dialog_body"
+        const val DIALOG_POSITIVE = "dialog_positive"
+        const val DIALOG_NEGATIVE = "dialog_negative"
+        const val DIALOG_NEUTRAL = "dialog_neutral"
+        const val DIALOG_SINGLE_CHOICE_ARRAY_RES = "dialog_single_choice_array_res"
+        const val DIALOG_SINGLE_CHOICE_PRESET_POSITION = "dialog_single_choice_preset_position"
+    }
 }

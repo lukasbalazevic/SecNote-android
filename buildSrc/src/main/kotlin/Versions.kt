@@ -41,7 +41,7 @@ object Versions {
     const val timber = "4.7.1"
 
     // taste
-    const val mvvm = "2.1.0"
+    const val mvvm = "2.1.3"
 
     // testing
     const val testCore = "1.2.0"
