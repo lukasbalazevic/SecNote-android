@@ -31,3 +31,9 @@ class UnknownAppError(exception: Throwable) : AppError(
     imageSrc = R.drawable.ic_server_down,
     cause = exception
 )
+
+class UnauthenticatedError(exception: Throwable) : AppError(
+    body = R.string.general_error_unauthenticated,
+    imageSrc = R.drawable.ic_undraw_unlock,
+    cause = exception
+)

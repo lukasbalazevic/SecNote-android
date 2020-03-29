@@ -1,5 +1,6 @@
 package app.vut.secnote.ui.main.notes
 
+import android.content.res.Resources
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.OnLifecycleEvent
 import app.vut.secnote.domain.notes.GetNotesInteractor
@@ -12,7 +13,8 @@ import javax.inject.Inject
 class NotesViewModel @Inject constructor(
     override val viewState: NotesViewState,
     private val syncNotesInteractor: SyncNotesInteractor,
-    private val getNotesInteractor: GetNotesInteractor
+    private val getNotesInteractor: GetNotesInteractor,
+    private val resources: Resources
 ) : BaseCrViewModel<NotesViewState>() {
 
     override fun onStart() {
@@ -31,14 +33,22 @@ class NotesViewModel @Inject constructor(
                 Timber.d("Sync complete")
             },
             onError = {
-               it.checkForUserNoteAuthenticatedException(
-                   authorize = {
-                       sendEvent(AuthorizeDeviceEvent)
-                   },
-                   showError = {
-                       // TODO show error
-                   }
-               )
+                it.checkForUserNoteAuthenticatedException(
+                    authorize = {
+                        sendEvent(AuthorizeDeviceEvent)
+                    },
+                    logOutUser = {
+                        sendEvent(LogOutUserEvent)
+                    },
+                    showError = {
+                        sendEvent(
+                            ShowErrorEvent(
+                                message = resources.getString(it.body),
+                                imageSrc = it.imageSrc
+                            )
+                        )
+                    }
+                )
             }
         )
     }

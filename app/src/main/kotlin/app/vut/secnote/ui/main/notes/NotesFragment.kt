@@ -31,6 +31,12 @@ class NotesFragment : BaseBindingFragment<NotesViewModel, NotesViewState, Fragme
             )
         }
 
+        observeEvent(ShowErrorEvent::class) {
+            navigateTo(
+                NotesFragmentDirections.navigateToErrorDialog(it.message, it.imageSrc)
+            )
+        }
+
         observeEvent(AuthorizeDeviceEvent::class) {
             navigateTo(
                 NotesFragmentDirections.navigateToPinFragment(PinState.REAUTHORISE)

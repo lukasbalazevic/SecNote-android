@@ -1,5 +1,9 @@
 package app.vut.secnote.data.remote
 
+import android.security.keystore.UserNotAuthenticatedException
+import app.vut.secnote.data.model.error.NoConnectionError
+import app.vut.secnote.data.model.error.UnauthenticatedError
+import app.vut.secnote.data.model.error.UnknownAppError
 import app.vut.secnote.data.store.TokenStore
 import app.vut.secnote.domain.security.CryptoHelper
 import io.grpc.Metadata
@@ -7,6 +11,7 @@ import io.grpc.Status
 import io.grpc.StatusRuntimeException
 import io.grpc.stub.AbstractStub
 import io.grpc.stub.MetadataUtils
+import kotlinx.coroutines.CancellationException
 import timber.log.Timber
 import java.net.UnknownHostException
 
@@ -40,11 +45,14 @@ abstract class ServiceManager(
         } catch (e: KotlinNullPointerException) {
             throw e
         } catch (e: UnknownHostException) {
-            Timber.e(e)
+            throw NoConnectionError(e)
+        } catch (e: UserNotAuthenticatedException) {
+            throw e
+        } catch (e: CancellationException) {
             throw e
         } catch (e: Exception) {
             Timber.e(e)
-            throw e
+            throw UnknownAppError(e)
         }
     }
 
@@ -65,7 +73,7 @@ abstract class ServiceManager(
             Status.Code.UNIMPLEMENTED,
             Status.Code.INTERNAL,
             Status.Code.UNAVAILABLE,
-            Status.Code.DATA_LOSS -> throw e
+            Status.Code.DATA_LOSS -> throw UnknownAppError(e)
             Status.Code.UNAUTHENTICATED -> handleUnauthenticatedError(e, apiCall)
         }
 
@@ -74,6 +82,6 @@ abstract class ServiceManager(
         if (successful) {
             return apiCall()
         }
-        throw e
+        throw UnauthenticatedError(e)
     }
 }
