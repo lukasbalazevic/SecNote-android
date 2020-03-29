@@ -51,7 +51,7 @@ class PinFragment : BaseBindingFragment<PinViewModel, PinViewState, FragmentPinB
     }
 
     override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
-        // TODO show error
+        viewState.loading.value = false
     }
 
     override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) = runOnUIThread {
@@ -59,6 +59,6 @@ class PinFragment : BaseBindingFragment<PinViewModel, PinViewState, FragmentPinB
     }
 
     override fun onAuthenticationFailed() {
-        // TODO show error
+        viewState.loading.value = false
     }
 }

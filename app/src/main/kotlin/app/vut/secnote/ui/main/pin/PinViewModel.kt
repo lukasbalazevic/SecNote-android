@@ -1,18 +1,18 @@
 package app.vut.secnote.ui.main.pin
 
-import android.app.KeyguardManager
 import app.vut.secnote.data.model.ui.PinState
 import com.thefuntasty.mvvm.crinteractors.BaseCrViewModel
 import javax.inject.Inject
 
 class PinViewModel @Inject constructor(
-    override val viewState: PinViewState,
-    private val keyguardManager: KeyguardManager
+    override val viewState: PinViewState
 ) : BaseCrViewModel<PinViewState>() {
 
     override fun onStart() {
         if (viewState.state.value == PinState.AUTHORISE) {
             sendEvent(AuthenticateDeviceEvent)
+        } else {
+            viewState.loading.value = false
         }
     }
 

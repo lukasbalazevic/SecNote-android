@@ -12,6 +12,8 @@ class PinViewState @Inject constructor(
     arguments: PinFragmentArgs,
     resources: Resources
 ) : ViewState {
+
+    val loading = DefaultValueLiveData(true)
     val state = DefaultValueLiveData(arguments.pinState)
     val infoText = state.map {
         when(it) {
