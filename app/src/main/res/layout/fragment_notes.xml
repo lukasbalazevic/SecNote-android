@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="vertical"
-            app:visibility="@{viewState.isListEmpty}">
+            app:visibility="@{viewState.showEmptyState}">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -55,12 +55,17 @@
             android:layout_marginStart="@dimen/d4"
             android:layout_marginEnd="@dimen/d4"
             android:clipToPadding="false"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
             android:paddingBottom="@dimen/d16"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
             app:spanCount="2"
-            app:visibility="@{!viewState.isListEmpty}"/>
+            app:visibility="@{viewState.showList}"/>
 
+        <ProgressBar
+            app:visibility="@{viewState.loading}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"

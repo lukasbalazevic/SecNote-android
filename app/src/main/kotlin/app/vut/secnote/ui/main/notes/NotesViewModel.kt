@@ -19,6 +19,7 @@ class NotesViewModel @Inject constructor(
         getNotesInteractor.execute(
             onNext = {
                 viewState.list.value = it
+                viewState.loading.value = false
             }
         )
     }
