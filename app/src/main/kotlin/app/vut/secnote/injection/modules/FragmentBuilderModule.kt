@@ -8,6 +8,8 @@ import app.vut.secnote.ui.main.encryption.EncryptionFragment
 import app.vut.secnote.ui.main.encryption.EncryptionFragmentModule
 import app.vut.secnote.ui.main.encryption.create.CreateKeyFragment
 import app.vut.secnote.ui.main.encryption.create.CreateKeyFragmentModule
+import app.vut.secnote.ui.main.error.ErrorDialogFragment
+import app.vut.secnote.ui.main.error.ErrorDialogFragmentModule
 import app.vut.secnote.ui.main.invite.InviteFragment
 import app.vut.secnote.ui.main.invite.InviteFragmentModule
 import app.vut.secnote.ui.main.login.LoginFragment
@@ -55,4 +57,7 @@ abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector(modules = [ProfileFragmentModule::class])
     abstract fun profileFragment(): ProfileFragment
+
+    @ContributesAndroidInjector(modules = [ErrorDialogFragmentModule::class])
+    abstract fun errorDialogFragment(): ErrorDialogFragment
 }

@@ -3,6 +3,7 @@ package app.vut.secnote.ui.main.login
 import android.app.KeyguardManager
 import android.content.res.Resources
 import app.vut.secnote.R
+import app.vut.secnote.data.model.error.AppError
 import app.vut.secnote.data.model.ui.PinState
 import app.vut.secnote.domain.login.SignInInteractor
 import app.vut.secnote.domain.login.SignUpInteractor
@@ -19,7 +20,6 @@ class LoginViewModel @Inject constructor(
 ) : BaseCrViewModel<LoginViewState>() {
 
     fun signIn() = validateInput {
-
         if (!keyguardManager.isDeviceSecure) {
             sendEvent(NavigateToPinEvent(PinState.PIN_SET))
             return@validateInput
@@ -33,17 +33,12 @@ class LoginViewModel @Inject constructor(
                 sendEvent(NavigateToPinEvent(PinState.AUTHORISE))
             },
             onError = {
-                Timber.d(it)
-                sendEvent(ShowErrorEvent(
-                    title = "",
-                    body = ""
-                ))
+                sendErrorEvent(it)
             }
         )
     }
 
     fun signUp() = validateInput {
-
         if (!keyguardManager.isDeviceSecure) {
             sendEvent(NavigateToPinEvent(PinState.PIN_SET))
             return@validateInput
@@ -57,13 +52,21 @@ class LoginViewModel @Inject constructor(
                 sendEvent(NavigateToPinEvent(PinState.AUTHORISE))
             },
             onError = {
-                Timber.d(it)
-                sendEvent(ShowErrorEvent(
-                    title = "",
-                    body = ""
-                ))
+                sendErrorEvent(it)
             }
         )
+    }
+
+    private fun sendErrorEvent(e: Throwable) {
+        if (e is AppError) {
+            sendEvent(ShowErrorEvent(
+                message = resources.getString(e.body),
+                imageSrc = e.imageSrc
+            ))
+            return
+        }
+        Timber.d(e)
+        error("Invalid error type")
     }
 
     private fun validateInput(action: () -> Unit) {

@@ -11,13 +11,13 @@ import app.vut.secnote.tools.extensions.getResultOnce
 import app.vut.secnote.tools.extensions.navigateBack
 import app.vut.secnote.tools.extensions.navigateTo
 import app.vut.secnote.ui.base.BaseBindingFragment
-import app.vut.secnote.ui.base.BaseDialogFragment
+import app.vut.secnote.ui.base.BaseSimpleDialogFragment
 import com.google.android.material.snackbar.Snackbar
 import com.thefuntasty.mvvm.livedata.observe
 import javax.inject.Inject
 
 class NoteFragment : BaseBindingFragment<NoteViewModel, NoteViewState, FragmentNoteBinding>(),
-    NoteView, BaseDialogFragment.DialogListener {
+    NoteView, BaseSimpleDialogFragment.DialogListener {
 
     @Inject override lateinit var viewModelFactory: NoteViewModelFactory
     @Inject lateinit var adapter: CategoriesAdapter

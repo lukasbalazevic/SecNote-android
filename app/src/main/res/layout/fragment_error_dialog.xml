@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.main.error.ErrorDialogFragment">
+
+    <data>
+
+        <variable
+            name="view"
+            type="app.vut.secnote.ui.main.error.ErrorDialogView"/>
+
+        <variable
+            name="viewModel"
+            type="app.vut.secnote.ui.main.error.ErrorDialogViewModel"/>
+
+        <variable
+            name="viewState"
+            type="app.vut.secnote.ui.main.error.ErrorDialogViewState"/>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="@dimen/d8">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/d8"
+            android:src="@{viewState.image}"
+            app:layout_constraintBottom_toTopOf="@id/error_dialog_text"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:src="@drawable/ic_server_down"/>
+
+        <TextView
+            android:id="@+id/error_dialog_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/d18"
+            android:gravity="center"
+            android:text="@{viewState.message}"
+            android:textAppearance="@style/TextRegular.Black.16"
+            app:layout_constraintBottom_toTopOf="@id/error_dialog_confirm"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:text="Check your internet connection and try again"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/error_dialog_confirm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> viewModel.navigateBack()}"
+            android:text="@string/general_ok"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

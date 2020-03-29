@@ -136,8 +136,31 @@
     </fragment>
 
     <dialog
+        android:id="@+id/fragment_error_dialog"
+        android:name="app.vut.secnote.ui.main.error.ErrorDialogFragment"
+        android:label="ErrorDialogFragment"
+        tools:layout="@layout/fragment_error_dialog">
+
+        <argument
+            android:name="message"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true"/>
+
+        <argument
+            android:name="image_src"
+            app:argType="reference"
+            android:defaultValue="@drawable/ic_server_down"/>
+
+    </dialog>
+
+    <action
+        android:id="@+id/navigate_to_error_dialog"
+        app:destination="@id/fragment_error_dialog"/>
+
+    <dialog
         android:id="@+id/dialog"
-        android:name="app.vut.secnote.ui.base.BaseDialogFragment"
+        android:name="app.vut.secnote.ui.base.BaseSimpleDialogFragment"
         android:label="Dialog">
 
         <argument

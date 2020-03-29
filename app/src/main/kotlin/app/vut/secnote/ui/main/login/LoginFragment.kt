@@ -20,5 +20,14 @@ class LoginFragment : BaseBindingFragment<LoginViewModel, LoginViewState, Fragme
                 LoginFragmentDirections.navigateToPinFragment(it.state)
             )
         }
+
+        observeEvent(ShowErrorEvent::class) {
+            navigateTo(
+                LoginFragmentDirections.navigateToErrorDialog(
+                    it.message,
+                    it.imageSrc
+                )
+            )
+        }
     }
 }

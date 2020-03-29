@@ -1,14 +1,19 @@
 package app.vut.secnote.data.remote
 
 import app.vut.secnote.authservice.AuthServiceCoroutineGrpc
+import app.vut.secnote.data.model.error.AppError
+import app.vut.secnote.data.model.error.InvalidCredentialsError
+import app.vut.secnote.data.model.error.NoConnectionError
+import app.vut.secnote.data.model.error.UnknownAppError
+import app.vut.secnote.data.model.error.UserNotFoundError
 import app.vut.secnote.data.store.TokenStore
 import app.vut.secnote.domain.security.CryptoHelper
 import com.github.marcoferrer.krotoplus.coroutines.withCoroutineContext
 import io.grpc.Metadata
+import io.grpc.Status
 import io.grpc.StatusRuntimeException
 import io.grpc.stub.AbstractStub
 import io.grpc.stub.MetadataUtils
-import timber.log.Timber
 import java.net.UnknownHostException
 import javax.inject.Inject
 
@@ -56,16 +61,34 @@ class AuthServiceManager @Inject constructor(
         return try {
             apiCall()
         } catch (e: StatusRuntimeException) {
-            throw e
+            throw convertStatusRuntimeException(e)
         } catch (e: KotlinNullPointerException) {
-            throw e
+            throw UnknownAppError(e)
         } catch (e: UnknownHostException) {
-            Timber.e(e)
-            throw e
+            throw NoConnectionError(e)
         } catch (e: Exception) {
-            Timber.e(e)
-            throw e
+            throw UnknownAppError(e)
         }
+    }
+
+    private fun convertStatusRuntimeException(e: StatusRuntimeException): AppError = when (e.status.code) {
+        Status.Code.OK,
+        Status.Code.CANCELLED,
+        Status.Code.UNKNOWN,
+        Status.Code.INVALID_ARGUMENT,
+        Status.Code.DEADLINE_EXCEEDED,
+        Status.Code.ALREADY_EXISTS,
+        Status.Code.PERMISSION_DENIED,
+        Status.Code.RESOURCE_EXHAUSTED,
+        Status.Code.FAILED_PRECONDITION,
+        Status.Code.ABORTED,
+        Status.Code.OUT_OF_RANGE,
+        Status.Code.UNIMPLEMENTED,
+        Status.Code.INTERNAL,
+        Status.Code.UNAVAILABLE,
+        Status.Code.DATA_LOSS -> UnknownAppError(e)
+        Status.Code.UNAUTHENTICATED -> InvalidCredentialsError(e)
+        Status.Code.NOT_FOUND -> UserNotFoundError(e)
     }
 
     suspend fun <T : AbstractStub<T>> T.executeWithMetadata(request: String): T = executeApiCall {

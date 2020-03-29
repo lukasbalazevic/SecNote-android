@@ -37,4 +37,8 @@
     <string name="general_note_key_not_found_title">Key for decryption not found</string>
     <string name="general_note_key_not_found_body">If you changed your phone screen lock mechanism all your keys are invalidated therefore note can`t be decrypted. Note will be deleted. </string>
     <string name="general_ok">OK</string>
+    <string name="general_error_unknown">Error occurred, please try again later.</string>
+    <string name="general_error_connection">Check your internet connection and try again.</string>
+    <string name="general_error_invalid_credentials">Check your login credentials and try again.</string>
+    <string name="general_error_user_not_found">User with provided email not found.</string>
 </resources>

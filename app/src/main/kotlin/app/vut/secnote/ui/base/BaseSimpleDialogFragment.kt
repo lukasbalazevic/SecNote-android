@@ -6,7 +6,7 @@ import androidx.fragment.app.DialogFragment
 import app.vut.secnote.tools.Constants
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-class BaseDialogFragment : DialogFragment() {
+class BaseSimpleDialogFragment : DialogFragment() {
 
     private val listener: DialogListener?
         get() = requireParentFragment().childFragmentManager.fragments.first() as? DialogListener
