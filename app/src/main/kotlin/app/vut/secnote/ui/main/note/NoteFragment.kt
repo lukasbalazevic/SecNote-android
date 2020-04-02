@@ -2,6 +2,7 @@ package app.vut.secnote.ui.main.note
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.addCallback
 import app.vut.secnote.R
 import app.vut.secnote.data.model.ui.NoteCategories
 import app.vut.secnote.databinding.FragmentNoteBinding
@@ -25,9 +26,11 @@ class NoteFragment : BaseBindingFragment<NoteViewModel, NoteViewState, FragmentN
 
     companion object {
         const val KEY_NOT_FOUND_DIALOG_TAG = "KEY_NOT_FOUND_DIALOG_TAG"
+        const val CONFIRM_BACK_PRESS_DIALOG_TAG = "CONFIRM_BACK_PRESS_DIALOG_TAG"
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setOnBackPressCallback()
         setBottomBarMenuClicks()
         binding.noteCategories.adapter = adapter
 
@@ -46,6 +49,19 @@ class NoteFragment : BaseBindingFragment<NoteViewModel, NoteViewState, FragmentN
         observeEvent(NavigateBackEvent::class) {
             forceHideKeyboard()
             navigateBack()
+        }
+
+        observeEvent(BackPressConfirmEvent::class) {
+            forceHideKeyboard()
+            navigateTo(
+                NoteFragmentDirections.navigateToDialog(
+                    dialogTag = CONFIRM_BACK_PRESS_DIALOG_TAG,
+                    dialogTitle = resources.getString(R.string.general_unsafe_changes),
+                    dialogBody = resources.getString(R.string.general_unsafe_changes_info),
+                    dialogPositive = resources.getString(R.string.general_discard),
+                    dialogNegative = resources.getString(R.string.general_cancel)
+                )
+            )
         }
 
         observeEvent(NoteSavedEvent::class) {
@@ -96,8 +112,20 @@ class NoteFragment : BaseBindingFragment<NoteViewModel, NoteViewState, FragmentN
         }
     }
 
+    private fun setOnBackPressCallback() {
+        activity?.onBackPressedDispatcher?.addCallback(owner = this, onBackPressed = {
+            viewModel.navigateBack()
+        })
+    }
+
+    override fun onPositive(tag: String?) {
+        when (tag) {
+            CONFIRM_BACK_PRESS_DIALOG_TAG -> navigateBack(R.id.fragment_notes)
+        }
+    }
+
     override fun onCancel(tag: String?) {
-        when(tag) {
+        when (tag) {
             KEY_NOT_FOUND_DIALOG_TAG -> viewModel.deleteNote()
         }
     }

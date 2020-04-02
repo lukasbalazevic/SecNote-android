@@ -38,6 +38,8 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:navigationIcon="@drawable/ic_back"
                 app:navigation_icon_click="@{() -> viewModel.navigateBack()}"
+                app:subtitle="@{viewState.subtitle}"
+                app:subtitleTextColor="@color/night_sky"
                 app:title="@string/general_note"
                 app:titleTextColor="@color/white"/>
 

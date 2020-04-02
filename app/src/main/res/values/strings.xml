@@ -42,4 +42,8 @@
     <string name="general_error_invalid_credentials">Check your login credentials and try again.</string>
     <string name="general_error_user_not_found">User with provided email not found.</string>
     <string name="general_error_unauthenticated">Login time expired. Renew your login.</string>
+    <string name="general_unsafe_changes">Unsaved changes</string>
+    <string name="general_unsafe_changes_info">You made changes and didn\'t save them. Do you want to discard these changes?</string>
+    <string name="general_discard">Discard</string>
+    <string name="general_cancel">Cancel</string>
 </resources>

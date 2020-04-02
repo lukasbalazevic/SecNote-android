@@ -23,4 +23,8 @@ data class Note(
         "${body.subSequence(0, Constants.Note.NOTE_BODY_PREVIEW_LENGTH)}..."
     else
         body
+
+    companion object {
+        val DEFAULT = Note("", "", "", false, "", "")
+    }
 }

@@ -22,6 +22,7 @@ class NoteViewModel @Inject constructor(
         arguments.noteId?.also { note ->
             getNoteInteractor.init(note).execute(
                 onNext = {
+                    viewState.note.value = it
                     viewState.id.value = it.id
                     viewState.title.value = it.title
                     viewState.body.value = it.body
@@ -88,6 +89,10 @@ class NoteViewModel @Inject constructor(
     }
 
     fun navigateBack() {
-        sendEvent(NavigateBackEvent)
+        if (viewState.changed.value == true) {
+            sendEvent(BackPressConfirmEvent)
+        } else {
+            sendEvent(NavigateBackEvent)
+        }
     }
 }
