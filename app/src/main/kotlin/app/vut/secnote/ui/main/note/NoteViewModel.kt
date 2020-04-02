@@ -42,7 +42,7 @@ class NoteViewModel @Inject constructor(
     }
 
     fun deleteNote() {
-        if (viewState.id.value == null) {
+        if (viewState.id.value.isBlank()) {
             sendEvent(
                 ErrorOccurredEvent(
                     resources.getString(R.string.general_error_occurred),
@@ -66,7 +66,7 @@ class NoteViewModel @Inject constructor(
 
     fun saveNote() {
         createOrUpdateNoteInteractor.init(
-            id = viewState.id.value,
+            id = if (viewState.id.value.isBlank()) null else viewState.id.value,
             title = viewState.title.value,
             body = viewState.body.value,
             categories = viewState.categories.value,
@@ -74,7 +74,11 @@ class NoteViewModel @Inject constructor(
             alias = viewState.alias.value
         ).execute(
             onSuccess = {
-                sendEvent(NoteSavedEvent)
+                if (arguments.noteId == null) {
+                    sendEvent(NavigateBackEvent)
+                } else {
+                    sendEvent(NoteSavedEvent)
+                }
             },
             onError = {
                 Timber.d(it)

@@ -1,7 +1,6 @@
 package app.vut.secnote.ui.main.note
 
 import android.content.res.Resources
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import app.vut.secnote.R
 import app.vut.secnote.data.model.room.Note
@@ -16,7 +15,7 @@ class NoteViewState @Inject constructor(
 ) : ViewState {
 
     val note = DefaultValueLiveData(Note.DEFAULT)
-    val id = MutableLiveData<String?>(null)
+    val id = DefaultValueLiveData("")
     val categories = DefaultValueLiveData<List<String>>(listOf())
     val title = DefaultValueLiveData("")
     val body = DefaultValueLiveData("")
