@@ -8,6 +8,7 @@ import app.vut.secnote.data.model.ui.PinState
 import app.vut.secnote.databinding.FragmentNotesBinding
 import app.vut.secnote.tools.extensions.navigateTo
 import app.vut.secnote.ui.base.BaseBindingFragment
+import app.vut.secnote.ui.main.note.NoteFragmentDirections
 import com.thefuntasty.mvvm.livedata.observeNonNull
 import javax.inject.Inject
 
@@ -40,6 +41,12 @@ class NotesFragment : BaseBindingFragment<NotesViewModel, NotesViewState, Fragme
         observeEvent(AuthorizeDeviceEvent::class) {
             navigateTo(
                 NotesFragmentDirections.navigateToPinFragment(PinState.REAUTHORISE)
+            )
+        }
+
+        observeEvent(LogOutUserEvent::class) {
+            navigateTo(
+                NoteFragmentDirections.navigateToLoginFragment()
             )
         }
     }

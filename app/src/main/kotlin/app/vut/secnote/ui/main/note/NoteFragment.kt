@@ -5,6 +5,7 @@ import android.view.View
 import androidx.activity.addCallback
 import app.vut.secnote.R
 import app.vut.secnote.data.model.ui.NoteCategories
+import app.vut.secnote.data.model.ui.PinState
 import app.vut.secnote.databinding.FragmentNoteBinding
 import app.vut.secnote.tools.Constants
 import app.vut.secnote.tools.extensions.forceHideKeyboard
@@ -84,6 +85,18 @@ class NoteFragment : BaseBindingFragment<NoteViewModel, NoteViewState, FragmentN
                     dialogBody = resources.getString(R.string.general_note_key_not_found_body),
                     dialogPositive = resources.getString(R.string.general_ok)
                 )
+            )
+        }
+
+        observeEvent(AuthorizeDeviceEvent::class) {
+            navigateTo(
+                NoteFragmentDirections.navigateToPinFragment(PinState.REAUTHORISE)
+            )
+        }
+
+        observeEvent(LogOutUserEvent::class) {
+            navigateTo(
+                NoteFragmentDirections.navigateToLoginFragment()
             )
         }
     }

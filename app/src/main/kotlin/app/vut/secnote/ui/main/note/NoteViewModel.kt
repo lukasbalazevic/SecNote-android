@@ -2,9 +2,11 @@ package app.vut.secnote.ui.main.note
 
 import android.content.res.Resources
 import app.vut.secnote.R
+import app.vut.secnote.domain.login.SignOutInteractor
 import app.vut.secnote.domain.notes.CreateOrUpdateNoteInteractor
 import app.vut.secnote.domain.notes.DeleteNoteInteractor
 import app.vut.secnote.domain.notes.GetNoteInteractor
+import app.vut.secnote.tools.extensions.checkForUserNoteAuthenticatedException
 import com.thefuntasty.mvvm.crinteractors.BaseCrViewModel
 import timber.log.Timber
 import javax.inject.Inject
@@ -15,7 +17,8 @@ class NoteViewModel @Inject constructor(
     private val resources: Resources,
     private val getNoteInteractor: GetNoteInteractor,
     private val createOrUpdateNoteInteractor: CreateOrUpdateNoteInteractor,
-    private val deleteNoteInteractor: DeleteNoteInteractor
+    private val deleteNoteInteractor: DeleteNoteInteractor,
+    private val signOutInteractor: SignOutInteractor
 ) : BaseCrViewModel<NoteViewState>() {
 
     override fun onStart() {
@@ -51,14 +54,26 @@ class NoteViewModel @Inject constructor(
             )
             return
         }
-        deleteNoteInteractor.init(viewState.id.value ?: "").execute(
+        deleteNoteInteractor.init(viewState.id.value).execute(
             onSuccess = {
                 sendEvent(NavigateBackEvent)
             },
             onError = {
-                ErrorOccurredEvent(
-                    resources.getString(R.string.general_error_occurred),
-                    resources.getString(R.string.general_try_again_later)
+                it.checkForUserNoteAuthenticatedException(
+                    authorize = {
+                        sendEvent(AuthorizeDeviceEvent)
+                    },
+                    logOutUser = {
+                        sendEvent(LogOutUserEvent)
+                    },
+                    showError = {
+                        sendEvent(
+                            ErrorOccurredEvent(
+                                resources.getString(R.string.general_error_occurred),
+                                resources.getString(R.string.general_try_again_later)
+                            )
+                        )
+                    }
                 )
             }
         )
@@ -81,12 +96,21 @@ class NoteViewModel @Inject constructor(
                 }
             },
             onError = {
-                Timber.d(it)
-                sendEvent(
-                    ErrorOccurredEvent(
-                        resources.getString(R.string.general_error_occurred),
-                        resources.getString(R.string.general_try_again_later)
-                    )
+                it.checkForUserNoteAuthenticatedException(
+                    authorize = {
+                        sendEvent(AuthorizeDeviceEvent)
+                    },
+                    logOutUser = {
+                        signOut()
+                    },
+                    showError = {
+                        sendEvent(
+                            ErrorOccurredEvent(
+                                resources.getString(R.string.general_error_occurred),
+                                resources.getString(R.string.general_try_again_later)
+                            )
+                        )
+                    }
                 )
             }
         )
@@ -98,5 +122,13 @@ class NoteViewModel @Inject constructor(
         } else {
             sendEvent(NavigateBackEvent)
         }
+    }
+
+    private fun signOut() {
+        signOutInteractor.init(includeServerCall = false).execute(
+            onSuccess = {
+                sendEvent(LogOutUserEvent)
+            }
+        )
     }
 }

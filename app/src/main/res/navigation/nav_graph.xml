@@ -64,6 +64,12 @@
             app:destination="@id/fragment_pin"/>
     </fragment>
 
+    <action
+        android:id="@+id/navigate_to_login_fragment"
+        app:destination="@id/fragment_login"
+        app:popUpTo="@id/fragment_notes"
+        app:popUpToInclusive="true"/>
+
     <fragment
         android:id="@+id/fragment_note"
         android:name="app.vut.secnote.ui.main.note.NoteFragment"
@@ -100,10 +106,6 @@
         <action
             android:id="@+id/navigate_to_encryption_fragment"
             app:destination="@id/fragment_encryption"/>
-
-        <action
-            android:id="@+id/navigate_to_pin_fragment"
-            app:destination="@id/fragment_pin"/>
     </fragment>
 
     <fragment
@@ -123,17 +125,15 @@
             app:popUpToInclusive="true"/>
     </fragment>
 
+    <action
+        android:id="@+id/navigate_to_pin_fragment"
+        app:destination="@id/fragment_pin"/>
+
     <fragment
         android:id="@+id/fragment_profile"
         android:name="app.vut.secnote.ui.main.profile.ProfileFragment"
         android:label="ProfileFragment"
-        tools:layout="@layout/fragment_profile">
-        <action
-            android:id="@+id/navigate_to_login_fragment"
-            app:destination="@id/fragment_login"
-            app:popUpTo="@id/fragment_notes"
-            app:popUpToInclusive="true"/>
-    </fragment>
+        tools:layout="@layout/fragment_profile"/>
 
     <dialog
         android:id="@+id/fragment_error_dialog"
@@ -149,8 +149,8 @@
 
         <argument
             android:name="image_src"
-            app:argType="reference"
-            android:defaultValue="@drawable/ic_server_down"/>
+            android:defaultValue="@drawable/ic_server_down"
+            app:argType="reference"/>
 
     </dialog>
 
