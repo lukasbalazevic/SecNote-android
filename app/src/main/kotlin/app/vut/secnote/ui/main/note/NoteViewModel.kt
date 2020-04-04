@@ -69,7 +69,7 @@ class NoteViewModel @Inject constructor(
                         sendEvent(AuthorizeDeviceEvent)
                     },
                     logOutUser = {
-                        sendEvent(LogOutUserEvent)
+                        signOut()
                     },
                     showError = {
                         sendEvent(

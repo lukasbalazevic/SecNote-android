@@ -8,11 +8,13 @@ import app.vut.secnote.data.model.ui.PinState
 import app.vut.secnote.databinding.FragmentNotesBinding
 import app.vut.secnote.tools.extensions.navigateTo
 import app.vut.secnote.ui.base.BaseBindingFragment
+import app.vut.secnote.ui.base.BaseSimpleDialogFragment
+import app.vut.secnote.ui.main.note.NoteFragment
 import app.vut.secnote.ui.main.note.NoteFragmentDirections
 import com.thefuntasty.mvvm.livedata.observeNonNull
 import javax.inject.Inject
 
-class NotesFragment : BaseBindingFragment<NotesViewModel, NotesViewState, FragmentNotesBinding>(), NotesView {
+class NotesFragment : BaseBindingFragment<NotesViewModel, NotesViewState, FragmentNotesBinding>(), NotesView, BaseSimpleDialogFragment.DialogListener {
 
     @Inject override lateinit var viewModelFactory: NotesViewModelFactory
     @Inject lateinit var adapter: NotesAdapter
@@ -49,7 +51,11 @@ class NotesFragment : BaseBindingFragment<NotesViewModel, NotesViewState, Fragme
 
         observeEvent(LogOutUserEvent::class) {
             navigateTo(
-                NoteFragmentDirections.navigateToLoginFragment()
+                NoteFragmentDirections.navigateToDialog(
+                    dialogTitle = resources.getString(R.string.general_error_unauthenticated),
+                    dialogBody = resources.getString(R.string.general_error_unauthenticated_body),
+                    dialogNegative = resources.getString(R.string.general_ok)
+                )
             )
         }
     }
@@ -71,6 +77,12 @@ class NotesFragment : BaseBindingFragment<NotesViewModel, NotesViewState, Fragme
     override fun onNoteClick(item: Note) {
         navigateTo(
             NotesFragmentDirections.navigateToNoteFragment(item.id)
+        )
+    }
+
+    override fun onCancel(tag: String?) {
+        navigateTo(
+            NoteFragmentDirections.navigateToLoginFragment()
         )
     }
 }

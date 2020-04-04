@@ -3,6 +3,7 @@ package app.vut.secnote.ui.main.notes
 import android.content.res.Resources
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.OnLifecycleEvent
+import app.vut.secnote.domain.login.SignOutInteractor
 import app.vut.secnote.domain.notes.GetNotesInteractor
 import app.vut.secnote.domain.notes.SyncNotesInteractor
 import app.vut.secnote.tools.extensions.checkForUserNoteAuthenticatedException
@@ -14,6 +15,7 @@ class NotesViewModel @Inject constructor(
     override val viewState: NotesViewState,
     private val syncNotesInteractor: SyncNotesInteractor,
     private val getNotesInteractor: GetNotesInteractor,
+    private val signOutInteractor: SignOutInteractor,
     private val resources: Resources
 ) : BaseCrViewModel<NotesViewState>() {
 
@@ -38,7 +40,7 @@ class NotesViewModel @Inject constructor(
                         sendEvent(AuthorizeDeviceEvent)
                     },
                     logOutUser = {
-                        sendEvent(LogOutUserEvent)
+                        signOut()
                     },
                     showError = {
                         sendEvent(
@@ -55,6 +57,14 @@ class NotesViewModel @Inject constructor(
 
     fun createNote() {
         sendEvent(NavigateToCreateOrUpdateNoteEvent())
+    }
+
+    private fun signOut() {
+        signOutInteractor.init(includeServerCall = false).execute(
+            onSuccess = {
+                sendEvent(LogOutUserEvent)
+            }
+        )
     }
 }
 

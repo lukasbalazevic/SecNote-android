@@ -29,6 +29,7 @@ class NoteFragment : BaseBindingFragment<NoteViewModel, NoteViewState, FragmentN
         const val KEY_NOT_FOUND_DIALOG_TAG = "KEY_NOT_FOUND_DIALOG_TAG"
         const val CONFIRM_BACK_PRESS_DIALOG_TAG = "CONFIRM_BACK_PRESS_DIALOG_TAG"
         const val DECRYPTION_TUTORIAL = "DECRYPTION_TUTORIAL"
+        const val TOKEN_EXPIRED = "TOKEN_EXPIRED"
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -98,7 +99,12 @@ class NoteFragment : BaseBindingFragment<NoteViewModel, NoteViewState, FragmentN
 
         observeEvent(LogOutUserEvent::class) {
             navigateTo(
-                NoteFragmentDirections.navigateToLoginFragment()
+                NoteFragmentDirections.navigateToDialog(
+                    dialogTag = TOKEN_EXPIRED,
+                    dialogTitle = resources.getString(R.string.general_error_unauthenticated),
+                    dialogBody = resources.getString(R.string.general_error_unauthenticated_body),
+                    dialogNegative = resources.getString(R.string.general_ok)
+                )
             )
         }
 
@@ -162,6 +168,7 @@ class NoteFragment : BaseBindingFragment<NoteViewModel, NoteViewState, FragmentN
         when (tag) {
             KEY_NOT_FOUND_DIALOG_TAG -> viewModel.deleteNote()
             DECRYPTION_TUTORIAL -> viewModel.markDecryptionTutorial()
+            TOKEN_EXPIRED -> navigateTo(NoteFragmentDirections.navigateToLoginFragment())
         }
     }
 }
