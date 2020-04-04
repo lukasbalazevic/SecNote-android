@@ -32,11 +32,9 @@ class ApplicationModule {
     @Provides
     fun resources(@ApplicationContext context: Context): Resources = context.resources
 
-    @Singleton
     @Provides
     fun keystore(): KeyStore = KeyStore.getInstance(Constants.Security.KEYSTORE).apply { load(null) }
 
-    @Singleton
     @Provides
     fun keyPairGenerator(): KeyPairGenerator = KeyPairGenerator.getInstance(KeyProperties.KEY_ALGORITHM_RSA, Constants.Security.KEYSTORE)
 

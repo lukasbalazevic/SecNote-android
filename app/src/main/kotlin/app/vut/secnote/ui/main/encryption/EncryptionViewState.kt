@@ -1,5 +1,6 @@
 package app.vut.secnote.ui.main.encryption
 
+import androidx.lifecycle.map
 import app.vut.secnote.data.model.ui.KeySelection
 import com.thefuntasty.mvvm.ViewState
 import com.thefuntasty.mvvm.livedata.DefaultValueLiveData
@@ -17,4 +18,5 @@ class EncryptionViewState @Inject constructor(
             KeySelection(it, it == selected)
         }
     }
+    val showEmptyState = list.map { it.isEmpty() }
 }

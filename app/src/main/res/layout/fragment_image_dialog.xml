@@ -2,45 +2,47 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.main.error.ErrorDialogFragment">
+    tools:context=".ui.main.dialog.ImageDialogFragment">
 
     <data>
 
         <variable
             name="view"
-            type="app.vut.secnote.ui.main.error.ErrorDialogView"/>
+            type="app.vut.secnote.ui.main.dialog.ImageDialogView"/>
 
         <variable
             name="viewModel"
-            type="app.vut.secnote.ui.main.error.ErrorDialogViewModel"/>
+            type="app.vut.secnote.ui.main.dialog.ImageDialogViewModel"/>
 
         <variable
             name="viewState"
-            type="app.vut.secnote.ui.main.error.ErrorDialogViewState"/>
+            type="app.vut.secnote.ui.main.dialog.ImageDialogViewState"/>
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@color/white"
         android:padding="@dimen/d8">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/d8"
+            android:adjustViewBounds="true"
             android:src="@{viewState.image}"
             app:layout_constraintBottom_toTopOf="@id/error_dialog_text"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            tools:src="@drawable/ic_server_down"/>
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_undraw_surveillance"/>
 
         <TextView
             android:id="@+id/error_dialog_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/d18"
+            android:layout_marginBottom="@dimen/d8"
             android:gravity="center"
             android:text="@{viewState.message}"
             android:textAppearance="@style/TextRegular.Black.16"

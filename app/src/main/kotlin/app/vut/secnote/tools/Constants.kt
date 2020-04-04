@@ -15,7 +15,7 @@ interface Constants {
         const val AES = "AES"
         const val SALT = "@Secnote?2020?Thesis!@"
         const val ENCRYPTED_SHARED_PREFS = "secret_shared_prefs"
-        const val DEVICE_AUTHORIZATION_WINDOW = 60 * 20
+        const val DEVICE_AUTHORIZATION_WINDOW = 60 * 1
     }
 
     object Database {
@@ -32,6 +32,7 @@ interface Constants {
         const val NOTE_BODY_PREVIEW_LENGTH = 60
         const val CATEGORIES_CHANGE = "CATEGORIES_CHANGE"
         const val KEY_SELECTED = "KEY_SELECTED"
+        const val ENCRYPTION_TUTORIAL = "ENCRYPTION_TUTORIAL"
     }
 
     object Bundle {

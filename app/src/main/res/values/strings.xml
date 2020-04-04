@@ -14,6 +14,7 @@
     <string name="general_encryption">Encryption</string>
     <string name="general_all_notes">All notes</string>
     <string name="general_add_first_note">Add your first note</string>
+    <string name="general_no_keys">No keys found</string>
     <string name="general_title">Title</string>
     <string name="general_body">Body</string>
     <string name="general_note">Note</string>
@@ -46,4 +47,6 @@
     <string name="general_unsafe_changes_info">You made changes and didn\'t save them. Do you want to discard these changes?</string>
     <string name="general_discard">Discard</string>
     <string name="general_cancel">Cancel</string>
+    <string name="general_encryption_tutorial">Encryption keys are used to secure your notes, so only you and you only on your device can access content in your notes. In case of loss of device or uninstalling, the application keys are permanently lost, and so are notes encrypted with them.</string>
+
 </resources>

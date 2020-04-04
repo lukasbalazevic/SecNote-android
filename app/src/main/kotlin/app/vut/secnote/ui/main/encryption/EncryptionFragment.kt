@@ -9,10 +9,12 @@ import app.vut.secnote.tools.extensions.navigateBack
 import app.vut.secnote.tools.extensions.navigateTo
 import app.vut.secnote.tools.extensions.setResult
 import app.vut.secnote.ui.base.BaseBindingFragment
+import app.vut.secnote.ui.base.BaseSimpleDialogFragment
 import com.thefuntasty.mvvm.livedata.observeNonNull
 import javax.inject.Inject
 
-class EncryptionFragment : BaseBindingFragment<EncryptionViewModel, EncryptionViewState, FragmentEncryptionBinding>(), EncryptionView {
+class EncryptionFragment : BaseBindingFragment<EncryptionViewModel, EncryptionViewState, FragmentEncryptionBinding>(),
+    EncryptionView, BaseSimpleDialogFragment.DialogListener {
 
     @Inject override lateinit var viewModelFactory: EncryptionViewModelFactory
     @Inject lateinit var adapter: EncryptionAdapter
@@ -33,6 +35,15 @@ class EncryptionFragment : BaseBindingFragment<EncryptionViewModel, EncryptionVi
             )
         }
 
+        observeEvent(ShowEncryptionTutorialEvent::class) {
+            navigateTo(
+                EncryptionFragmentDirections.navigateToImageDialog(
+                    message = resources.getString(R.string.general_encryption_tutorial),
+                    imageSrc = R.drawable.ic_undraw_surveillance
+                )
+            )
+        }
+
         binding.encryptionList.adapter = adapter
         viewModel.viewState.list.observeNonNull(this) {
             adapter.submitList(it)
@@ -41,5 +52,9 @@ class EncryptionFragment : BaseBindingFragment<EncryptionViewModel, EncryptionVi
 
     override fun onKeySelected(alias: String) {
         viewModel.onKeySelection(alias)
+    }
+
+    override fun onCancel(tag: String?) {
+        viewModel.markTutorialAsSeen()
     }
 }

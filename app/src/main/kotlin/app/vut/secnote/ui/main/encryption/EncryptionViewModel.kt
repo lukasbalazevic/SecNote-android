@@ -3,13 +3,29 @@ package app.vut.secnote.ui.main.encryption
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.OnLifecycleEvent
 import app.vut.secnote.domain.security.GetKeyAliasesInteractor
+import app.vut.secnote.domain.tutorial.GetEncryptionTutorialInteractor
+import app.vut.secnote.domain.tutorial.MarkEncryptionTutorialInteractor
 import com.thefuntasty.mvvm.crinteractors.BaseCrViewModel
 import javax.inject.Inject
 
 class EncryptionViewModel @Inject constructor(
     override val viewState: EncryptionViewState,
-    private val getKeyAliasesInteractor: GetKeyAliasesInteractor
+    private val getKeyAliasesInteractor: GetKeyAliasesInteractor,
+    private val getEncryptionTutorialInteractor: GetEncryptionTutorialInteractor,
+    private val markEncryptionTutorialInteractor: MarkEncryptionTutorialInteractor
 ) : BaseCrViewModel<EncryptionViewState>() {
+
+    override fun onStart() {
+        getEncryptionTutorialInteractor.execute(
+            onSuccess = {
+                if (!it) sendEvent(ShowEncryptionTutorialEvent)
+            }
+        )
+    }
+
+    fun markTutorialAsSeen() {
+        markEncryptionTutorialInteractor.execute { }
+    }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     fun getKeyAliases() {

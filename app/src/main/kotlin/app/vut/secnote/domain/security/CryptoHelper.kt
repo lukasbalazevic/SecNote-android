@@ -10,6 +10,7 @@ import java.lang.IllegalStateException
 import java.security.KeyPairGenerator
 import java.security.KeyStore
 import java.security.MessageDigest
+import java.security.PrivateKey
 import java.security.Signature
 import java.security.UnrecoverableKeyException
 import javax.crypto.Cipher
@@ -124,10 +125,10 @@ class CryptoHelper @Inject constructor(
         }
 
     fun signAndEncodeDataBase64(data: ByteArray): String {
-        val entry = keystore.getEntry(Constants.Security.DEVICE_USER_KEY, null) as KeyStore.PrivateKeyEntry
+        val entry = keystore.getKey(Constants.Security.DEVICE_USER_KEY, null) as PrivateKey
         return Signature.getInstance(Constants.Security.DEVICE_USER_KEY_SIG_ALG)
             .run {
-                initSign(entry.privateKey)
+                initSign(entry)
                 update(data)
                 encodeBase64(sign())
             }
