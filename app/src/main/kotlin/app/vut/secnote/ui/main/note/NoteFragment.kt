@@ -141,8 +141,6 @@ class NoteFragment : BaseBindingFragment<NoteViewModel, NoteViewState, FragmentN
                     )
                 }
                 R.id.note_delete -> viewModel.deleteNote()
-                R.id.note_share -> {
-                }
             }
             true
         }
