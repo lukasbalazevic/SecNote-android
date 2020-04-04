@@ -48,7 +48,7 @@ class CryptoHelper @Inject constructor(
     }
 
     fun checkIfDeviceKeyExists() = try {
-        keystore.getEntry(Constants.Security.DEVICE_USER_KEY, null) != null
+        keystore.getCertificate(Constants.Security.DEVICE_USER_KEY) != null
     } catch (e: UnrecoverableKeyException) {
         deleteDeviceKey()
         false
@@ -58,8 +58,8 @@ class CryptoHelper @Inject constructor(
     private fun deleteDeviceKey() = keystore.deleteEntry(Constants.Security.DEVICE_USER_KEY)
 
     fun getDeviceKey(): String {
-        val entry = keystore.getEntry(Constants.Security.DEVICE_USER_KEY, null) as KeyStore.PrivateKeyEntry
-        val encoded = BaseEncoding.base64().encode(entry.certificate.publicKey.encoded)
+        val entry = keystore.getCertificate(Constants.Security.DEVICE_USER_KEY) ?: return generateKey()
+        val encoded = BaseEncoding.base64().encode(entry.publicKey.encoded)
         val pem = "$PEM_KEY_RREFIX\n$encoded\n$PEM_KEY_POSFIX"
 
         return encodeBase64(pem.toByteArray())
