@@ -52,6 +52,43 @@
                 android:layout_margin="@dimen/d8"/>
         </androidx.core.widget.NestedScrollView>
 
+        <LinearLayout
+            app:layout_constraintTop_toBottomOf="@id/categories_toolbar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:id="@+id/notes_empty_state"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            app:visibility="@{viewState.showEmptyState}">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_undraw_personal_settings"
+                tools:ignore="ContentDescription"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/d8"
+                android:text="@string/general_no_categories"
+                android:textAppearance="@style/TextRegular.White.16"/>
+        </LinearLayout>
+
+        <ProgressBar
+            app:visibility="@{viewState.loading}"
+            app:layout_constraintTop_toBottomOf="@id/categories_toolbar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

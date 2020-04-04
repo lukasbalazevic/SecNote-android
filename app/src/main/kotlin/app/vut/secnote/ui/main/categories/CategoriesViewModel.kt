@@ -27,6 +27,7 @@ class CategoriesViewModel @Inject constructor(
         getCategoriesInteractor.execute(
             onNext = {
                 viewState.categories.value = it
+                viewState.loading.value = false
             }
         )
     }

@@ -51,4 +51,5 @@
     <string name="general_encryption_removed">Encryption from note removed</string>
     <string name="general_encryption_added">Note encrypted with key: %s</string>
     <string name="general_decryption_tutorial">Encrypted notes are automatically decrypted when the note is opened. Decryption is tied to the user authorization window, which lasts for 5 minutes from the last successful unlock of application.</string>
+    <string name="general_no_categories">No categories found</string>
 </resources>
