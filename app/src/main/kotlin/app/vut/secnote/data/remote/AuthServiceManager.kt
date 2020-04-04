@@ -66,6 +66,8 @@ class AuthServiceManager @Inject constructor(
             throw UnknownAppError(e)
         } catch (e: UnknownHostException) {
             throw NoConnectionError(e)
+        } catch (e: InvalidCredentialsError) {
+            throw e
         } catch (e: Exception) {
             throw UnknownAppError(e)
         }

@@ -1,8 +1,8 @@
 package app.vut.secnote.data.remote
 
 import android.security.keystore.UserNotAuthenticatedException
+import app.vut.secnote.data.model.error.InvalidCredentialsError
 import app.vut.secnote.data.model.error.NoConnectionError
-import app.vut.secnote.data.model.error.UnauthenticatedError
 import app.vut.secnote.data.model.error.UnknownAppError
 import app.vut.secnote.data.store.TokenStore
 import app.vut.secnote.domain.security.CryptoHelper
@@ -82,6 +82,6 @@ abstract class ServiceManager(
         if (successful) {
             return apiCall()
         }
-        throw UnauthenticatedError(e)
+        throw InvalidCredentialsError(e)
     }
 }
