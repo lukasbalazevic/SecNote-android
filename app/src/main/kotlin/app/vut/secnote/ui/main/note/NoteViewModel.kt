@@ -6,6 +6,8 @@ import app.vut.secnote.domain.login.SignOutInteractor
 import app.vut.secnote.domain.notes.CreateOrUpdateNoteInteractor
 import app.vut.secnote.domain.notes.DeleteNoteInteractor
 import app.vut.secnote.domain.notes.GetNoteInteractor
+import app.vut.secnote.domain.tutorial.GetDecryptionTutorialInteractor
+import app.vut.secnote.domain.tutorial.MarkDecryptionTutorialInteractor
 import app.vut.secnote.tools.extensions.checkForUserNoteAuthenticatedException
 import com.thefuntasty.mvvm.crinteractors.BaseCrViewModel
 import timber.log.Timber
@@ -18,7 +20,9 @@ class NoteViewModel @Inject constructor(
     private val getNoteInteractor: GetNoteInteractor,
     private val createOrUpdateNoteInteractor: CreateOrUpdateNoteInteractor,
     private val deleteNoteInteractor: DeleteNoteInteractor,
-    private val signOutInteractor: SignOutInteractor
+    private val signOutInteractor: SignOutInteractor,
+    private val getDecryptionTutorialInteractor: GetDecryptionTutorialInteractor,
+    private val markDecryptionTutorialInteractor: MarkDecryptionTutorialInteractor
 ) : BaseCrViewModel<NoteViewState>() {
 
     override fun onStart() {
@@ -31,6 +35,7 @@ class NoteViewModel @Inject constructor(
                     viewState.body.value = it.body
                     viewState.alias.value = it.alias
                     viewState.categories.value = it.categoryList
+                    checkDecryptionTutorial(it.encrypted)
                 },
                 onError = {
                     when (it) {
@@ -122,6 +127,19 @@ class NoteViewModel @Inject constructor(
         } else {
             sendEvent(NavigateBackEvent)
         }
+    }
+
+    fun markDecryptionTutorial() {
+        markDecryptionTutorialInteractor.execute {}
+    }
+
+    private fun checkDecryptionTutorial(encrypted: Boolean) {
+        if (encrypted.not()) return
+        getDecryptionTutorialInteractor.execute(
+            onSuccess = {
+                if (it.not()) sendEvent(ShowDecryptionTutorialEvent)
+            }
+        )
     }
 
     private fun signOut() {

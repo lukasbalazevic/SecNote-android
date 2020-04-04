@@ -28,6 +28,7 @@ class NoteFragment : BaseBindingFragment<NoteViewModel, NoteViewState, FragmentN
     companion object {
         const val KEY_NOT_FOUND_DIALOG_TAG = "KEY_NOT_FOUND_DIALOG_TAG"
         const val CONFIRM_BACK_PRESS_DIALOG_TAG = "CONFIRM_BACK_PRESS_DIALOG_TAG"
+        const val DECRYPTION_TUTORIAL = "DECRYPTION_TUTORIAL"
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -100,6 +101,16 @@ class NoteFragment : BaseBindingFragment<NoteViewModel, NoteViewState, FragmentN
                 NoteFragmentDirections.navigateToLoginFragment()
             )
         }
+
+        observeEvent(ShowDecryptionTutorialEvent::class) {
+            navigateTo(
+                NoteFragmentDirections.navigateToImageDialog(
+                    dialogTag = DECRYPTION_TUTORIAL,
+                    message = resources.getString(R.string.general_decryption_tutorial),
+                    imageSrc = R.drawable.ic_undraw_security_on
+                )
+            )
+        }
     }
 
     override fun addCategory() {
@@ -152,6 +163,7 @@ class NoteFragment : BaseBindingFragment<NoteViewModel, NoteViewState, FragmentN
     override fun onCancel(tag: String?) {
         when (tag) {
             KEY_NOT_FOUND_DIALOG_TAG -> viewModel.deleteNote()
+            DECRYPTION_TUTORIAL -> viewModel.markDecryptionTutorial()
         }
     }
 }

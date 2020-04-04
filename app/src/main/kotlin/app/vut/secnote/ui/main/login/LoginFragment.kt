@@ -24,8 +24,8 @@ class LoginFragment : BaseBindingFragment<LoginViewModel, LoginViewState, Fragme
         observeEvent(ShowErrorEvent::class) {
             navigateTo(
                 LoginFragmentDirections.navigateToImageDialog(
-                    it.message,
-                    it.imageSrc
+                    message = it.message,
+                    imageSrc = it.imageSrc
                 )
             )
         }

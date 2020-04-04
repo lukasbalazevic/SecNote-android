@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 class ImageDialogViewState @Inject constructor(
     private val resources: Resources,
-    args: ImageDialogFragmentArgs
+    val args: ImageDialogFragmentArgs
 ) : ViewState {
     val message = DefaultValueLiveData(
         args.message ?: resources.getString(R.string.general_error_connection)

@@ -50,4 +50,5 @@
     <string name="general_encryption_tutorial">Encryption keys are used to secure your notes, so only you and you only on your device can access content in your notes. In case of loss of device or uninstalling, the application keys are permanently lost, and so are notes encrypted with them.</string>
     <string name="general_encryption_removed">Encryption from note removed</string>
     <string name="general_encryption_added">Note encrypted with key: %s</string>
+    <string name="general_decryption_tutorial">Encrypted notes are automatically decrypted when the note is opened. Decryption is tied to the user authorization window, which lasts for 5 minutes from the last successful unlock of application.</string>
 </resources>

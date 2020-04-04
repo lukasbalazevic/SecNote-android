@@ -31,7 +31,7 @@ class ImageDialogFragment : BaseDaggerBindingDialogFragment<ImageDialogViewModel
     }
 
     override fun onStop() {
-        listener?.onCancel("")
+        listener?.onCancel(viewModel.viewState.args.dialogTag)
         super.onStop()
     }
 }

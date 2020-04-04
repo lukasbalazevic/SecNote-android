@@ -33,6 +33,7 @@ interface Constants {
         const val CATEGORIES_CHANGE = "CATEGORIES_CHANGE"
         const val KEY_SELECTED = "KEY_SELECTED"
         const val ENCRYPTION_TUTORIAL = "ENCRYPTION_TUTORIAL"
+        const val DECRYPTION_TUTORIAL = "DECRYPTION_TUTORIAL"
     }
 
     object Bundle {

@@ -34,7 +34,10 @@ class NotesFragment : BaseBindingFragment<NotesViewModel, NotesViewState, Fragme
 
         observeEvent(ShowErrorEvent::class) {
             navigateTo(
-                NotesFragmentDirections.navigateToImageDialog(it.message, it.imageSrc)
+                NotesFragmentDirections.navigateToImageDialog(
+                    message = it.message,
+                    imageSrc = it.imageSrc
+                )
             )
         }
 
