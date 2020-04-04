@@ -48,5 +48,6 @@
     <string name="general_discard">Discard</string>
     <string name="general_cancel">Cancel</string>
     <string name="general_encryption_tutorial">Encryption keys are used to secure your notes, so only you and you only on your device can access content in your notes. In case of loss of device or uninstalling, the application keys are permanently lost, and so are notes encrypted with them.</string>
-
+    <string name="general_encryption_removed">Encryption from note removed</string>
+    <string name="general_encryption_added">Note encrypted with key %s</string>
 </resources>

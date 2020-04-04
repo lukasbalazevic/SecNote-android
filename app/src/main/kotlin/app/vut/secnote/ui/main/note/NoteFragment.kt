@@ -44,6 +44,7 @@ class NoteFragment : BaseBindingFragment<NoteViewModel, NoteViewState, FragmentN
         }
 
         getResultOnce<String>(this, Constants.Note.KEY_SELECTED) {
+            showEncryptionChange(it)
             viewModel.viewState.alias.value = it
         }
 
@@ -107,6 +108,17 @@ class NoteFragment : BaseBindingFragment<NoteViewModel, NoteViewState, FragmentN
                 NoteCategories(viewModel.viewState.categories.value)
             )
         )
+    }
+
+    private fun showEncryptionChange(key: String) {
+        val message = if (key.isBlank()) {
+            resources.getString(R.string.general_encryption_removed)
+        } else {
+            resources.getString(R.string.general_encryption_added, key)
+        }
+        Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT)
+            .setAnchorView(binding.notesSaveFab)
+            .show()
     }
 
     private fun setBottomBarMenuClicks() {
