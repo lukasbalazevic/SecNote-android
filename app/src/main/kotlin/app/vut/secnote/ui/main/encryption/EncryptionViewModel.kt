@@ -32,6 +32,7 @@ class EncryptionViewModel @Inject constructor(
         getKeyAliasesInteractor.execute(
             onSuccess = {
                 viewState.aliases.value = it
+                viewState.loading.value = false
             }
         )
     }

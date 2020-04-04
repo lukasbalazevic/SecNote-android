@@ -18,5 +18,8 @@ class EncryptionViewState @Inject constructor(
             KeySelection(it, it == selected)
         }
     }
-    val showEmptyState = list.map { it.isEmpty() }
+    val loading = DefaultValueLiveData(true)
+    val showEmptyState = combineLiveData(list, loading) {list, loading ->
+        loading.not() && list.isEmpty()
+    }
 }
