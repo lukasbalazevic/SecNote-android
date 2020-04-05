@@ -15,7 +15,7 @@ interface Constants {
         const val AES = "AES"
         const val SALT = "@Secnote?2020?Thesis!@"
         const val ENCRYPTED_SHARED_PREFS = "secret_shared_prefs"
-        const val DEVICE_AUTHORIZATION_WINDOW = 30 * 1
+        const val DEVICE_AUTHORIZATION_WINDOW = 60 * 5
     }
 
     object Database {
