@@ -56,7 +56,7 @@ class PinFragment : BaseBindingFragment<PinViewModel, PinViewState, FragmentPinB
         }
     }
 
-    override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
+    override fun onAuthenticationError(errorCode: Int, errString: CharSequence) = runOnUIThread {
         viewState.loading.value = false
     }
 
@@ -64,7 +64,7 @@ class PinFragment : BaseBindingFragment<PinViewModel, PinViewState, FragmentPinB
         viewModel.checkState()
     }
 
-    override fun onAuthenticationFailed() {
+    override fun onAuthenticationFailed() = runOnUIThread {
         viewState.loading.value = false
     }
 }
