@@ -68,8 +68,8 @@ class NoteViewModel @Inject constructor(
         if (viewState.id.value.isBlank()) {
             sendEvent(
                 ErrorOccurredEvent(
-                    resources.getString(R.string.general_error_occurred),
-                    resources.getString(R.string.general_try_again_later)
+                    resources.getString(R.string.general_error_delete_new_note_title),
+                    resources.getString(R.string.general_error_delete_new_note)
                 )
             )
             return

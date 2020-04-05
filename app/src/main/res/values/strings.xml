@@ -23,6 +23,8 @@
     <string name="general_category_name">Category name</string>
     <string name="general_note_saved">Note has been successfully saved</string>
     <string name="general_error_occurred">Error occurred</string>
+    <string name="general_error_delete_new_note_title">Note not created yet.</string>
+    <string name="general_error_delete_new_note">Can`t delete note that don`t exist yet.</string>
     <string name="general_try_again_later">Please try again later.</string>
     <string name="general_lock_screen_title">Please authorize device to continue.</string>
     <string name="general_lock_screen_subtitle">By authentication you unlocking cryptographic material which is used for safety of your data</string>
