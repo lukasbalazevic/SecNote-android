@@ -123,6 +123,12 @@
             app:destination="@id/fragment_notes"
             app:popUpTo="@id/fragment_pin"
             app:popUpToInclusive="true"/>
+
+        <action
+            android:id="@+id/recreate"
+            app:destination="@id/fragment_pin"
+            app:popUpTo="@id/fragment_pin"
+            app:popUpToInclusive="true"/>
     </fragment>
 
     <action

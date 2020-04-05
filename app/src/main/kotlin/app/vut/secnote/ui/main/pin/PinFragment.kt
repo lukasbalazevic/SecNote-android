@@ -31,6 +31,12 @@ class PinFragment : BaseBindingFragment<PinViewModel, PinViewState, FragmentPinB
             biometricPrompt.authenticate(promptInfo)
         }
 
+        observeEvent(ReauthenticateDeviceEvent::class) {
+            navigateTo(
+                PinFragmentDirections.recreate(viewModel.viewState.state.value)
+            )
+        }
+
         observeEvent(SetPinEvent::class) {
             startActivityForResult(Intent(Settings.ACTION_SECURITY_SETTINGS), REQUEST_CODE_PIN_SETTINGS)
         }

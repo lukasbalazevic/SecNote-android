@@ -20,7 +20,7 @@ class PinViewModel @Inject constructor(
         when (viewState.state.value) {
             PinState.PIN_SET -> sendEvent(SetPinEvent)
             PinState.AUTHORISE,
-            PinState.REAUTHORISE -> sendEvent(AuthenticateDeviceEvent)
+            PinState.REAUTHORISE -> sendEvent(ReauthenticateDeviceEvent)
         }
     }
 

@@ -10,7 +10,6 @@ import app.vut.secnote.domain.tutorial.GetDecryptionTutorialInteractor
 import app.vut.secnote.domain.tutorial.MarkDecryptionTutorialInteractor
 import app.vut.secnote.tools.extensions.checkForUserNoteAuthenticatedException
 import com.thefuntasty.mvvm.crinteractors.BaseCrViewModel
-import timber.log.Timber
 import javax.inject.Inject
 
 class NoteViewModel @Inject constructor(
@@ -38,12 +37,28 @@ class NoteViewModel @Inject constructor(
                     checkDecryptionTutorial(it.encrypted)
                 },
                 onError = {
-                    when (it) {
-                        is IllegalStateException -> {
-                            sendEvent(NoDecryptionKeyEvent)
+                    it.checkForUserNoteAuthenticatedException(
+                        authorize = {
+                            sendEvent(AuthorizeDeviceEvent)
+                        },
+                        logOutUser = {
+                            signOut()
+                        },
+                        showError = {
+                            when (it.cause) {
+                                is IllegalStateException -> {
+                                    sendEvent(NoDecryptionKeyEvent)
+                                }
+                                else -> sendEvent(
+                                    ErrorOccurredEvent(
+                                        resources.getString(R.string.general_error_occurred),
+                                        resources.getString(R.string.general_try_again_later)
+                                    )
+                                )
+                            }
                         }
-                        else -> Timber.e(it)
-                    }
+                    )
+
                 }
             )
         }
