@@ -16,19 +16,20 @@ import timber.log.Timber
 import java.net.UnknownHostException
 
 abstract class ServiceManager(
-    private val cryptoHelper: CryptoHelper,
+    val cryptoHelper: CryptoHelper,
     private val tokenStore: TokenStore,
     private val authServiceManager: AuthServiceManager
 ) {
 
     suspend fun <T : AbstractStub<T>> T.executeWithMetadata(request: String): T = executeApiCall {
 
-        val signature = cryptoHelper.signAndEncodeDataBase64(request.toByteArray())
-        val encodedMessage = cryptoHelper.encodeBase64(request.toByteArray())
+        val token = tokenStore.getAccessToken() ?: ""
+
+        val signature = cryptoHelper.signAndEncodeDataBase64(request.toByteArray() + token.toByteArray())
 
         val header = Metadata()
-        header.put(Metadata.Key.of("Authorization", Metadata.ASCII_STRING_MARSHALLER), tokenStore.getAccessToken())
-        header.put(Metadata.Key.of("Digest", Metadata.ASCII_STRING_MARSHALLER), encodedMessage)
+        header.put(Metadata.Key.of("Authorization", Metadata.ASCII_STRING_MARSHALLER), token)
+        header.put(Metadata.Key.of("Digest", Metadata.ASCII_STRING_MARSHALLER), request)
         header.put(Metadata.Key.of("Signature", Metadata.ASCII_STRING_MARSHALLER), signature)
 
         MetadataUtils.attachHeaders(
@@ -80,7 +81,11 @@ abstract class ServiceManager(
     private suspend fun <T> handleUnauthenticatedError(e: StatusRuntimeException, apiCall: suspend () -> T): T {
         val successful = authServiceManager.renewToken()
         if (successful) {
-            return apiCall()
+            try {
+                return apiCall()
+            } catch (e: Exception) {
+                throw UnknownAppError(e)
+            }
         }
         throw InvalidCredentialsError(e)
     }
