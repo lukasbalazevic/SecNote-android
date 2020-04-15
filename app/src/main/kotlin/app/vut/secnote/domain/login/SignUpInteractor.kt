@@ -25,12 +25,7 @@ class SignUpInteractor @Inject constructor(
     }
 
     override suspend fun build(): CredentialsResponse {
-
-        val key = if (cryptoHelper.checkIfDeviceKeyExists()) {
-            cryptoHelper.getDeviceKey()
-        } else {
-            cryptoHelper.generateKey()
-        }
+        val key = cryptoHelper.generateKey()
         val hashedPassword = cryptoHelper.hashMessage("$password${Constants.Security.SALT}".toByteArray())
         val creds = authServiceManager.signUp(email, hashedPassword, key)
 
