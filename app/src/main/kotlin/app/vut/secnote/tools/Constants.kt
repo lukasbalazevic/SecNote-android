@@ -18,6 +18,11 @@ interface Constants {
         const val DEVICE_AUTHORIZATION_WINDOW = 60 * 5
     }
 
+    object Network {
+        const val URL = "grpc.secnote.space"
+        const val IDLE_TIMEOUT = 1L
+    }
+
     object Database {
         const val VERSION = 2
         const val NAME = "secnote.db"
