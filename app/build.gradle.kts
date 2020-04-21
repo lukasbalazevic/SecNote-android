@@ -144,8 +144,8 @@ protobuf {
         id(Dependencies.Plugins.grpc) {
             artifact = Dependencies.Grpc.genGrpc
         }
-        id(Dependencies.Plugins.coroutines) {
-            artifact = Dependencies.Grpc.krotoPlusProtocGen
+        id(Dependencies.Plugins.grpckt) {
+            artifact = Dependencies.Grpc.genGrpcKotlin
         }
     }
 
@@ -156,7 +156,9 @@ protobuf {
                 id(Dependencies.Plugins.grpc) {
                     option("lite")
                 }
-                id(Dependencies.Plugins.coroutines)
+                id(Dependencies.Plugins.grpckt) {
+                    option("lite")
+                }
             }
         }
     }
@@ -203,13 +205,16 @@ dependencies {
     // GRPC
     implementation(Dependencies.Grpc.javaxAnnotation)
     implementation(Dependencies.Grpc.grpcStub)
+    implementation(Dependencies.Grpc.grpcAndroid)
     implementation(Dependencies.Grpc.grpcOkHttp)
     implementation(Dependencies.Grpc.grpcCore)
     implementation(Dependencies.Grpc.grpcProtoLite) {
         exclude("com.google.protobuf", "protobuf-javalite")
     }
 
-    implementation(Dependencies.Grpc.krotoPlus)
+    implementation(Dependencies.Grpc.grpcKotlin) {
+        exclude("com.google.protobuf", "protobuf-java")
+    }
 
     // Room
     implementation(Dependencies.Room.roomRuntime)

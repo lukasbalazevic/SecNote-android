@@ -5,14 +5,13 @@ import app.vut.secnote.domain.security.CryptoHelper
 import app.vut.secnote.noteservice.DeleteRequest
 import app.vut.secnote.noteservice.Note
 import app.vut.secnote.noteservice.NoteOperationRequest
-import app.vut.secnote.permissionservice.PermissionServiceCoroutineGrpc
+import app.vut.secnote.permissionservice.PermissionServiceGrpcKt
 import app.vut.secnote.permissionservice.Request
-import com.github.marcoferrer.krotoplus.coroutines.withCoroutineContext
 import javax.inject.Inject
 
 
 class PermissionServiceManager @Inject constructor(
-    private val client: PermissionServiceCoroutineGrpc.PermissionServiceCoroutineStub,
+    private val client: PermissionServiceGrpcKt.PermissionServiceCoroutineStub,
     cryptoHelper: CryptoHelper,
     tokenStore: TokenStore,
     authServiceManager: AuthServiceManager
@@ -24,7 +23,6 @@ class PermissionServiceManager @Inject constructor(
         val digest = cryptoHelper.hashMessage(request.toByteArray())
         client
             .executeWithMetadata(digest)
-            .withCoroutineContext()
             .getNotes(request)
     }
 
@@ -33,7 +31,6 @@ class PermissionServiceManager @Inject constructor(
         val digest = cryptoHelper.hashMessage(request.toByteArray())
         client
             .executeWithMetadata(digest)
-            .withCoroutineContext()
             .deleteNote(request)
     }
 
@@ -58,7 +55,6 @@ class PermissionServiceManager @Inject constructor(
         val digest = cryptoHelper.hashMessage(request.toByteArray())
         client
             .executeWithMetadata(digest)
-            .withCoroutineContext()
             .addOrUpdateNote(request)
     }
 }

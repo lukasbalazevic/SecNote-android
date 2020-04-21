@@ -1,6 +1,9 @@
 package app.vut.secnote.data.remote
 
-import app.vut.secnote.authservice.AuthServiceCoroutineGrpc
+import app.vut.secnote.authservice.AuthServiceGrpcKt
+import app.vut.secnote.authservice.CredentialsRequest
+import app.vut.secnote.authservice.RenewRequest
+import app.vut.secnote.authservice.Request
 import app.vut.secnote.data.model.error.AppError
 import app.vut.secnote.data.model.error.InvalidCredentialsError
 import app.vut.secnote.data.model.error.NoConnectionError
@@ -8,7 +11,6 @@ import app.vut.secnote.data.model.error.UnknownAppError
 import app.vut.secnote.data.model.error.UserNotFoundError
 import app.vut.secnote.data.store.TokenStore
 import app.vut.secnote.domain.security.CryptoHelper
-import com.github.marcoferrer.krotoplus.coroutines.withCoroutineContext
 import io.grpc.Metadata
 import io.grpc.Status
 import io.grpc.StatusRuntimeException
@@ -18,39 +20,33 @@ import java.net.UnknownHostException
 import javax.inject.Inject
 
 class AuthServiceManager @Inject constructor(
-    private val client: AuthServiceCoroutineGrpc.AuthServiceCoroutineStub,
+    private val client: AuthServiceGrpcKt.AuthServiceCoroutineStub,
     private val tokenStore: TokenStore,
     private val cryptoHelper: CryptoHelper
 ) {
 
     suspend fun signIn(email: String, password: String, key: String) = executeApiCall {
-        client.withCoroutineContext().signIn {
-            this.email = email
-            this.password = password
-            this.key = key
-        }
+        client.signIn(
+            CredentialsRequest.newBuilder().setEmail(email).setPassword(password).setKey(key).build()
+        )
     }
 
     suspend fun signUp(email: String, password: String, key: String) = executeApiCall {
-        client
-            .withCoroutineContext().signUp {
-                this.email = email
-                this.password = password
-                this.key = key
-            }
+        client.signUp(
+            CredentialsRequest.newBuilder().setEmail(email).setPassword(password).setKey(key).build()
+        )
     }
 
     suspend fun signOut() = executeApiCall {
         client
-            .executeWithMetadata("")
-            .withCoroutineContext().signOut {}
+            .executeWithMetadata("").signOut(Request.newBuilder().build())
     }
 
     suspend fun renewToken() = executeApiCall {
         val credResponse = executeApiCall {
-            client.withCoroutineContext().renewToken {
-                refreshToken = tokenStore.getRefreshToken()
-            }
+            client.renewToken(
+                RenewRequest.newBuilder().setRefreshToken(tokenStore.getRefreshToken()).build()
+            )
         }
         tokenStore.run {
             saveAccessToken(credResponse.jwt.accessToken) && saveRefreshToken(credResponse.jwt.refreshToken)

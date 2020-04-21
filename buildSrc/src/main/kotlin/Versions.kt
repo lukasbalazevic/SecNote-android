@@ -34,6 +34,7 @@ object Versions {
     const val krotoPlus = "0.6.1"
     const val javaxAnnotation = "1.3.2"
     const val grpc = "1.28.0"
+    const val grpcKotlin = "0.1.1"
     const val java = "3.0.0"
 
     // other

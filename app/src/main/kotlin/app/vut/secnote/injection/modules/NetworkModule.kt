@@ -1,27 +1,32 @@
 package app.vut.secnote.injection.modules
 
-import app.vut.secnote.authservice.AuthServiceCoroutineGrpc
-import app.vut.secnote.permissionservice.PermissionServiceCoroutineGrpc
+import android.content.Context
+import app.vut.secnote.authservice.AuthServiceGrpcKt
+import app.vut.secnote.injection.ApplicationContext
+import app.vut.secnote.permissionservice.PermissionServiceGrpcKt
 import dagger.Module
 import dagger.Provides
-import io.grpc.Channel
-import io.grpc.ManagedChannelBuilder
+import io.grpc.android.AndroidChannelBuilder
 import javax.inject.Singleton
 
 @Module
 class NetworkModule {
+    @Provides
+    @Singleton
+    fun provideAuthStub(@ApplicationContext context: Context): AuthServiceGrpcKt.AuthServiceCoroutineStub = AuthServiceGrpcKt.AuthServiceCoroutineStub(
+        AndroidChannelBuilder
+            .forTarget("grpc.secnote.space")
+            .context(context)
+            .intercept()
+            .build()
+    )
 
     @Provides
     @Singleton
-    fun provideChannel(): Channel = ManagedChannelBuilder
-        .forTarget("grpc.secnote.space")
-        .build()
-
-    @Provides
-    @Singleton
-    fun provideAuthStub(channel: Channel): AuthServiceCoroutineGrpc.AuthServiceCoroutineStub = AuthServiceCoroutineGrpc.newStub(channel)
-
-    @Provides
-    @Singleton
-    fun providePermissionStub(channel: Channel): PermissionServiceCoroutineGrpc.PermissionServiceCoroutineStub = PermissionServiceCoroutineGrpc.newStub(channel)
+    fun providePermissionStub(@ApplicationContext context: Context): PermissionServiceGrpcKt.PermissionServiceCoroutineStub = PermissionServiceGrpcKt.PermissionServiceCoroutineStub(
+        AndroidChannelBuilder
+            .forTarget("grpc.secnote.space")
+            .context(context)
+            .build()
+    )
 }
