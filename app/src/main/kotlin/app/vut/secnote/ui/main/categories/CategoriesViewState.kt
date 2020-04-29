@@ -1,6 +1,5 @@
 package app.vut.secnote.ui.main.categories
 
-import androidx.lifecycle.map
 import app.vut.secnote.data.model.ui.CategorySelection
 import com.thefuntasty.mvvm.ViewState
 import com.thefuntasty.mvvm.livedata.DefaultValueLiveData
@@ -15,7 +14,7 @@ class CategoriesViewState @Inject constructor(
 
     val loading = DefaultValueLiveData(true)
 
-    val showEmptyState = combineLiveData(categories, loading) {list, loading ->
+    val showEmptyState = combineLiveData(categories, loading) { list, loading ->
         loading.not() && list.isEmpty()
     }
 

@@ -20,6 +20,7 @@ class NetworkModule {
         .forTarget(Constants.Network.URL)
         .context(context)
         .idleTimeout(Constants.Network.IDLE_TIMEOUT, TimeUnit.MINUTES)
+        .useTransportSecurity()
         .build()
 
     @Provides

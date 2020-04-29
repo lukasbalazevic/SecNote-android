@@ -27,7 +27,7 @@ class ProfileViewModel @Inject constructor(
                 sendEvent(NavigateToLoginEvent)
             },
             onError = {
-                ErrorOccurredEvent
+                sendEvent(ErrorOccurredEvent)
             })
     }
 }

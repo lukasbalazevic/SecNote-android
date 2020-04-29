@@ -8,7 +8,7 @@ import app.vut.secnote.data.store.TokenStore
 import app.vut.secnote.domain.security.CryptoHelper
 import io.grpc.Metadata
 import io.grpc.Status
-import io.grpc.StatusRuntimeException
+import io.grpc.StatusException
 import io.grpc.stub.AbstractStub
 import io.grpc.stub.MetadataUtils
 import kotlinx.coroutines.CancellationException
@@ -41,7 +41,7 @@ abstract class ServiceManager(
     suspend fun <T> executeApiCall(apiCall: suspend () -> T): T {
         return try {
             apiCall()
-        } catch (e: StatusRuntimeException) {
+        } catch (e: StatusException) {
             checkStatusRuntimeException(e, apiCall)
         } catch (e: KotlinNullPointerException) {
             throw e
@@ -57,7 +57,7 @@ abstract class ServiceManager(
         }
     }
 
-    private suspend fun <T> checkStatusRuntimeException(e: StatusRuntimeException, apiCall: suspend () -> T): T =
+    private suspend fun <T> checkStatusRuntimeException(e: StatusException, apiCall: suspend () -> T): T =
         when (e.status.code) {
             Status.Code.OK,
             Status.Code.CANCELLED,
@@ -78,7 +78,7 @@ abstract class ServiceManager(
             Status.Code.UNAUTHENTICATED -> handleUnauthenticatedError(e, apiCall)
         }
 
-    private suspend fun <T> handleUnauthenticatedError(e: StatusRuntimeException, apiCall: suspend () -> T): T {
+    private suspend fun <T> handleUnauthenticatedError(e: StatusException, apiCall: suspend () -> T): T {
         val successful = authServiceManager.renewToken()
         if (successful) {
             try {

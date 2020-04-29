@@ -36,7 +36,7 @@ class CategoriesFragment : BaseBindingFragment<CategoriesViewModel, CategoriesVi
         }
 
         observeEvent(ChangeCategoriesEvent::class) {
-            setResult(it.result)
+            setResult(Constants.Note.CATEGORIES_CHANGE, it.result)
         }
 
         viewModel.viewState.categoriesList.observeNonNull(this) {
@@ -45,10 +45,6 @@ class CategoriesFragment : BaseBindingFragment<CategoriesViewModel, CategoriesVi
                 binding.categoriesGroup.addView(createSelectionChip(it))
             }
         }
-    }
-
-    private fun setResult(result: NoteCategories) {
-        setResult(Constants.Note.CATEGORIES_CHANGE, result)
     }
 
     private fun createSelectionChip(category: CategorySelection) =

@@ -41,10 +41,10 @@ class CategoriesViewModel @Inject constructor(
     }
 
     fun invertState(category: CategorySelection) {
-        if (category.selected) {
-            viewState.selectedCategories.value = viewState.selectedCategories.value.apply { remove(category.name) }
+        viewState.selectedCategories.value = if (category.selected) {
+            viewState.selectedCategories.value.apply { remove(category.name) }
         } else {
-            viewState.selectedCategories.value = viewState.selectedCategories.value.apply { add(category.name) }
+            viewState.selectedCategories.value.apply { add(category.name) }
         }
         sendEvent(ChangeCategoriesEvent(
             NoteCategories(
