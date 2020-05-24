@@ -5,7 +5,8 @@ object ProjectSettings {
     const val compileSdkVersion = 29
     const val targetSdk = 29
     const val minSdk = 23
-    const val versionName = "1.0.0"
+    const val defaultVersionName = "0.0.1"
+    val versionName = System.getenv("VERSION_TAG") ?: defaultVersionName
     val versionCode = System.getenv("BITRISE_BUILD_NUMBER")?.toInt() ?: 1
 
     object Flavor {
@@ -29,9 +30,9 @@ object ProjectSettings {
     }
 
     object Release {
-        const val KEY_ALIAS = "TBD"
-        val KEY_PASSWORD = System.getenv("KEY_PASSWORD") ?: ""
-        val STORE_PASSWORD = System.getenv("STORE_PASSWORD") ?: ""
+        const val KEY_ALIAS = "SecNote"
+        val KEY_PASSWORD = System.getenv("PASSWORD") ?: ""
+        val STORE_PASSWORD = System.getenv("PASSWORD") ?: ""
     }
 
     const val TASK_GROUP = "futured"
