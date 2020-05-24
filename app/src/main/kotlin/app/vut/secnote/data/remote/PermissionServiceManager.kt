@@ -18,7 +18,6 @@ class PermissionServiceManager @Inject constructor(
 ) : ServiceManager(cryptoHelper, tokenStore, authServiceManager) {
 
     suspend fun getNotes() = executeApiCall {
-
         val request = Request.newBuilder().build()
         val digest = cryptoHelper.hashMessage(request.toByteArray())
         client

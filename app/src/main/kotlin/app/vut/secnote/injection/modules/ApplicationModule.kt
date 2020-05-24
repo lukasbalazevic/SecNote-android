@@ -65,11 +65,4 @@ class ApplicationModule {
     @Provides
     fun keyguardManager(@ApplicationContext context: Context): KeyguardManager =
         context.getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
-
-    @Provides
-    fun biometricPromptInfo(resources: Resources) = BiometricPrompt.PromptInfo.Builder()
-        .setTitle(resources.getString(R.string.general_lock_screen_title))
-        .setSubtitle(resources.getString(R.string.general_lock_screen_subtitle))
-        .setDeviceCredentialAllowed(true)
-        .build()
 }

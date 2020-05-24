@@ -2,6 +2,7 @@ package app.vut.secnote.ui.main.login
 
 import android.app.KeyguardManager
 import android.content.res.Resources
+import android.util.Patterns
 import app.vut.secnote.R
 import app.vut.secnote.data.model.error.AppError
 import app.vut.secnote.data.model.ui.PinState
@@ -20,41 +21,35 @@ class LoginViewModel @Inject constructor(
 ) : BaseCrViewModel<LoginViewState>() {
 
     fun signIn() = validateInput {
-        if (!keyguardManager.isDeviceSecure) {
-            sendEvent(NavigateToPinEvent(PinState.PIN_SET))
-            return@validateInput
+        checkIfDeviceIsSecure {
+            signInInteractor.init(
+                viewState.email.value,
+                viewState.password.value
+            ).execute(
+                onSuccess = {
+                    sendEvent(NavigateToPinEvent(PinState.AUTHORISE))
+                },
+                onError = {
+                    sendErrorEvent(it)
+                }
+            )
         }
-
-        signInInteractor.init(
-            viewState.email.value,
-            viewState.password.value
-        ).execute(
-            onSuccess = {
-                sendEvent(NavigateToPinEvent(PinState.AUTHORISE))
-            },
-            onError = {
-                sendErrorEvent(it)
-            }
-        )
     }
 
     fun signUp() = validateInput {
-        if (!keyguardManager.isDeviceSecure) {
-            sendEvent(NavigateToPinEvent(PinState.PIN_SET))
-            return@validateInput
+        checkIfDeviceIsSecure {
+            signUpInteractor.init(
+                viewState.email.value,
+                viewState.password.value
+            ).execute(
+                onSuccess = {
+                    sendEvent(NavigateToPinEvent(PinState.AUTHORISE))
+                },
+                onError = {
+                    sendErrorEvent(it)
+                }
+            )
         }
-
-        signUpInteractor.init(
-            viewState.email.value,
-            viewState.password.value
-        ).execute(
-            onSuccess = {
-                sendEvent(NavigateToPinEvent(PinState.AUTHORISE))
-            },
-            onError = {
-                sendErrorEvent(it)
-            }
-        )
     }
 
     private fun sendErrorEvent(e: Throwable) {
@@ -69,8 +64,17 @@ class LoginViewModel @Inject constructor(
         error("Invalid error type")
     }
 
+
+    private fun checkIfDeviceIsSecure(action: () -> Unit) {
+        if (!keyguardManager.isDeviceSecure) {
+            sendEvent(NavigateToPinEvent(PinState.PIN_SET))
+        } else {
+            action()
+        }
+    }
+
     private fun validateInput(action: () -> Unit) {
-        val isEmailValid = viewState.email.value.isNotBlank()
+        val isEmailValid = Patterns.EMAIL_ADDRESS.matcher(viewState.email.value).matches()
         val isPasswordValid = viewState.password.value.isNotBlank()
 
         viewState.emailError.value = if (isEmailValid.not()) resources.getString(R.string.general_email_error) else ""
