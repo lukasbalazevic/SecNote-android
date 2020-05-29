@@ -60,8 +60,14 @@
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login">
         <action
-            android:id="@+id/navigate_to_pin_fragment"
+            android:id="@+id/navigate_to_pin_fragment_to_set_pin"
             app:destination="@id/fragment_pin"/>
+
+        <action
+            android:id="@+id/navigate_to_pin_fragment"
+            app:destination="@id/fragment_pin"
+            app:popUpTo="@id/fragment_login"
+            app:popUpToInclusive="true"/>
     </fragment>
 
     <action

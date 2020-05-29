@@ -27,7 +27,7 @@ class LoginViewModel @Inject constructor(
                 viewState.password.value
             ).execute(
                 onSuccess = {
-                    sendEvent(NavigateToPinEvent(PinState.AUTHORISE))
+                    sendEvent(NavigateToPinWithPopEvent(PinState.AUTHORISE))
                 },
                 onError = {
                     sendErrorEvent(it)
@@ -43,7 +43,7 @@ class LoginViewModel @Inject constructor(
                 viewState.password.value
             ).execute(
                 onSuccess = {
-                    sendEvent(NavigateToPinEvent(PinState.AUTHORISE))
+                    sendEvent(NavigateToPinWithPopEvent(PinState.AUTHORISE))
                 },
                 onError = {
                     sendErrorEvent(it)

@@ -7,10 +7,4 @@
         android:icon="@drawable/ic_profile"
         android:title="@string/general_profile"
         app:showAsAction="ifRoom"/>
-
-    <item
-        android:id="@+id/notes_encryption"
-        android:icon="@drawable/ic_encryption"
-        android:title="@string/general_encryption"
-        app:showAsAction="ifRoom"/>
 </menu>

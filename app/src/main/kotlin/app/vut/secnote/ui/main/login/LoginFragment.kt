@@ -17,6 +17,12 @@ class LoginFragment : BaseBindingFragment<LoginViewModel, LoginViewState, Fragme
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         observeEvent(NavigateToPinEvent::class) {
             navigateTo(
+                LoginFragmentDirections.navigateToPinFragmentToSetPin(it.state)
+            )
+        }
+
+        observeEvent(NavigateToPinWithPopEvent::class) {
+            navigateTo(
                 LoginFragmentDirections.navigateToPinFragment(it.state)
             )
         }

@@ -66,9 +66,6 @@ class NotesFragment : BaseBindingFragment<NotesViewModel, NotesViewState, Fragme
                 R.id.notes_profile -> navigateTo(
                     NotesFragmentDirections.navigateToProfileFragment()
                 )
-                R.id.notes_encryption -> navigateTo(
-                    NotesFragmentDirections.navigateToEncryptionFragment("")
-                )
             }
             true
         }
